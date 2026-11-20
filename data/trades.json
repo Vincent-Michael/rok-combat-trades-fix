@@ -5,5 +5,5 @@
   "lastCheckedAtUTC": null,
   "lastRunSuccessCount": 0,
   "lastErrors": {},
-  "correction": "Reset for 7 days / Open field. Previous 1-year Open field snapshot archived at data/trades-1y-open-field-archived.json."
+  "resetNote": "Manual reset requested; the next successful 7-day/Open field API run starts a new comparison baseline."
 }
