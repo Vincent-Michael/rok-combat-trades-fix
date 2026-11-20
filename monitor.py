@@ -9,6 +9,8 @@ from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
+SCENARIO_KEY = "1y/openField"
+SCENARIO_LABEL = "1 year / Open field"
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data" / "trades.json"
 REPORT = ROOT / "REPORT.md"
@@ -46,9 +48,9 @@ def parse_payload(payload, primary, secondary):
     generation_ms = number(payload["generatedAtMs"])
     if generation_ms <= 0:
         raise ValueError("Invalid generatedAtMs")
-    rows = [r for r in payload.get("summaries", []) if isinstance(r, list) and len(r) >= 12 and r[:2] == [0, 0]]
+    rows = [r for r in payload.get("summaries", []) if isinstance(r, list) and len(r) >= 12 and r[:2] == [0, 1]]
     if len(rows) != 1:
-        raise ValueError("Missing/ambiguous summary for 1y / all scenario")
+        raise ValueError("Missing/ambiguous summary for 1y / Open field scenario")
     r = rows[0]
     battles, unique, gained, lost, sev_inf, sev_taken, rate_ms, dmg, heal = (
         number(r[2]), number(r[3]), number(r[4]), number(r[5]),
@@ -104,7 +106,7 @@ def build_report(store, results, now):
         "# RoK Combat Lab — Trade Report",
         "",
         f"**Checked:** {now}  ",
-        "**Scenario:** 1 year / All (same selection for all pairings)  ",
+        f"**Scenario:** {SCENARIO_LABEL} (matching the Combat Lab page defaults)  ",
         f"**Live retrieval:** {sum(v['ok'] for v in results.values())}/4 successful",
         "",
         "| Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) | Status |",
@@ -151,6 +153,19 @@ def main():
     store.setdefault("snapshots", {})
     store.setdefault("history", [])
     now = utc_now()
+    # Prior versions selected [0,0] (1y/All). Those snapshots must never
+    # be compared with [0,1] (1y/Open field), the live website default.
+    if store.get("scenario") != SCENARIO_KEY:
+        if store.get("snapshots") or store.get("history"):
+            store.setdefault("archivedLegacyData", []).append({
+                "scenario": store.get("scenario") or "1y/all",
+                "archivedAtUTC": now,
+                "snapshots": store.get("snapshots", {}),
+                "history": store.get("history", []),
+            })
+        store["snapshots"] = {}
+        store["history"] = []
+        store["scenario"] = SCENARIO_KEY
     results = {}
     for name, p, s, *_ in PAIRS:
         key = f"{p}-{s}"
