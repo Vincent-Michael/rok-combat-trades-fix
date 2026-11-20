@@ -15,7 +15,7 @@
       "sps": 60.962,
       "tps": 58.477,
       "hps": 4.032,
-      "checkedAtUTC": "2026-11-20T22:18:29Z"
+      "checkedAtUTC": "2026-11-20T22:49:52Z"
     },
     "621-596": {
       "generatedAtMs": 1795191899819,
@@ -31,7 +31,7 @@
       "sps": 57.517,
       "tps": 56.084,
       "hps": 10.964,
-      "checkedAtUTC": "2026-11-20T22:18:29Z"
+      "checkedAtUTC": "2026-11-20T22:49:52Z"
     },
     "621-185": {
       "generatedAtMs": 1795191899819,
@@ -47,7 +47,7 @@
       "sps": 56.696,
       "tps": 58.299,
       "hps": 5.44,
-      "checkedAtUTC": "2026-11-20T22:18:29Z"
+      "checkedAtUTC": "2026-11-20T22:49:52Z"
     },
     "595-621": {
       "generatedAtMs": 1795191899819,
@@ -63,7 +63,7 @@
       "sps": 80.891,
       "tps": 57.197,
       "hps": 8.309,
-      "checkedAtUTC": "2026-11-20T22:18:29Z"
+      "checkedAtUTC": "2026-11-20T22:49:52Z"
     },
     "595-596": {
       "generatedAtMs": 1795191899819,
@@ -79,7 +79,7 @@
       "sps": 69.502,
       "tps": 58.591,
       "hps": 4.542,
-      "checkedAtUTC": "2026-11-20T22:18:29Z"
+      "checkedAtUTC": "2026-11-20T22:49:52Z"
     },
     "545-185": {
       "generatedAtMs": 1795191899819,
@@ -95,7 +95,7 @@
       "sps": 55.217,
       "tps": 72.33,
       "hps": 6.928,
-      "checkedAtUTC": "2026-11-20T22:18:29Z"
+      "checkedAtUTC": "2026-11-20T22:49:52Z"
     },
     "595-545": {
       "generatedAtMs": 1795191899819,
@@ -111,7 +111,7 @@
       "sps": 63.608,
       "tps": 62.062,
       "hps": 5.087,
-      "checkedAtUTC": "2026-11-20T22:18:29Z"
+      "checkedAtUTC": "2026-11-20T22:49:52Z"
     },
     "545-621": {
       "generatedAtMs": 1795191899819,
@@ -127,7 +127,55 @@
       "sps": 60.136,
       "tps": 49.302,
       "hps": 1.634,
-      "checkedAtUTC": "2026-11-20T22:18:29Z"
+      "checkedAtUTC": "2026-11-20T22:49:52Z"
+    },
+    "595-185": {
+      "generatedAtMs": 1795191899819,
+      "generatedAtUTC": "2026-11-20 16:24 UTC",
+      "primary": 595,
+      "secondary": 185,
+      "battles": 208695,
+      "uniqueGovernors": 3277,
+      "killPointsGained": 2732460344,
+      "killPointsLost": 2789866634,
+      "tradePercent": 97.9423,
+      "dps": 362.768,
+      "sps": 58.362,
+      "tps": 59.753,
+      "hps": 6.656,
+      "checkedAtUTC": "2026-11-20T22:49:52Z"
+    },
+    "595-616": {
+      "generatedAtMs": 1795191899819,
+      "generatedAtUTC": "2026-11-20 16:24 UTC",
+      "primary": 595,
+      "secondary": 616,
+      "battles": 16828,
+      "uniqueGovernors": 303,
+      "killPointsGained": 211148946,
+      "killPointsLost": 220367306,
+      "tradePercent": 95.8168,
+      "dps": 300.83,
+      "sps": 50.903,
+      "tps": 51.679,
+      "hps": 4.15,
+      "checkedAtUTC": "2026-11-20T22:49:52Z"
+    },
+    "545-616": {
+      "generatedAtMs": 1795191899819,
+      "generatedAtUTC": "2026-11-20 16:24 UTC",
+      "primary": 545,
+      "secondary": 616,
+      "battles": 25089,
+      "uniqueGovernors": 301,
+      "killPointsGained": 343336321,
+      "killPointsLost": 435430050,
+      "tradePercent": 78.8499,
+      "dps": 323.743,
+      "sps": 53.756,
+      "tps": 67.428,
+      "hps": 5.268,
+      "checkedAtUTC": "2026-11-20T22:49:52Z"
     }
   },
   "history": [
@@ -266,10 +314,61 @@
       "tps": 49.302,
       "hps": 1.634,
       "checkedAtUTC": "2026-11-20T21:42:26Z"
+    },
+    {
+      "pairing": "Sun Tzu / Liu Che",
+      "generatedAtMs": 1795191899819,
+      "generatedAtUTC": "2026-11-20 16:24 UTC",
+      "primary": 595,
+      "secondary": 185,
+      "battles": 208695,
+      "uniqueGovernors": 3277,
+      "killPointsGained": 2732460344,
+      "killPointsLost": 2789866634,
+      "tradePercent": 97.9423,
+      "dps": 362.768,
+      "sps": 58.362,
+      "tps": 59.753,
+      "hps": 6.656,
+      "checkedAtUTC": "2026-11-20T22:49:52Z"
+    },
+    {
+      "pairing": "Sun Tzu / Vercingetorix",
+      "generatedAtMs": 1795191899819,
+      "generatedAtUTC": "2026-11-20 16:24 UTC",
+      "primary": 595,
+      "secondary": 616,
+      "battles": 16828,
+      "uniqueGovernors": 303,
+      "killPointsGained": 211148946,
+      "killPointsLost": 220367306,
+      "tradePercent": 95.8168,
+      "dps": 300.83,
+      "sps": 50.903,
+      "tps": 51.679,
+      "hps": 4.15,
+      "checkedAtUTC": "2026-11-20T22:49:52Z"
+    },
+    {
+      "pairing": "Bai Qi / Vercingetorix",
+      "generatedAtMs": 1795191899819,
+      "generatedAtUTC": "2026-11-20 16:24 UTC",
+      "primary": 545,
+      "secondary": 616,
+      "battles": 25089,
+      "uniqueGovernors": 301,
+      "killPointsGained": 343336321,
+      "killPointsLost": 435430050,
+      "tradePercent": 78.8499,
+      "dps": 323.743,
+      "sps": 53.756,
+      "tps": 67.428,
+      "hps": 5.268,
+      "checkedAtUTC": "2026-11-20T22:49:52Z"
     }
   ],
-  "lastCheckedAtUTC": "2026-11-20T22:18:29Z",
-  "lastRunSuccessCount": 8,
+  "lastCheckedAtUTC": "2026-11-20T22:49:52Z",
+  "lastRunSuccessCount": 11,
   "lastErrors": {},
   "resetNote": "Manual reset requested; the next successful 7-day/Open field API run starts a new comparison baseline."
 }
