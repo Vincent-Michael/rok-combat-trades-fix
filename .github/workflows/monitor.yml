@@ -24,7 +24,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Fetch 4 pairings and update report
+      - name: Fetch 6 pairings and update report
         run: python monitor.py
       - name: Commit report and data
         run: |
