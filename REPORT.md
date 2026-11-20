@@ -1,9 +1,9 @@
 # RoK Combat Lab — Trade Report
 
 **Scenario:** 7 days / Open field  
-**Status:** Waiting for the first verified 7-day API snapshot
+**Status:** Values manually reset — awaiting a new verified 7-day API snapshot
 
-The monitor was switched from 1 year to **7 days** while retaining the **Open field** scenario. Historical 1-year results were archived separately and will not be mixed with 7-day statistics.
+The stored trade values and comparison history have been reset. The next successful API retrieval will establish a fresh baseline for **7 days / Open field**. Previous 1-year data remains archived separately and will not be mixed into this series.
 
 | Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) |
 |---|---:|---:|---:|---:|---|
