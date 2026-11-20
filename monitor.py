@@ -9,6 +9,7 @@ from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
+# Manual data-refresh trigger: retain 7d/Open field setting.
 SCENARIO_KEY = "7d/openField"
 SCENARIO_LABEL = "7 days / Open field"
 ROOT = Path(__file__).resolve().parent
