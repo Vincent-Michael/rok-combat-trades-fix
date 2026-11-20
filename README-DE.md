@@ -22,10 +22,10 @@ Wenn das Repository angebunden ist, kann die ChatGPT-Überwachung **GitHub `REPO
 
 - Es werden genau vier Kombinationen abgefragt (621/545, 621/596, 621/185, 595/621).
 - API-JSON: `/proxy/v2/global/combat-lab?primary=...&secondary=...`
-- Verglichen wird die **Standardansicht: 1 Jahr / Open field** (`summaries`-Tupel [0,1], 0=1 Jahr, 1=Open field). Das entspricht den Standardfiltern der vier Combat-Lab-Links. Wer manuell andere Filter wählt, bekommt andere Statistiken.
+- Verglichen wird ausschließlich **7 Tage / Open field** (`summaries`-Tupel [3,1], 3=7 Tage, 1=Open field). Damit der Browser dieselben Werte zeigt, dort den Zeitraum manuell auf **7 days** und das Szenario auf **Open field** stellen. Die reine URL speichert diese Filterauswahl nicht.
 - Echte neue Daten werden nur akzeptiert, wenn die IDs exakt stimmen und Datenformate valide sind.
 - Änderungswerte beziehen sich auf den vorherigen erfolgreichen API-Snapshot; bei Abfragefehlern gibt es **keine erfundenen Veränderungen**.
-- Der erste Workflow nutzte versehentlich `1 Jahr / All` ([0,0]). Diese nicht vergleichbaren Snapshots wurden in `data/trades-all-archived.json` gesichert. Nach der Korrektur beginnt die Open-field-Zeitreihe neu; Änderungswerte erscheinen erst nach zwei vergleichbaren Datensätzen.
+- Frühere 1-Jahr-/All-Daten liegen in `data/trades-all-archived.json`, die 1-Jahr-/Open-field-Daten in `data/trades-1y-open-field-archived.json`. Beide bleiben vom neuen 7-Tage-Verlauf getrennt. Erst nach zwei 7-Tage-Snapshots mit neuem Datenzeitstempel sind Deltas möglich.
 - Falls auch GitHub Actions blockiert wird, muss man einen alternativen, erreichbaren Runner/Server verwenden (z. B. PC mit Aufgabenplanung).
 
 ## Lokale Prüfung unter Windows
