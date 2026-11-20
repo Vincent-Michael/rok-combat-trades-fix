@@ -25,6 +25,9 @@ PAIRS = [
     ("Bai Qi / Liu Che", 545, 185),
     ("Sun Tzu / Bai Qi", 595, 545),
     ("Bai Qi / Yi Do", 545, 621),
+    ("Sun Tzu / Liu Che", 595, 185),
+    ("Sun Tzu / Vercingetorix", 595, 616),
+    ("Bai Qi / Vercingetorix", 545, 616),
 ]
 
 
@@ -107,57 +110,110 @@ def fmt_num(value, digits=0):
 
 
 def build_report(store, results, now):
-    # Rank by latest 7-day Open field trade; unknown values remain last.
-    def sort_key(pair):
-        key = f"{pair[1]}-{pair[2]}"
-        snapshot = results[key]["snapshot"]
-        trade = snapshot.get("tradePercent") if snapshot else None
+    def key(pair):
+        return f"{pair[1]}-{pair[2]}"
+    def ranking(pair):
+        snap = results[key(pair)]["snapshot"]
+        trade = snap.get("tradePercent") if snap else None
         return (trade is None, -(trade if trade is not None else 0))
-
-    ranked_pairs = sorted(PAIRS, key=sort_key)
+    ranked_pairs = sorted(PAIRS, key=ranking)
+    verified = sum(v["ok"] for v in results.values())
+    stamps = sorted(set(v["snapshot"]["generatedAtUTC"] for v in results.values() if v["snapshot"]))
+    site_stamp = ", ".join(stamps) if stamps else "N/A"
     lines = [
-        "# RoK Combat Lab — Trade Report",
+        "# RoK Combat Lab — Infantry Trade Report", "",
+        f"**Workflow checked UTC:** {now}  ",
+        f"**API site-generated UTC:** {site_stamp}  ",
+        f"**Successful monitor checks:** {verified}/{len(PAIRS)}  ",
+        f"**Scenario:** 7 Days / Open Field ([3,1]); rolling seven days, independent of eight-hour monitoring.",
         "",
-        f"**Checked:** {now}  ",
-        f"**Scenario:** {SCENARIO_LABEL} (7-day selected time window)  ",
-        f"**Live retrieval:** {sum(v['ok'] for v in results.values())}/{len(PAIRS)} successful",
+        "**Data age:** Site-generated timestamps may be historical/stale. Retained results from failed checks are old verified snapshots, not fresh measurements.",
         "",
-        "| Rank | Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) | Status |",
-        "|---:|---|---:|---:|---:|---:|---|---|",
+        "## Trade Efficiency Ranking", "",
+        "![Trade efficiency ranking](charts/infantry.svg)", "",
+        "## Trade Ranking & Battle Reports", "",
+        "| Rank | Commander Pairing | Trade % | Δ pp | Reports |",
+        "|---:|---|---:|---:|---:|",
     ]
-    for rank, (name, p, s) in enumerate(ranked_pairs, start=1):
-        k = f"{p}-{s}"
-        result = results[k]
-        current = result["snapshot"]
-        prior = result.get("previous")
+    for rank,(name,p,s) in enumerate(ranked_pairs,1):
+        r = results[f"{p}-{s}"]
+        v,old = r["snapshot"],r.get("previous")
+        trade = f'{v["tradePercent"]:.2f}%' if v and v.get("tradePercent") is not None else "N/A"
+        delta = f'{v["tradePercent"]-old["tradePercent"]:+.2f}' if v and old and v.get("tradePercent") is not None and old.get("tradePercent") is not None else "N/A"
+        battles = fmt_num(v.get("battles")) if v else "N/A"
         url = f"https://rokbattles.com/combat-lab?primary={p}&secondary={s}"
-        if current:
-            trade = fmt_num(current.get("tradePercent"), 2) + "%" if current.get("tradePercent") is not None else "N/A"
-            battles = fmt_num(current.get("battles"))
-            trade_delta = (fmt_num(current["tradePercent"]-prior["tradePercent"],2) if prior and current.get("tradePercent") is not None and prior.get("tradePercent") is not None else "N/A")
-            count_delta = fmt_num(current["battles"]-prior["battles"]) if prior else "N/A"
-            stamp = current["generatedAtUTC"]
-            status = "Verified this run" if result["ok"] else "Old verified snapshot"
-        else:
-            trade, trade_delta, battles, count_delta, stamp, status = "N/A", "N/A", "N/A", "N/A", "N/A", "Not yet verified"
-        lines.append(f"| {rank} | [{name}]({url}) | {trade} | {trade_delta} | {battles} | {count_delta} | {stamp} | {status} |")
-    lines += ["", "## Detailed metrics (verified API responses only)", "", "| Pairing | KP gained | KP lost | DPS | SPS | TPS |", "|---|---:|---:|---:|---:|---:|"]
-    for name, p, s in ranked_pairs:
-        x = results[f"{p}-{s}"]
-        v = x["snapshot"] if x["ok"] else None
-        if v:
-            cols = [fmt_num(v.get(n),3 if n in ("dps","sps","tps") else 0) for n in ("killPointsGained","killPointsLost","dps","sps","tps")]
-        else:
-            cols = ["N/A"] * 5
-        lines.append(f"| {name} | " + " | ".join(cols) + " |")
-    errors = [f"- **{name}:** {results[f'{p}-{s}']['error']}" for name,p,s in ranked_pairs if results[f"{p}-{s}"]["error"]]
-    if errors:
-        lines += ["", "## Retrieval errors", "", *errors]
-    if sum(v["ok"] for v in results.values()) == 0:
-        lines += ["", "**LIVE DATA UNAVAILABLE.** Any retained snapshots are older verified API data, not fresh measurements. No changes are claimed when retrieval fails."]
-    lines += ["", "## Scenario integrity", "",
-              "This report uses **7 days / Open field** (Combat Lab range index 3, scenario index 1). Older 1-year reports are archived and excluded from change calculations."]
-    return "\n".join(lines) + "\n"
+        lines.append(f"| {rank} | [{name}]({url}) | {trade} | {delta} | {battles} |")
+    stale = [name for name,p,s in ranked_pairs if results[f"{p}-{s}"]["snapshot"] and not results[f"{p}-{s}"]["ok"]]
+    unknown = [name for name,p,s in ranked_pairs if not results[f"{p}-{s}"]["snapshot"]]
+    lines += ["",f"Site-generated: {site_stamp} · Verified this run: {verified}/{len(PAIRS)} · Old verified snapshots: {len(stale)} · Unavailable: {len(unknown)}.", "",
+              "## Detailed Combat Statistics", "", "KP Gained and KP Lost are in millions (M). DPS, SPS and TPS are per-second rates.", "",
+              "| Commander Pairing | KP Gained | KP Lost | DPS | SPS | TPS |", "|---|---:|---:|---:|---:|---:|"]
+    for name,p,s in ranked_pairs:
+        v=results[f"{p}-{s}"]["snapshot"]
+        def metric(field):
+            if not v or v.get(field) is None: return "N/A"
+            if field in ("killPointsGained","killPointsLost"): return f'{v[field]/1000000:,.3f}M'
+            return f'{v[field]:.3f}'
+        lines.append(f"| {name} | " + " | ".join(metric(f) for f in ("killPointsGained","killPointsLost","dps","sps","tps")) + " |")
+    valid=[(name,p,s,results[f"{p}-{s}"]["snapshot"]) for name,p,s in ranked_pairs if results[f"{p}-{s}"]["snapshot"] and results[f"{p}-{s}"]["snapshot"].get("tradePercent") is not None]
+    lines += ["","## Key Findings",""]
+    if valid:
+        best=valid[0]; worst=valid[-1]
+        largest=max(valid,key=lambda x:x[3].get("battles",0))
+        smallest=min(valid,key=lambda x:x[3].get("battles",0))
+        lines.append(f'**Best trade:** {best[0]} at {best[3]["tradePercent"]:.2f}%. **Worst trade:** {worst[0]} at {worst[3]["tradePercent"]:.2f}%.')
+        lines.append(f'**Largest dataset:** {largest[0]} ({largest[3]["battles"]:,} reports). **Smallest dataset:** {smallest[0]} ({smallest[3]["battles"]:,} reports; interpret cautiously).')
+    else:
+        lines.append("No verified 7-day/Open Field trade values are currently available.")
+    changes=[(name,v,results[f"{p}-{s}"].get("previous")) for name,p,s,v in valid if results[f"{p}-{s}"].get("previous") and v.get("tradePercent") is not None]
+    if changes:
+        lines.append("**Distinct-snapshot changes:** " + "; ".join(f'{name} {v["tradePercent"]-old["tradePercent"]:+.2f} pp' for name,v,old in changes if old.get("tradePercent") is not None) + ".")
+    else:
+        lines.append("**Distinct-snapshot changes:** N/A (no preceding distinct valid 7-day/Open Field snapshot).")
+    if stale: lines.append("**Old verified snapshots:** " + ", ".join(stale) + ".")
+    if unknown: lines.append("**Unverified / N/A:** " + ", ".join(unknown) + ".")
+    errors=[f'{name}: {results[f"{p}-{s}"]["error"]}' for name,p,s in ranked_pairs if results[f"{p}-{s}"]["error"]]
+    if errors: lines.append("**Retrieval failures:** " + "; ".join(errors) + ".")
+    lines += ["","**Source / monitor status:** [trades.json](data/trades.json) · [REPORT.md](REPORT.md) · "
+              + f"Workflow checked: {now} · API generated: {site_stamp} · "
+              + f"Monitor: {verified}/{len(PAIRS)} · Historical data preserved; no 1-year baselines.",
+              ""]
+    return "\n".join(lines)
+
+
+def build_svg(results):
+    from html import escape
+    ranked=sorted(PAIRS,key=lambda p:(results[f"{p[1]}-{p[2]}"]["snapshot"] is None or results[f"{p[1]}-{p[2]}"]["snapshot"].get("tradePercent") is None,
+                                   -(results[f"{p[1]}-{p[2]}"]["snapshot"] or {}).get("tradePercent",0) if (results[f"{p[1]}-{p[2]}"]["snapshot"] or {}).get("tradePercent") is not None else 0))
+    trades=[r["snapshot"].get("tradePercent") for r in results.values() if r["snapshot"] and r["snapshot"].get("tradePercent") is not None]
+    limit=max(170,10*(int(max(trades)/10)+1)) if trades else 170
+    x0, bw, y0, step=328,660,90,52
+    yaxis=y0+len(PAIRS)*step
+    h=yaxis+77
+    line=x0+bw*100/limit
+    svg=[f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 {h}" role="img" aria-label="Infantry trade efficiency ranking">',
+         f'<rect x="1" y="1" width="1198" height="{h-2}" rx="16" fill="#172234" stroke="#344258" stroke-width="2"/>',
+         '<circle cx="26" cy="31" r="7" fill="#22c55e"/><text x="43" y="37" fill="#22c55e" font-family="Arial,sans-serif" font-size="18" font-weight="600">Positive (&gt;100%)</text>',
+         '<circle cx="280" cy="31" r="7" fill="#ef4444"/><text x="297" y="37" fill="#ef4444" font-family="Arial,sans-serif" font-size="18" font-weight="600">Negative (&lt;100%)</text>']
+    for i,(name,p,s) in enumerate(ranked):
+        y=y0+i*step
+        v=results[f"{p}-{s}"]["snapshot"]
+        trade=v.get("tradePercent") if v else None
+        col="#22c55e" if trade is not None and trade>100 else "#ef4444" if trade is not None and trade<100 else "#94a3b8"
+        svg += [f'<rect x="{x0}" y="{y-25}" width="{bw}" height="32" rx="5" fill="#28374d"/>']
+        if trade is not None:
+            svg.append(f'<rect x="{x0}" y="{y-25}" width="{max(0,min(bw,bw*trade/limit)):.2f}" height="32" rx="5" fill="{col}"/>')
+        svg += [f'<text x="20" y="{y-2}" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">{i+1}</text>',
+                f'<text x="53" y="{y-2}" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">{escape(name)}</text>',
+                f'<text x="1172" y="{y-2}" text-anchor="end" fill="{col}" font-family="Arial,sans-serif" font-weight="bold" font-size="22">{f"{trade:.2f}%" if trade is not None else "N/A"}</text>']
+    svg.append(f'<line x1="{line:.2f}" y1="53" x2="{line:.2f}" y2="{yaxis-29}" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="6 7"/>')
+    svg += [f'<line x1="{x0}" y1="{yaxis-31}" x2="{x0+bw}" y2="{yaxis-31}" stroke="#51617a"/>',
+            f'<text x="{x0}" y="{yaxis-7}" text-anchor="middle" fill="#b4c3d8" font-family="Arial" font-size="18">0%</text>',
+            f'<text x="{line:.2f}" y="{yaxis-7}" text-anchor="middle" fill="#f1f5f9" font-family="Arial" font-size="18">100%</text>',
+            f'<text x="{x0+bw}" y="{yaxis-7}" text-anchor="middle" fill="#b4c3d8" font-family="Arial" font-size="18">{limit}%</text>',
+            f'<text x="600" y="{yaxis+37}" text-anchor="middle" fill="#cbd5e1" font-family="Arial" font-size="16">Dashed line = 100% break-even · Latest verified site snapshot</text>',
+            '</svg>']
+    return "\n".join(svg)+"\n"
 
 
 def main():
@@ -182,13 +238,21 @@ def main():
     for name, p, s, *_ in PAIRS:
         key = f"{p}-{s}"
         prior = store["snapshots"].get(key)
+        if not isinstance(prior, dict) or (prior.get("primary"), prior.get("secondary")) != (p, s):
+            prior = None  # Never reuse another pairing's snapshot.
         data, err = fetch(p, s)
         if data:
             data["checkedAtUTC"] = now
             if prior is None or data["generatedAtMs"] != prior["generatedAtMs"]:
                 store["history"].append({"pairing": name, **data})
             store["snapshots"][key] = data
-        results[key] = {"ok": bool(data), "snapshot": data or prior, "previous": prior if data else None, "error": err}
+        current = data or prior
+        candidates = [h for h in store["history"] if h.get("primary") == p and h.get("secondary") == s and
+                      current and isinstance(h.get("generatedAtMs"), (int,float)) and h["generatedAtMs"] < current["generatedAtMs"]]
+        previous = max(candidates, key=lambda h: h["generatedAtMs"]) if candidates else None
+        if prior and current and prior.get("generatedAtMs",0) < current["generatedAtMs"] and (previous is None or prior["generatedAtMs"] > previous["generatedAtMs"]):
+            previous = prior
+        results[key] = {"ok": bool(data), "snapshot": current, "previous": previous, "error": err}
         print(f"{name}: {'OK '+str(data['tradePercent'])+'%' if data else 'FAILED '+str(err)}")
         # Avoid bursts against a shared resource.
         time.sleep(1)
@@ -199,6 +263,9 @@ def main():
     DATA.parent.mkdir(parents=True, exist_ok=True)
     DATA.write_text(json.dumps(store, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     REPORT.write_text(build_report(store, results, now), encoding="utf-8")
+    chart_path = ROOT / "charts" / "infantry.svg"
+    chart_path.parent.mkdir(parents=True, exist_ok=True)
+    chart_path.write_text(build_svg(results), encoding="utf-8")
     print(f"Saved {REPORT} and {DATA}")
     return 0
 
