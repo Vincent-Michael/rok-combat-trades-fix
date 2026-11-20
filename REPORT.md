@@ -1,25 +1,15 @@
 # RoK Combat Lab — Trade Report
 
-**Checked:** 2026-11-20T20:42:28Z  
-**Scenario:** 1 year / Open field (matching the Combat Lab page defaults)  
-**Live retrieval:** 4/4 successful
+**Scenario:** 7 days / Open field  
+**Status:** Waiting for the first verified 7-day API snapshot
 
-| Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) | Status |
-|---|---:|---:|---:|---:|---|---|
-| [Yi Do / Bai Qi](https://rokbattles.com/combat-lab?primary=621&secondary=545) | 102.54% | N/A | 23,360 | N/A | 2026-11-20 16:24 UTC | Verified this run |
-| [Yi Do / Ivar](https://rokbattles.com/combat-lab?primary=621&secondary=596) | 104.15% | N/A | 3,133 | N/A | 2026-11-20 16:24 UTC | Verified this run |
-| [Yi Do / Liu Che](https://rokbattles.com/combat-lab?primary=621&secondary=185) | 96.09% | N/A | 393,986 | N/A | 2026-11-20 16:24 UTC | Verified this run |
-| [Sun Tzu / Yi Do](https://rokbattles.com/combat-lab?primary=595&secondary=621) | 139.58% | N/A | 264,823 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+The monitor was switched from 1 year to **7 days** while retaining the **Open field** scenario. Historical 1-year results were archived separately and will not be mixed with 7-day statistics.
 
-## Detailed metrics (verified API responses only)
+| Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) |
+|---|---:|---:|---:|---:|---|
+| [Yi Do / Bai Qi](https://rokbattles.com/combat-lab?primary=621&secondary=545) | Pending | N/A | Pending | N/A | Pending |
+| [Yi Do / Ivar](https://rokbattles.com/combat-lab?primary=621&secondary=596) | Pending | N/A | Pending | N/A | Pending |
+| [Yi Do / Liu Che](https://rokbattles.com/combat-lab?primary=621&secondary=185) | Pending | N/A | Pending | N/A | Pending |
+| [Sun Tzu / Yi Do](https://rokbattles.com/combat-lab?primary=595&secondary=621) | Pending | N/A | Pending | N/A | Pending |
 
-| Pairing | KP gained | KP lost | DPS | SPS | TPS |
-|---|---:|---:|---:|---:|---:|
-| Yi Do / Bai Qi | 312,321,890 | 304,577,250 | 369.186 | 60.962 | 58.477 |
-| Yi Do / Ivar | 37,566,950 | 36,068,830 | 353.504 | 57.517 | 56.084 |
-| Yi Do / Liu Che | 4,871,324,314 | 5,069,388,770 | 355.519 | 56.696 | 58.299 |
-| Sun Tzu / Yi Do | 4,863,388,372 | 3,484,310,142 | 475.959 | 80.891 | 57.197 |
-
-## Scenario integrity
-
-This report uses **1 year / Open field**, matching Combat Lab's default filters. Older 1-year/All values are archived separately and excluded from change calculations.
+Previous 1-year data: [Archived JSON](data/trades-1y-open-field-archived.json).
