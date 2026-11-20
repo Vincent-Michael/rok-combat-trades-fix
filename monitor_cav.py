@@ -26,6 +26,7 @@ PAIRS = [
     ("Achilles / Gang Gamchan", 575, 579),
     ("Achilles / Vercingetorix", 575, 616),
     ("Achilles / William Marshal", 575, 620),
+    ("William Marshal / Achilles", 620, 575),
 ]
 
 
