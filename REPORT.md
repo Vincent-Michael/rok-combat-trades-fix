@@ -6,13 +6,13 @@
 
 | Rank | Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) | Status |
 |---:|---|---:|---:|---:|---:|---|---|
-| 1 | [Sun Tzu / Yi Do](https://rokbattles.com/combat-lab?primary=595&secondary=621) | 139.58% | 0.00 | 264,823 | 0 | 2026-11-20 16:24 UTC | Verified this run |
-| 2 | [Sun Tzu / Ivar](https://rokbattles.com/combat-lab?primary=595&secondary=596) | 117.14% | 0.00 | 157,905 | 0 | 2026-11-20 16:24 UTC | Verified this run |
-| 3 | [Yi Do / Ivar](https://rokbattles.com/combat-lab?primary=621&secondary=596) | 104.15% | 0.00 | 3,133 | 0 | 2026-11-20 16:24 UTC | Verified this run |
-| 4 | [Yi Do / Bai Qi](https://rokbattles.com/combat-lab?primary=621&secondary=545) | 102.54% | 0.00 | 23,360 | 0 | 2026-11-20 16:24 UTC | Verified this run |
-| 5 | [Sun Tzu / Bai Qi](https://rokbattles.com/combat-lab?primary=595&secondary=545) | 102.34% | 0.00 | 729,631 | 0 | 2026-11-20 16:24 UTC | Verified this run |
-| 6 | [Yi Do / Liu Che](https://rokbattles.com/combat-lab?primary=621&secondary=185) | 96.09% | 0.00 | 393,986 | 0 | 2026-11-20 16:24 UTC | Verified this run |
-| 7 | [Bai Qi / Liu Che](https://rokbattles.com/combat-lab?primary=545&secondary=185) | 76.70% | 0.00 | 354,959 | 0 | 2026-11-20 16:24 UTC | Verified this run |
+| 1 | 1 | [Sun Tzu / Yi Do](https://rokbattles.com/combat-lab?primary=595&secondary=621) | 139.58% | 0.00 | 264,823 | 0 | 2026-11-20 16:24 UTC | Verified this run |
+| 2 | 2 | [Sun Tzu / Ivar](https://rokbattles.com/combat-lab?primary=595&secondary=596) | 117.14% | 0.00 | 157,905 | 0 | 2026-11-20 16:24 UTC | Verified this run |
+| 3 | 3 | [Yi Do / Ivar](https://rokbattles.com/combat-lab?primary=621&secondary=596) | 104.15% | 0.00 | 3,133 | 0 | 2026-11-20 16:24 UTC | Verified this run |
+| 4 | 4 | [Yi Do / Bai Qi](https://rokbattles.com/combat-lab?primary=621&secondary=545) | 102.54% | 0.00 | 23,360 | 0 | 2026-11-20 16:24 UTC | Verified this run |
+| 5 | 5 | [Sun Tzu / Bai Qi](https://rokbattles.com/combat-lab?primary=595&secondary=545) | 102.34% | 0.00 | 729,631 | 0 | 2026-11-20 16:24 UTC | Verified this run |
+| 6 | 6 | [Yi Do / Liu Che](https://rokbattles.com/combat-lab?primary=621&secondary=185) | 96.09% | 0.00 | 393,986 | 0 | 2026-11-20 16:24 UTC | Verified this run |
+| 7 | 7 | [Bai Qi / Liu Che](https://rokbattles.com/combat-lab?primary=545&secondary=185) | 76.70% | 0.00 | 354,959 | 0 | 2026-11-20 16:24 UTC | Verified this run |
 
 ## Detailed metrics (verified API responses only)
 
