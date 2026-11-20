@@ -25,7 +25,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Fetch 8 infantry and 8 cavalry pairings
+      - name: Fetch infantry and 9 cavalry pairings
         run: |
           python monitor.py
           python monitor_cav.py
