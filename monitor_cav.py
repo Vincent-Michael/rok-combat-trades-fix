@@ -20,6 +20,7 @@ PAIRS = [
     ("Ivan IV / William Marshal", 619, 620),
     ("Ivan IV / Achilles", 619, 575),
     ("Arthur Pendragon / Ivan IV", 540, 619),
+    ("Arthur Pendragon / Achilles", 540, 575),
     ("Arthur Pendragon / Gang Gamchan", 540, 579),
     ("Arthur Pendragon / Hector", 540, 576),
     ("Achilles / Gang Gamchan", 575, 579),
