@@ -1,6 +1,6 @@
 # RoK Combat Lab — Trade Report
 
-**Checked:** 2026-11-20T21:04:35Z  
+**Checked:** 2026-11-20T21:24:57Z  
 **Scenario:** 7 days / Open field (7-day selected time window)  
 **Live retrieval:** 7/7 successful
 
