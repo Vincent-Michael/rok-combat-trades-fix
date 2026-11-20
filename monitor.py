@@ -24,6 +24,7 @@ PAIRS = [
     ("Sun Tzu / Ivar", 595, 596),
     ("Bai Qi / Liu Che", 545, 185),
     ("Sun Tzu / Bai Qi", 595, 545),
+    ("Bai Qi / Yi Do", 545, 621),
 ]
 
 
