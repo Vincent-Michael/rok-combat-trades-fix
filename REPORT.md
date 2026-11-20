@@ -1,13 +1,13 @@
 # RoK Combat Lab — Trade Report
 
-**Checked:** 2026-11-20T21:42:26Z  
+**Checked:** 2026-11-20T21:47:03Z  
 **Scenario:** 7 days / Open field (7-day selected time window)  
 **Live retrieval:** 8/8 successful
 
 | Rank | Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) | Status |
 |---:|---|---:|---:|---:|---:|---|---|
 | 1 | [Sun Tzu / Yi Do](https://rokbattles.com/combat-lab?primary=595&secondary=621) | 139.58% | 0.00 | 264,823 | 0 | 2026-11-20 16:24 UTC | Verified this run |
-| 2 | [Bai Qi / Yi Do](https://rokbattles.com/combat-lab?primary=545&secondary=621) | 118.46% | N/A | 27,940 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| 2 | [Bai Qi / Yi Do](https://rokbattles.com/combat-lab?primary=545&secondary=621) | 118.46% | 0.00 | 27,940 | 0 | 2026-11-20 16:24 UTC | Verified this run |
 | 3 | [Sun Tzu / Ivar](https://rokbattles.com/combat-lab?primary=595&secondary=596) | 117.14% | 0.00 | 157,905 | 0 | 2026-11-20 16:24 UTC | Verified this run |
 | 4 | [Yi Do / Ivar](https://rokbattles.com/combat-lab?primary=621&secondary=596) | 104.15% | 0.00 | 3,133 | 0 | 2026-11-20 16:24 UTC | Verified this run |
 | 5 | [Yi Do / Bai Qi](https://rokbattles.com/combat-lab?primary=621&secondary=545) | 102.54% | 0.00 | 23,360 | 0 | 2026-11-20 16:24 UTC | Verified this run |

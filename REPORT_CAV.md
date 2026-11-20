@@ -1,8 +1,8 @@
 # RoK Combat Lab — Cavalry Trade Report
 
-**Checked:** 2026-11-20T21:42:37Z  
+**Checked:** 2026-11-20T21:47:13Z  
 **Scenario:** 7 days / Open field (7-day selected time window)  
-**Live retrieval:** 8/8 successful
+**Live retrieval:** 9/9 successful
 
 | Rank | Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) | Status |
 |---:|---|---:|---:|---:|---:|---|---|
@@ -13,7 +13,8 @@
 | 5 | [Achilles / Vercingetorix](https://rokbattles.com/combat-lab?primary=575&secondary=616) | 100.13% | N/A | 29,420 | N/A | 2026-11-20 16:24 UTC | Verified this run |
 | 6 | [Achilles / Gang Gamchan](https://rokbattles.com/combat-lab?primary=575&secondary=579) | 83.70% | N/A | 420,233 | N/A | 2026-11-20 16:24 UTC | Verified this run |
 | 7 | [Arthur Pendragon / Hector](https://rokbattles.com/combat-lab?primary=540&secondary=576) | 81.65% | N/A | 59,110 | N/A | 2026-11-20 16:24 UTC | Verified this run |
-| 8 | [Arthur Pendragon / Gang Gamchan](https://rokbattles.com/combat-lab?primary=540&secondary=579) | 50.60% | N/A | 19,732 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| 8 | [Arthur Pendragon / Achilles](https://rokbattles.com/combat-lab?primary=540&secondary=575) | 68.25% | N/A | 118,640 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| 9 | [Arthur Pendragon / Gang Gamchan](https://rokbattles.com/combat-lab?primary=540&secondary=579) | 50.60% | N/A | 19,732 | N/A | 2026-11-20 16:24 UTC | Verified this run |
 
 ## Detailed metrics (verified API responses only)
 
@@ -26,6 +27,7 @@
 | Achilles / Vercingetorix | 397,116,440 | 396,609,680 | 364.217 | 57.639 | 56.112 |
 | Achilles / Gang Gamchan | 4,651,190,787 | 5,557,024,690 | 310.662 | 51.409 | 60.315 |
 | Arthur Pendragon / Hector | 724,572,872 | 887,362,110 | 369.302 | 56.428 | 67.571 |
+| Arthur Pendragon / Achilles | 1,509,615,255 | 2,211,870,120 | 386.676 | 60.192 | 88.618 |
 | Arthur Pendragon / Gang Gamchan | 176,879,780 | 349,554,300 | 282.112 | 44.027 | 89.050 |
 
 ## Scenario integrity
