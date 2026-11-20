@@ -20,7 +20,7 @@ Wenn das Repository angebunden ist, kann die ChatGPT-Überwachung **GitHub `REPO
 
 ## Hinweise
 
-- Es werden genau vier Kombinationen abgefragt (621/545, 621/596, 621/185, 595/621).
+- Es werden genau sechs Kombinationen abgefragt (621/545, 621/596, 621/185, 595/621, 595/596, 545/185). Die neuen Paarungen sind **Sun Tzu / Ivar** und **Bai Qi / Liu Che**. Für neue Paarungen beginnt die Vergleichshistorie mit dem ersten erfolgreichen 7-Tage-/Open-field-Snapshot; die bisherigen vier behalten ihre Daten.
 - API-JSON: `/proxy/v2/global/combat-lab?primary=...&secondary=...`
 - Verglichen wird ausschließlich **7 Tage / Open field** (`summaries`-Tupel [3,1], 3=7 Tage, 1=Open field). Damit der Browser dieselben Werte zeigt, dort den Zeitraum manuell auf **7 days** und das Szenario auf **Open field** stellen. Die reine URL speichert diese Filterauswahl nicht.
 - Echte neue Daten werden nur akzeptiert, wenn die IDs exakt stimmen und Datenformate valide sind.
