@@ -1,18 +1,25 @@
 # RoK Combat Lab — Trade Report
 
-**Correction in progress — awaiting the next successful API run.**
+**Checked:** 2026-11-20T20:42:28Z  
+**Scenario:** 1 year / Open field (matching the Combat Lab page defaults)  
+**Live retrieval:** 4/4 successful
 
-The previous monitor reported `1 year / All` values, while the Combat Lab page defaults to **1 year / Open field**. Those values were therefore not comparable with the four normal links.
+| Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) | Status |
+|---|---:|---:|---:|---:|---|---|
+| [Yi Do / Bai Qi](https://rokbattles.com/combat-lab?primary=621&secondary=545) | 102.54% | N/A | 23,360 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| [Yi Do / Ivar](https://rokbattles.com/combat-lab?primary=621&secondary=596) | 104.15% | N/A | 3,133 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| [Yi Do / Liu Che](https://rokbattles.com/combat-lab?primary=621&secondary=185) | 96.09% | N/A | 393,986 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| [Sun Tzu / Yi Do](https://rokbattles.com/combat-lab?primary=595&secondary=621) | 139.58% | N/A | 264,823 | N/A | 2026-11-20 16:24 UTC | Verified this run |
 
-**Monitor configuration:** 1 year / Open field (`summaries[range=0, scenario=1]`)  
-**Current verified Open field snapshots:** none yet  
-**Previous All-scenario snapshot:** [Archived JSON](data/trades-all-archived.json)
+## Detailed metrics (verified API responses only)
 
-| Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) |
-|---|---:|---:|---:|---:|---|
-| [Yi Do / Bai Qi](https://rokbattles.com/combat-lab?primary=621&secondary=545) | Pending | N/A | Pending | N/A | Pending |
-| [Yi Do / Ivar](https://rokbattles.com/combat-lab?primary=621&secondary=596) | Pending | N/A | Pending | N/A | Pending |
-| [Yi Do / Liu Che](https://rokbattles.com/combat-lab?primary=621&secondary=185) | Pending | N/A | Pending | N/A | Pending |
-| [Sun Tzu / Yi Do](https://rokbattles.com/combat-lab?primary=595&secondary=621) | Pending | N/A | Pending | N/A | Pending |
+| Pairing | KP gained | KP lost | DPS | SPS | TPS |
+|---|---:|---:|---:|---:|---:|
+| Yi Do / Bai Qi | 312,321,890 | 304,577,250 | 369.186 | 60.962 | 58.477 |
+| Yi Do / Ivar | 37,566,950 | 36,068,830 | 353.504 | 57.517 | 56.084 |
+| Yi Do / Liu Che | 4,871,324,314 | 5,069,388,770 | 355.519 | 56.696 | 58.299 |
+| Sun Tzu / Yi Do | 4,863,388,372 | 3,484,310,142 | 475.959 | 80.891 | 57.197 |
 
-The workflow will automatically replace this notice with a fresh report when its Open field API check finishes. Old All-scenario values must never be treated as this scenario's prior snapshots.
+## Scenario integrity
+
+This report uses **1 year / Open field**, matching Combat Lab's default filters. Older 1-year/All values are archived separately and excluded from change calculations.
