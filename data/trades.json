@@ -15,7 +15,7 @@
       "sps": 60.962,
       "tps": 58.477,
       "hps": 4.032,
-      "checkedAtUTC": "2026-11-20T20:46:14Z"
+      "checkedAtUTC": "2026-11-20T20:53:22Z"
     },
     "621-596": {
       "generatedAtMs": 1795191899819,
@@ -31,7 +31,7 @@
       "sps": 57.517,
       "tps": 56.084,
       "hps": 10.964,
-      "checkedAtUTC": "2026-11-20T20:46:14Z"
+      "checkedAtUTC": "2026-11-20T20:53:22Z"
     },
     "621-185": {
       "generatedAtMs": 1795191899819,
@@ -47,7 +47,7 @@
       "sps": 56.696,
       "tps": 58.299,
       "hps": 5.44,
-      "checkedAtUTC": "2026-11-20T20:46:14Z"
+      "checkedAtUTC": "2026-11-20T20:53:22Z"
     },
     "595-621": {
       "generatedAtMs": 1795191899819,
@@ -63,7 +63,39 @@
       "sps": 80.891,
       "tps": 57.197,
       "hps": 8.309,
-      "checkedAtUTC": "2026-11-20T20:46:14Z"
+      "checkedAtUTC": "2026-11-20T20:53:22Z"
+    },
+    "595-596": {
+      "generatedAtMs": 1795191899819,
+      "generatedAtUTC": "2026-11-20 16:24 UTC",
+      "primary": 595,
+      "secondary": 596,
+      "battles": 157905,
+      "uniqueGovernors": 1397,
+      "killPointsGained": 2475476046,
+      "killPointsLost": 2113248010,
+      "tradePercent": 117.1408,
+      "dps": 406.513,
+      "sps": 69.502,
+      "tps": 58.591,
+      "hps": 4.542,
+      "checkedAtUTC": "2026-11-20T20:53:22Z"
+    },
+    "545-185": {
+      "generatedAtMs": 1795191899819,
+      "generatedAtUTC": "2026-11-20 16:24 UTC",
+      "primary": 545,
+      "secondary": 185,
+      "battles": 354959,
+      "uniqueGovernors": 5382,
+      "killPointsGained": 4229916706,
+      "killPointsLost": 5514920730,
+      "tradePercent": 76.6995,
+      "dps": 341.368,
+      "sps": 55.217,
+      "tps": 72.33,
+      "hps": 6.928,
+      "checkedAtUTC": "2026-11-20T20:53:22Z"
     }
   },
   "history": [
@@ -134,10 +166,44 @@
       "tps": 57.197,
       "hps": 8.309,
       "checkedAtUTC": "2026-11-20T20:46:14Z"
+    },
+    {
+      "pairing": "Sun Tzu / Ivar",
+      "generatedAtMs": 1795191899819,
+      "generatedAtUTC": "2026-11-20 16:24 UTC",
+      "primary": 595,
+      "secondary": 596,
+      "battles": 157905,
+      "uniqueGovernors": 1397,
+      "killPointsGained": 2475476046,
+      "killPointsLost": 2113248010,
+      "tradePercent": 117.1408,
+      "dps": 406.513,
+      "sps": 69.502,
+      "tps": 58.591,
+      "hps": 4.542,
+      "checkedAtUTC": "2026-11-20T20:53:22Z"
+    },
+    {
+      "pairing": "Bai Qi / Liu Che",
+      "generatedAtMs": 1795191899819,
+      "generatedAtUTC": "2026-11-20 16:24 UTC",
+      "primary": 545,
+      "secondary": 185,
+      "battles": 354959,
+      "uniqueGovernors": 5382,
+      "killPointsGained": 4229916706,
+      "killPointsLost": 5514920730,
+      "tradePercent": 76.6995,
+      "dps": 341.368,
+      "sps": 55.217,
+      "tps": 72.33,
+      "hps": 6.928,
+      "checkedAtUTC": "2026-11-20T20:53:22Z"
     }
   ],
-  "lastCheckedAtUTC": "2026-11-20T20:46:14Z",
-  "lastRunSuccessCount": 4,
+  "lastCheckedAtUTC": "2026-11-20T20:53:22Z",
+  "lastRunSuccessCount": 6,
   "lastErrors": {},
   "resetNote": "Manual reset requested; the next successful 7-day/Open field API run starts a new comparison baseline."
 }
