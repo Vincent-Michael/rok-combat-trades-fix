@@ -8,9 +8,9 @@ on:
       - 'monitor_cav.py'
       - '.github/workflows/monitor.yml'
   schedule:
-    # Every 8h. CET: 02:00 / 10:00 / 18:00 Berlin.
-    # CEST: 03:00 / 11:00 / 19:00 Berlin.
-    - cron: '0 1,9,17 * * *'
+    # Collect data 30 minutes ahead of the 02/10/18 local ChatGPT reports.
+    - cron: '30 1,9,17 * * *'
+      timezone: 'Europe/Berlin'
 permissions:
   contents: write
 concurrency:
