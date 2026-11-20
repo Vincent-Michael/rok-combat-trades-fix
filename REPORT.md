@@ -1,8 +1,8 @@
 # RoK Combat Lab — Trade Report
 
-**Checked:** 2026-11-20T20:53:22Z  
+**Checked:** 2026-11-20T21:00:39Z  
 **Scenario:** 7 days / Open field (7-day selected time window)  
-**Live retrieval:** 6/6 successful
+**Live retrieval:** 7/7 successful
 
 | Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) | Status |
 |---|---:|---:|---:|---:|---|---|
@@ -10,8 +10,9 @@
 | [Yi Do / Ivar](https://rokbattles.com/combat-lab?primary=621&secondary=596) | 104.15% | 0.00 | 3,133 | 0 | 2026-11-20 16:24 UTC | Verified this run |
 | [Yi Do / Liu Che](https://rokbattles.com/combat-lab?primary=621&secondary=185) | 96.09% | 0.00 | 393,986 | 0 | 2026-11-20 16:24 UTC | Verified this run |
 | [Sun Tzu / Yi Do](https://rokbattles.com/combat-lab?primary=595&secondary=621) | 139.58% | 0.00 | 264,823 | 0 | 2026-11-20 16:24 UTC | Verified this run |
-| [Sun Tzu / Ivar](https://rokbattles.com/combat-lab?primary=595&secondary=596) | 117.14% | N/A | 157,905 | N/A | 2026-11-20 16:24 UTC | Verified this run |
-| [Bai Qi / Liu Che](https://rokbattles.com/combat-lab?primary=545&secondary=185) | 76.70% | N/A | 354,959 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| [Sun Tzu / Ivar](https://rokbattles.com/combat-lab?primary=595&secondary=596) | 117.14% | 0.00 | 157,905 | 0 | 2026-11-20 16:24 UTC | Verified this run |
+| [Bai Qi / Liu Che](https://rokbattles.com/combat-lab?primary=545&secondary=185) | 76.70% | 0.00 | 354,959 | 0 | 2026-11-20 16:24 UTC | Verified this run |
+| [Sun Tzu / Bai Qi](https://rokbattles.com/combat-lab?primary=595&secondary=545) | 102.34% | N/A | 729,631 | N/A | 2026-11-20 16:24 UTC | Verified this run |
 
 ## Detailed metrics (verified API responses only)
 
@@ -23,6 +24,7 @@
 | Sun Tzu / Yi Do | 4,863,388,372 | 3,484,310,142 | 475.959 | 80.891 | 57.197 |
 | Sun Tzu / Ivar | 2,475,476,046 | 2,113,248,010 | 406.513 | 69.502 | 58.591 |
 | Bai Qi / Liu Che | 4,229,916,706 | 5,514,920,730 | 341.368 | 55.217 | 72.330 |
+| Sun Tzu / Bai Qi | 10,300,464,564 | 10,065,326,536 | 372.035 | 63.608 | 62.062 |
 
 ## Scenario integrity
 
