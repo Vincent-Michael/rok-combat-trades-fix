@@ -1,26 +1,28 @@
 # RoK Combat Lab — Cavalry Trade Report
 
-**Checked:** 2026-11-20T22:14:05Z  
+**Checked:** 2026-11-20T22:18:38Z  
 **Scenario:** 7 days / Open field (7-day selected time window)  
-**Live retrieval:** 10/10 successful
+**Live retrieval:** 11/11 successful
 
 | Rank | Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) | Status |
 |---:|---|---:|---:|---:|---:|---|---|
-| 1 | [Ivan IV / William Marshal](https://rokbattles.com/combat-lab?primary=619&secondary=620) | 160.54% | N/A | 80,344 | N/A | 2026-11-20 16:24 UTC | Verified this run |
-| 2 | [Ivan IV / Achilles](https://rokbattles.com/combat-lab?primary=619&secondary=575) | 124.80% | N/A | 369,415 | N/A | 2026-11-20 16:24 UTC | Verified this run |
-| 3 | [Arthur Pendragon / Ivan IV](https://rokbattles.com/combat-lab?primary=540&secondary=619) | 124.00% | N/A | 692,529 | N/A | 2026-11-20 16:24 UTC | Verified this run |
-| 4 | [William Marshal / Achilles](https://rokbattles.com/combat-lab?primary=620&secondary=575) | 106.37% | N/A | 27,727 | N/A | 2026-11-20 16:24 UTC | Verified this run |
-| 5 | [Achilles / William Marshal](https://rokbattles.com/combat-lab?primary=575&secondary=620) | 100.96% | N/A | 47,809 | N/A | 2026-11-20 16:24 UTC | Verified this run |
-| 6 | [Achilles / Vercingetorix](https://rokbattles.com/combat-lab?primary=575&secondary=616) | 100.13% | N/A | 29,420 | N/A | 2026-11-20 16:24 UTC | Verified this run |
-| 7 | [Achilles / Gang Gamchan](https://rokbattles.com/combat-lab?primary=575&secondary=579) | 83.70% | N/A | 420,233 | N/A | 2026-11-20 16:24 UTC | Verified this run |
-| 8 | [Arthur Pendragon / Hector](https://rokbattles.com/combat-lab?primary=540&secondary=576) | 81.65% | N/A | 59,110 | N/A | 2026-11-20 16:24 UTC | Verified this run |
-| 9 | [Arthur Pendragon / Achilles](https://rokbattles.com/combat-lab?primary=540&secondary=575) | 68.25% | N/A | 118,640 | N/A | 2026-11-20 16:24 UTC | Verified this run |
-| 10 | [Arthur Pendragon / Gang Gamchan](https://rokbattles.com/combat-lab?primary=540&secondary=579) | 50.60% | N/A | 19,732 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| 1 | [William Marshal / Ivan IV](https://rokbattles.com/combat-lab?primary=620&secondary=619) | 166.99% | N/A | 45,711 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| 2 | [Ivan IV / William Marshal](https://rokbattles.com/combat-lab?primary=619&secondary=620) | 160.54% | N/A | 80,344 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| 3 | [Ivan IV / Achilles](https://rokbattles.com/combat-lab?primary=619&secondary=575) | 124.80% | N/A | 369,415 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| 4 | [Arthur Pendragon / Ivan IV](https://rokbattles.com/combat-lab?primary=540&secondary=619) | 124.00% | N/A | 692,529 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| 5 | [William Marshal / Achilles](https://rokbattles.com/combat-lab?primary=620&secondary=575) | 106.37% | N/A | 27,727 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| 6 | [Achilles / William Marshal](https://rokbattles.com/combat-lab?primary=575&secondary=620) | 100.96% | N/A | 47,809 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| 7 | [Achilles / Vercingetorix](https://rokbattles.com/combat-lab?primary=575&secondary=616) | 100.13% | N/A | 29,420 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| 8 | [Achilles / Gang Gamchan](https://rokbattles.com/combat-lab?primary=575&secondary=579) | 83.70% | N/A | 420,233 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| 9 | [Arthur Pendragon / Hector](https://rokbattles.com/combat-lab?primary=540&secondary=576) | 81.65% | N/A | 59,110 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| 10 | [Arthur Pendragon / Achilles](https://rokbattles.com/combat-lab?primary=540&secondary=575) | 68.25% | N/A | 118,640 | N/A | 2026-11-20 16:24 UTC | Verified this run |
+| 11 | [Arthur Pendragon / Gang Gamchan](https://rokbattles.com/combat-lab?primary=540&secondary=579) | 50.60% | N/A | 19,732 | N/A | 2026-11-20 16:24 UTC | Verified this run |
 
 ## Detailed metrics (verified API responses only)
 
 | Pairing | KP gained | KP lost | DPS | SPS | TPS |
 |---|---:|---:|---:|---:|---:|
+| William Marshal / Ivan IV | 981,767,323 | 587,929,030 | 567.077 | 93.664 | 54.878 |
 | Ivan IV / William Marshal | 1,398,761,585 | 871,304,690 | 447.155 | 76.584 | 46.696 |
 | Ivan IV / Achilles | 5,525,871,959 | 4,427,818,110 | 407.870 | 68.337 | 53.760 |
 | Arthur Pendragon / Ivan IV | 11,160,761,343 | 9,000,921,340 | 471.496 | 76.977 | 61.470 |
