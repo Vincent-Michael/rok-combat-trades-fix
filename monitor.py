@@ -1,0 +1,179 @@
+#!/usr/bin/env python3
+"""ROK Battles Combat Lab monitor; Python 3.10+, standard library only."""
+import json
+import os
+import sys
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
+
+ROOT = Path(__file__).resolve().parent
+DATA = ROOT / "data" / "trades.json"
+REPORT = ROOT / "REPORT.md"
+
+PAIRS = [
+    ("Yi Do / Bai Qi", 621, 545, 102.24, "21.19K", "2026-11-20 08:24"),
+    ("Yi Do / Ivar", 621, 596, 101.39, "2.69K", "2026-11-20 08:24"),
+    ("Yi Do / Liu Che", 621, 185, 95.92, "356.67K", "2026-11-20 08:24"),
+    ("Sun Tzu / Yi Do", 595, 621, 139.25, "121.41K", "2026-11-19 08:23"),
+]
+
+
+def utc_now():
+    return datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+
+
+def timestamp(ms):
+    return datetime.fromtimestamp(int(ms) / 1000, timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+
+
+def number(value):
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise ValueError(f"Invalid numeric value: {value!r}")
+    return value
+
+
+def rate(numerator, duration_ms):
+    return round(numerator / (duration_ms / 1000), 3) if duration_ms > 0 else None
+
+
+def parse_payload(payload, primary, secondary):
+    pair = payload.get("pairing") or {}
+    if (int(pair.get("primaryCommanderId", -1)), int(pair.get("secondaryCommanderId", -1))) != (primary, secondary):
+        raise ValueError("API response is for a DIFFERENT commander pairing")
+    generation_ms = number(payload["generatedAtMs"])
+    if generation_ms <= 0:
+        raise ValueError("Invalid generatedAtMs")
+    rows = [r for r in payload.get("summaries", []) if isinstance(r, list) and len(r) >= 12 and r[:2] == [0, 0]]
+    if len(rows) != 1:
+        raise ValueError("Missing/ambiguous summary for 1y / all scenario")
+    r = rows[0]
+    battles, unique, gained, lost, sev_inf, sev_taken, rate_ms, dmg, heal = (
+        number(r[2]), number(r[3]), number(r[4]), number(r[5]),
+        number(r[6]), number(r[7]), number(r[9]), number(r[10]), number(r[11])
+    )
+    if battles < 0 or gained < 0 or lost < 0:
+        raise ValueError("Negative values in summary")
+    trade = round(gained / lost * 100, 4) if lost > 0 else (100.0 if gained == 0 else None)
+    return {
+        "generatedAtMs": generation_ms,
+        "generatedAtUTC": timestamp(generation_ms),
+        "primary": primary,
+        "secondary": secondary,
+        "battles": int(battles),
+        "uniqueGovernors": int(unique),
+        "killPointsGained": round(gained),
+        "killPointsLost": round(lost),
+        "tradePercent": trade,
+        "dps": rate(dmg, rate_ms),
+        "sps": rate(sev_inf, rate_ms),
+        "tps": rate(sev_taken, rate_ms),
+        "hps": rate(heal, rate_ms),
+    }
+
+
+def fetch(primary, secondary):
+    path = f"?primary={primary}&secondary={secondary}"
+    # The same-origin proxy route is declared in rokbattles' Next.js source.
+    urls = [
+        "https://rokbattles.com/proxy/v2/global/combat-lab" + path,
+    ]
+    errors = []
+    for url in urls:
+        try:
+            req = Request(url, headers={"Accept": "application/json", "User-Agent": "RoK-Combat-Trades-Monitor/1.0"})
+            with urlopen(req, timeout=25) as response:
+                if response.status != 200:
+                    raise ValueError(f"HTTP {response.status}")
+                raw = response.read(12 * 1024 * 1024)
+                data = json.loads(raw)
+            return parse_payload(data, primary, secondary), None
+        except Exception as exc:  # Keep reporting even if fetch/parsing fails.
+            errors.append(f"{url}: {type(exc).__name__} {str(exc)[:180]}")
+    return None, "; ".join(errors)
+
+
+def fmt_num(value, digits=0):
+    return "N/A" if value is None else f"{value:,.{digits}f}"
+
+
+def build_report(store, results, now):
+    lines = [
+        "# RoK Combat Lab — Trade Report",
+        "",
+        f"**Checked:** {now}  ",
+        "**Scenario:** 1 year / All (same selection for all pairings)  ",
+        f"**Live retrieval:** {sum(v['ok'] for v in results.values())}/4 successful",
+        "",
+        "| Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) | Status |",
+        "|---|---:|---:|---:|---:|---|---|",
+    ]
+    for name, p, s, base_trade, base_battles, base_time in PAIRS:
+        k = f"{p}-{s}"
+        result = results[k]
+        current = result["snapshot"]
+        prior = result.get("previous")
+        url = f"https://rokbattles.com/combat-lab?primary={p}&secondary={s}"
+        if current:
+            trade = fmt_num(current.get("tradePercent"), 2) + "%" if current.get("tradePercent") is not None else "N/A"
+            battles = fmt_num(current.get("battles"))
+            trade_delta = (fmt_num(current["tradePercent"]-prior["tradePercent"],2) if prior and current.get("tradePercent") is not None and prior.get("tradePercent") is not None else "N/A")
+            count_delta = fmt_num(current["battles"]-prior["battles"]) if prior else "N/A"
+            stamp = current["generatedAtUTC"]
+            status = "Verified this run" if result["ok"] else "Old verified snapshot"
+        else:
+            trade, trade_delta, battles, count_delta, stamp, status = "N/A", "N/A", "N/A", "N/A", "N/A", "Not yet verified"
+        lines.append(f"| [{name}]({url}) | {trade} | {trade_delta} | {battles} | {count_delta} | {stamp} | {status} |")
+    lines += ["", "## Detailed metrics (verified API responses only)", "", "| Pairing | KP gained | KP lost | DPS | SPS | TPS |", "|---|---:|---:|---:|---:|---:|"]
+    for name, p, s, *_ in PAIRS:
+        x = results[f"{p}-{s}"]
+        v = x["snapshot"] if x["ok"] else None
+        if v:
+            cols = [fmt_num(v.get(n),3 if n in ("dps","sps","tps") else 0) for n in ("killPointsGained","killPointsLost","dps","sps","tps")]
+        else:
+            cols = ["N/A"] * 5
+        lines.append(f"| {name} | " + " | ".join(cols) + " |")
+    errors = [f"- **{name}:** {results[f'{p}-{s}']['error']}" for name,p,s,*_ in PAIRS if results[f"{p}-{s}"]["error"]]
+    if errors:
+        lines += ["", "## Retrieval errors", "", *errors]
+    if sum(v["ok"] for v in results.values()) == 0:
+        lines += ["", "**LIVE DATA UNAVAILABLE.** Any retained snapshots are older verified API data, not fresh measurements. No changes are claimed when retrieval fails."]
+    lines += ["", "## Historical reference (2026-11-20, not an API-verified snapshot for this workflow)", "", "| Pairing | Reported trade | Reported battles | Reported site timestamp UTC |", "|---|---:|---:|---|"]
+    for name, p, s, bt, bb, ts in PAIRS:
+        lines.append(f"| {name} | {bt:.2f}% | {bb} | {ts} |")
+    return "\n".join(lines) + "\n"
+
+
+def main():
+    store = json.loads(DATA.read_text(encoding="utf-8")) if DATA.exists() else {"snapshots": {}, "history": []}
+    store.setdefault("snapshots", {})
+    store.setdefault("history", [])
+    now = utc_now()
+    results = {}
+    for name, p, s, *_ in PAIRS:
+        key = f"{p}-{s}"
+        prior = store["snapshots"].get(key)
+        data, err = fetch(p, s)
+        if data:
+            data["checkedAtUTC"] = now
+            if prior is None or data["generatedAtMs"] != prior["generatedAtMs"]:
+                store["history"].append({"pairing": name, **data})
+            store["snapshots"][key] = data
+        results[key] = {"ok": bool(data), "snapshot": data or prior, "previous": prior if data else None, "error": err}
+        print(f"{name}: {'OK '+str(data['tradePercent'])+'%' if data else 'FAILED '+str(err)}")
+        # Avoid bursts against a shared resource.
+        time.sleep(1)
+    store["lastCheckedAtUTC"] = now
+    store["lastRunSuccessCount"] = sum(v["ok"] for v in results.values())
+    store["lastErrors"] = {key: value["error"] for key, value in results.items() if value["error"]}
+    store["history"] = store["history"][-500:]
+    DATA.parent.mkdir(parents=True, exist_ok=True)
+    DATA.write_text(json.dumps(store, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    REPORT.write_text(build_report(store, results, now), encoding="utf-8")
+    print(f"Saved {REPORT} and {DATA}")
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())
