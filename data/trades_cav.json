@@ -14,7 +14,7 @@
       "sps": 76.584,
       "tps": 46.696,
       "hps": 2.69,
-      "checkedAtUTC": "2026-11-20T21:25:05Z"
+      "checkedAtUTC": "2026-11-20T21:42:37Z"
     },
     "619-575": {
       "generatedAtMs": 1795191899819,
@@ -30,7 +30,7 @@
       "sps": 68.337,
       "tps": 53.76,
       "hps": 4.212,
-      "checkedAtUTC": "2026-11-20T21:25:05Z"
+      "checkedAtUTC": "2026-11-20T21:42:37Z"
     },
     "540-619": {
       "generatedAtMs": 1795191899819,
@@ -46,7 +46,7 @@
       "sps": 76.977,
       "tps": 61.47,
       "hps": 5.783,
-      "checkedAtUTC": "2026-11-20T21:25:05Z"
+      "checkedAtUTC": "2026-11-20T21:42:37Z"
     },
     "540-579": {
       "generatedAtMs": 1795191899819,
@@ -62,7 +62,7 @@
       "sps": 44.027,
       "tps": 89.05,
       "hps": 140.811,
-      "checkedAtUTC": "2026-11-20T21:25:05Z"
+      "checkedAtUTC": "2026-11-20T21:42:37Z"
     },
     "540-576": {
       "generatedAtMs": 1795191899819,
@@ -78,7 +78,7 @@
       "sps": 56.428,
       "tps": 67.571,
       "hps": 2.672,
-      "checkedAtUTC": "2026-11-20T21:25:05Z"
+      "checkedAtUTC": "2026-11-20T21:42:37Z"
     },
     "575-579": {
       "generatedAtMs": 1795191899819,
@@ -94,7 +94,7 @@
       "sps": 51.409,
       "tps": 60.315,
       "hps": 249.713,
-      "checkedAtUTC": "2026-11-20T21:25:05Z"
+      "checkedAtUTC": "2026-11-20T21:42:37Z"
     },
     "575-616": {
       "generatedAtMs": 1795191899819,
@@ -110,7 +110,7 @@
       "sps": 57.639,
       "tps": 56.112,
       "hps": 26.773,
-      "checkedAtUTC": "2026-11-20T21:25:05Z"
+      "checkedAtUTC": "2026-11-20T21:42:37Z"
     },
     "575-620": {
       "generatedAtMs": 1795191899819,
@@ -126,7 +126,7 @@
       "sps": 58.616,
       "tps": 57.355,
       "hps": 7.442,
-      "checkedAtUTC": "2026-11-20T21:25:05Z"
+      "checkedAtUTC": "2026-11-20T21:42:37Z"
     }
   },
   "history": [
@@ -268,7 +268,7 @@
     }
   ],
   "scenario": "7d/openField",
-  "lastCheckedAtUTC": "2026-11-20T21:25:05Z",
+  "lastCheckedAtUTC": "2026-11-20T21:42:37Z",
   "lastRunSuccessCount": 8,
   "lastErrors": {}
 }

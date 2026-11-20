@@ -15,7 +15,7 @@
       "sps": 60.962,
       "tps": 58.477,
       "hps": 4.032,
-      "checkedAtUTC": "2026-11-20T21:24:57Z"
+      "checkedAtUTC": "2026-11-20T21:42:26Z"
     },
     "621-596": {
       "generatedAtMs": 1795191899819,
@@ -31,7 +31,7 @@
       "sps": 57.517,
       "tps": 56.084,
       "hps": 10.964,
-      "checkedAtUTC": "2026-11-20T21:24:57Z"
+      "checkedAtUTC": "2026-11-20T21:42:26Z"
     },
     "621-185": {
       "generatedAtMs": 1795191899819,
@@ -47,7 +47,7 @@
       "sps": 56.696,
       "tps": 58.299,
       "hps": 5.44,
-      "checkedAtUTC": "2026-11-20T21:24:57Z"
+      "checkedAtUTC": "2026-11-20T21:42:26Z"
     },
     "595-621": {
       "generatedAtMs": 1795191899819,
@@ -63,7 +63,7 @@
       "sps": 80.891,
       "tps": 57.197,
       "hps": 8.309,
-      "checkedAtUTC": "2026-11-20T21:24:57Z"
+      "checkedAtUTC": "2026-11-20T21:42:26Z"
     },
     "595-596": {
       "generatedAtMs": 1795191899819,
@@ -79,7 +79,7 @@
       "sps": 69.502,
       "tps": 58.591,
       "hps": 4.542,
-      "checkedAtUTC": "2026-11-20T21:24:57Z"
+      "checkedAtUTC": "2026-11-20T21:42:26Z"
     },
     "545-185": {
       "generatedAtMs": 1795191899819,
@@ -95,7 +95,7 @@
       "sps": 55.217,
       "tps": 72.33,
       "hps": 6.928,
-      "checkedAtUTC": "2026-11-20T21:24:57Z"
+      "checkedAtUTC": "2026-11-20T21:42:26Z"
     },
     "595-545": {
       "generatedAtMs": 1795191899819,
@@ -111,7 +111,23 @@
       "sps": 63.608,
       "tps": 62.062,
       "hps": 5.087,
-      "checkedAtUTC": "2026-11-20T21:24:57Z"
+      "checkedAtUTC": "2026-11-20T21:42:26Z"
+    },
+    "545-621": {
+      "generatedAtMs": 1795191899819,
+      "generatedAtUTC": "2026-11-20 16:24 UTC",
+      "primary": 545,
+      "secondary": 621,
+      "battles": 27940,
+      "uniqueGovernors": 244,
+      "killPointsGained": 355430795,
+      "killPointsLost": 300046960,
+      "tradePercent": 118.4584,
+      "dps": 349.808,
+      "sps": 60.136,
+      "tps": 49.302,
+      "hps": 1.634,
+      "checkedAtUTC": "2026-11-20T21:42:26Z"
     }
   },
   "history": [
@@ -233,10 +249,27 @@
       "tps": 62.062,
       "hps": 5.087,
       "checkedAtUTC": "2026-11-20T21:00:39Z"
+    },
+    {
+      "pairing": "Bai Qi / Yi Do",
+      "generatedAtMs": 1795191899819,
+      "generatedAtUTC": "2026-11-20 16:24 UTC",
+      "primary": 545,
+      "secondary": 621,
+      "battles": 27940,
+      "uniqueGovernors": 244,
+      "killPointsGained": 355430795,
+      "killPointsLost": 300046960,
+      "tradePercent": 118.4584,
+      "dps": 349.808,
+      "sps": 60.136,
+      "tps": 49.302,
+      "hps": 1.634,
+      "checkedAtUTC": "2026-11-20T21:42:26Z"
     }
   ],
-  "lastCheckedAtUTC": "2026-11-20T21:24:57Z",
-  "lastRunSuccessCount": 7,
+  "lastCheckedAtUTC": "2026-11-20T21:42:26Z",
+  "lastRunSuccessCount": 8,
   "lastErrors": {},
   "resetNote": "Manual reset requested; the next successful 7-day/Open field API run starts a new comparison baseline."
 }
