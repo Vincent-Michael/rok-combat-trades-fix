@@ -17,14 +17,14 @@ DATA = ROOT / "data" / "trades_cav.json"
 REPORT = ROOT / "REPORT_CAV.md"
 
 PAIRS = [
-    ("Commander 619 / Commander 620", 619, 620),
-    ("Commander 619 / Achilles", 619, 575),
-    ("Arthur Pendragon / Commander 619", 540, 619),
+    ("Ivan IV / William Marshal", 619, 620),
+    ("Ivan IV / Achilles", 619, 575),
+    ("Arthur Pendragon / Ivan IV", 540, 619),
     ("Arthur Pendragon / Gang Gamchan", 540, 579),
     ("Arthur Pendragon / Hector", 540, 576),
     ("Achilles / Gang Gamchan", 575, 579),
     ("Achilles / Vercingetorix", 575, 616),
-    ("Achilles / Commander 620", 575, 620),
+    ("Achilles / William Marshal", 575, 620),
 ]
 
 
