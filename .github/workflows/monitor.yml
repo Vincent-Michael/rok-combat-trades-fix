@@ -1,6 +1,11 @@
 name: RoK Combat Trades
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'monitor.py'
+      - '.github/workflows/monitor.yml'
   schedule:
     # Every 8h. CET: 02:00 / 10:00 / 18:00 Berlin.
     # CEST: 03:00 / 11:00 / 19:00 Berlin.
