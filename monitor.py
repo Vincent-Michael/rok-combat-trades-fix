@@ -106,6 +106,14 @@ def fmt_num(value, digits=0):
 
 
 def build_report(store, results, now):
+    # Rank by latest 7-day Open field trade; unknown values remain last.
+    def sort_key(pair):
+        key = f"{pair[1]}-{pair[2]}"
+        snapshot = results[key]["snapshot"]
+        trade = snapshot.get("tradePercent") if snapshot else None
+        return (trade is None, -(trade if trade is not None else 0))
+
+    ranked_pairs = sorted(PAIRS, key=sort_key)
     lines = [
         "# RoK Combat Lab — Trade Report",
         "",
@@ -113,10 +121,10 @@ def build_report(store, results, now):
         f"**Scenario:** {SCENARIO_LABEL} (7-day selected time window)  ",
         f"**Live retrieval:** {sum(v['ok'] for v in results.values())}/{len(PAIRS)} successful",
         "",
-        "| Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) | Status |",
-        "|---|---:|---:|---:|---:|---|---|",
+        "| Rank | Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) | Status |",
+        "|---:|---|---:|---:|---:|---:|---|---|",
     ]
-    for name, p, s in PAIRS:
+    for rank, (name, p, s) in enumerate(ranked_pairs, start=1):
         k = f"{p}-{s}"
         result = results[k]
         current = result["snapshot"]
@@ -131,9 +139,9 @@ def build_report(store, results, now):
             status = "Verified this run" if result["ok"] else "Old verified snapshot"
         else:
             trade, trade_delta, battles, count_delta, stamp, status = "N/A", "N/A", "N/A", "N/A", "N/A", "Not yet verified"
-        lines.append(f"| [{name}]({url}) | {trade} | {trade_delta} | {battles} | {count_delta} | {stamp} | {status} |")
+        lines.append(f"| {rank} | [{name}]({url}) | {trade} | {trade_delta} | {battles} | {count_delta} | {stamp} | {status} |")
     lines += ["", "## Detailed metrics (verified API responses only)", "", "| Pairing | KP gained | KP lost | DPS | SPS | TPS |", "|---|---:|---:|---:|---:|---:|"]
-    for name, p, s, *_ in PAIRS:
+    for name, p, s in ranked_pairs:
         x = results[f"{p}-{s}"]
         v = x["snapshot"] if x["ok"] else None
         if v:
@@ -141,7 +149,7 @@ def build_report(store, results, now):
         else:
             cols = ["N/A"] * 5
         lines.append(f"| {name} | " + " | ".join(cols) + " |")
-    errors = [f"- **{name}:** {results[f'{p}-{s}']['error']}" for name,p,s,*_ in PAIRS if results[f"{p}-{s}"]["error"]]
+    errors = [f"- **{name}:** {results[f'{p}-{s}']['error']}" for name,p,s in ranked_pairs if results[f"{p}-{s}"]["error"]]
     if errors:
         lines += ["", "## Retrieval errors", "", *errors]
     if sum(v["ok"] for v in results.values()) == 0:
