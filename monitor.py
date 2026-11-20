@@ -21,6 +21,8 @@ PAIRS = [
     ("Yi Do / Ivar", 621, 596),
     ("Yi Do / Liu Che", 621, 185),
     ("Sun Tzu / Yi Do", 595, 621),
+    ("Sun Tzu / Ivar", 595, 596),
+    ("Bai Qi / Liu Che", 545, 185),
 ]
 
 
@@ -108,7 +110,7 @@ def build_report(store, results, now):
         "",
         f"**Checked:** {now}  ",
         f"**Scenario:** {SCENARIO_LABEL} (7-day selected time window)  ",
-        f"**Live retrieval:** {sum(v['ok'] for v in results.values())}/4 successful",
+        f"**Live retrieval:** {sum(v['ok'] for v in results.values())}/{len(PAIRS)} successful",
         "",
         "| Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) | Status |",
         "|---|---:|---:|---:|---:|---|---|",
