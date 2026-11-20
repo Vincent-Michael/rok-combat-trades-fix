@@ -1,6 +1,6 @@
 # RoK Combat Trades – stabiler 8-Stunden-Checker
 
-Diese Lösung umgeht die DNS-Beschränkung **der ChatGPT-Abrufumgebung**, indem GitHub Actions das API-JSON abfragt und einen regelmäßig aktualisierten Report im Repository ablegt. Der GitHub-Runner muss den Host selbst erreichen können; das ist noch **nicht live bestätigt**.
+Diese Lösung umgeht die DNS-Beschränkung **der ChatGPT-Abrufumgebung**, indem GitHub Actions das API-JSON abfragt und einen regelmäßig aktualisierten Report im Repository ablegt. Der GitHub-Runner muss den Host selbst erreichen können; der Abruf wurde am 20.11.2026 bei vier Paarungen erfolgreich bestätigt.
 
 ## Installation auf GitHub
 
@@ -22,10 +22,10 @@ Wenn das Repository angebunden ist, kann die ChatGPT-Überwachung **GitHub `REPO
 
 - Es werden genau vier Kombinationen abgefragt (621/545, 621/596, 621/185, 595/621).
 - API-JSON: `/proxy/v2/global/combat-lab?primary=...&secondary=...`
-- Verglichen wird die **1-Jahr-/Alle-Szenarien-Ansicht** (`summaries`-Tupel [0,0]); das ist nicht automatisch identisch mit einer manuell veränderten Ansicht in deinem Browser.
+- Verglichen wird die **Standardansicht: 1 Jahr / Open field** (`summaries`-Tupel [0,1], 0=1 Jahr, 1=Open field). Das entspricht den Standardfiltern der vier Combat-Lab-Links. Wer manuell andere Filter wählt, bekommt andere Statistiken.
 - Echte neue Daten werden nur akzeptiert, wenn die IDs exakt stimmen und Datenformate valide sind.
 - Änderungswerte beziehen sich auf den vorherigen erfolgreichen API-Snapshot; bei Abfragefehlern gibt es **keine erfundenen Veränderungen**.
-- Die vorherigen Ausgangswerte stehen als Referenz im Report, werden aber nicht als neu bestätigt ausgegeben.
+- Der erste Workflow nutzte versehentlich `1 Jahr / All` ([0,0]). Diese nicht vergleichbaren Snapshots wurden in `data/trades-all-archived.json` gesichert. Nach der Korrektur beginnt die Open-field-Zeitreihe neu; Änderungswerte erscheinen erst nach zwei vergleichbaren Datensätzen.
 - Falls auch GitHub Actions blockiert wird, muss man einen alternativen, erreichbaren Runner/Server verwenden (z. B. PC mit Aufgabenplanung).
 
 ## Lokale Prüfung unter Windows
