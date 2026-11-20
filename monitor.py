@@ -16,10 +16,10 @@ DATA = ROOT / "data" / "trades.json"
 REPORT = ROOT / "REPORT.md"
 
 PAIRS = [
-    ("Yi Do / Bai Qi", 621, 545, 102.24, "21.19K", "2026-11-20 08:24"),
-    ("Yi Do / Ivar", 621, 596, 101.39, "2.69K", "2026-11-20 08:24"),
-    ("Yi Do / Liu Che", 621, 185, 95.92, "356.67K", "2026-11-20 08:24"),
-    ("Sun Tzu / Yi Do", 595, 621, 139.25, "121.41K", "2026-11-19 08:23"),
+    ("Yi Do / Bai Qi", 621, 545),
+    ("Yi Do / Ivar", 621, 596),
+    ("Yi Do / Liu Che", 621, 185),
+    ("Sun Tzu / Yi Do", 595, 621),
 ]
 
 
@@ -112,7 +112,7 @@ def build_report(store, results, now):
         "| Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) | Status |",
         "|---|---:|---:|---:|---:|---|---|",
     ]
-    for name, p, s, base_trade, base_battles, base_time in PAIRS:
+    for name, p, s in PAIRS:
         k = f"{p}-{s}"
         result = results[k]
         current = result["snapshot"]
@@ -142,9 +142,8 @@ def build_report(store, results, now):
         lines += ["", "## Retrieval errors", "", *errors]
     if sum(v["ok"] for v in results.values()) == 0:
         lines += ["", "**LIVE DATA UNAVAILABLE.** Any retained snapshots are older verified API data, not fresh measurements. No changes are claimed when retrieval fails."]
-    lines += ["", "## Historical reference (2026-11-20, not an API-verified snapshot for this workflow)", "", "| Pairing | Reported trade | Reported battles | Reported site timestamp UTC |", "|---|---:|---:|---|"]
-    for name, p, s, bt, bb, ts in PAIRS:
-        lines.append(f"| {name} | {bt:.2f}% | {bb} | {ts} |")
+    lines += ["", "## Scenario integrity", "",
+              "This report uses **1 year / Open field**, matching Combat Lab's default filters. Older 1-year/All values are archived separately and excluded from change calculations."]
     return "\n".join(lines) + "\n"
 
 
