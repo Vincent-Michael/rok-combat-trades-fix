@@ -14,7 +14,7 @@
       "sps": 76.584,
       "tps": 46.696,
       "hps": 2.69,
-      "checkedAtUTC": "2026-11-20T21:47:13Z"
+      "checkedAtUTC": "2026-11-20T22:14:05Z"
     },
     "619-575": {
       "generatedAtMs": 1795191899819,
@@ -30,7 +30,7 @@
       "sps": 68.337,
       "tps": 53.76,
       "hps": 4.212,
-      "checkedAtUTC": "2026-11-20T21:47:13Z"
+      "checkedAtUTC": "2026-11-20T22:14:05Z"
     },
     "540-619": {
       "generatedAtMs": 1795191899819,
@@ -46,7 +46,7 @@
       "sps": 76.977,
       "tps": 61.47,
       "hps": 5.783,
-      "checkedAtUTC": "2026-11-20T21:47:13Z"
+      "checkedAtUTC": "2026-11-20T22:14:05Z"
     },
     "540-579": {
       "generatedAtMs": 1795191899819,
@@ -62,7 +62,7 @@
       "sps": 44.027,
       "tps": 89.05,
       "hps": 140.811,
-      "checkedAtUTC": "2026-11-20T21:47:13Z"
+      "checkedAtUTC": "2026-11-20T22:14:05Z"
     },
     "540-576": {
       "generatedAtMs": 1795191899819,
@@ -78,7 +78,7 @@
       "sps": 56.428,
       "tps": 67.571,
       "hps": 2.672,
-      "checkedAtUTC": "2026-11-20T21:47:13Z"
+      "checkedAtUTC": "2026-11-20T22:14:05Z"
     },
     "575-579": {
       "generatedAtMs": 1795191899819,
@@ -94,7 +94,7 @@
       "sps": 51.409,
       "tps": 60.315,
       "hps": 249.713,
-      "checkedAtUTC": "2026-11-20T21:47:13Z"
+      "checkedAtUTC": "2026-11-20T22:14:05Z"
     },
     "575-616": {
       "generatedAtMs": 1795191899819,
@@ -110,7 +110,7 @@
       "sps": 57.639,
       "tps": 56.112,
       "hps": 26.773,
-      "checkedAtUTC": "2026-11-20T21:47:13Z"
+      "checkedAtUTC": "2026-11-20T22:14:05Z"
     },
     "575-620": {
       "generatedAtMs": 1795191899819,
@@ -126,7 +126,7 @@
       "sps": 58.616,
       "tps": 57.355,
       "hps": 7.442,
-      "checkedAtUTC": "2026-11-20T21:47:13Z"
+      "checkedAtUTC": "2026-11-20T22:14:05Z"
     },
     "540-575": {
       "generatedAtMs": 1795191899819,
@@ -142,7 +142,23 @@
       "sps": 60.192,
       "tps": 88.618,
       "hps": 5.642,
-      "checkedAtUTC": "2026-11-20T21:47:13Z"
+      "checkedAtUTC": "2026-11-20T22:14:05Z"
+    },
+    "620-575": {
+      "generatedAtMs": 1795191899819,
+      "generatedAtUTC": "2026-11-20 16:24 UTC",
+      "primary": 620,
+      "secondary": 575,
+      "battles": 27727,
+      "uniqueGovernors": 145,
+      "killPointsGained": 375707351,
+      "killPointsLost": 353196730,
+      "tradePercent": 106.3734,
+      "dps": 390.915,
+      "sps": 61.375,
+      "tps": 56.259,
+      "hps": 2.149,
+      "checkedAtUTC": "2026-11-20T22:14:05Z"
     }
   },
   "history": [
@@ -298,10 +314,27 @@
       "tps": 88.618,
       "hps": 5.642,
       "checkedAtUTC": "2026-11-20T21:47:13Z"
+    },
+    {
+      "pairing": "William Marshal / Achilles",
+      "generatedAtMs": 1795191899819,
+      "generatedAtUTC": "2026-11-20 16:24 UTC",
+      "primary": 620,
+      "secondary": 575,
+      "battles": 27727,
+      "uniqueGovernors": 145,
+      "killPointsGained": 375707351,
+      "killPointsLost": 353196730,
+      "tradePercent": 106.3734,
+      "dps": 390.915,
+      "sps": 61.375,
+      "tps": 56.259,
+      "hps": 2.149,
+      "checkedAtUTC": "2026-11-20T22:14:05Z"
     }
   ],
   "scenario": "7d/openField",
-  "lastCheckedAtUTC": "2026-11-20T21:47:13Z",
-  "lastRunSuccessCount": 9,
+  "lastCheckedAtUTC": "2026-11-20T22:14:05Z",
+  "lastRunSuccessCount": 10,
   "lastErrors": {}
 }
