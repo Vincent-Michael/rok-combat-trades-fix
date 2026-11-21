@@ -1,6 +1,6 @@
 # RoK Combat Lab — Cavalry Trade Report
 
-**Checked:** 2026-11-21T09:23:59Z  
+**Checked:** 2026-11-21T09:28:27Z  
 **Scenario:** 7 days / Open field (7-day selected time window)  
 **Live retrieval:** 11/11 successful
 
