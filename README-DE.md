@@ -8,19 +8,19 @@ Diese Lösung umgeht die DNS-Beschränkung **der ChatGPT-Abrufumgebung**, indem 
 2. Den Inhalt dieses ZIPs (einschließlich `.github/workflows/monitor.yml`) in das Stammverzeichnis des Repositorys hochladen.
 3. Unter **Settings > Actions > General > Workflow permissions** Schreibrechte für `GITHUB_TOKEN` zulassen (Read and write permissions), falls noch nicht aktiv.
 4. Unter **Actions > RoK Combat Trades > Run workflow** die erste Ausführung manuell starten.
-5. Danach werden `REPORT.md` und `data/trades_inf.json` bei jedem Lauf erzeugt bzw. aktualisiert. Auch bei fehlgeschlagenem Zugriff wird ein neuer Fehlerbericht erstellt.
+5. Danach werden `REPORT_INF.md` und `data/trades_inf.json` bei jedem Lauf erzeugt bzw. aktualisiert. Auch bei fehlgeschlagenem Zugriff wird ein neuer Fehlerbericht erstellt.
 
 ## Zeitplan
 
-`01:00 / 09:00 / 17:00 UTC` täglich (8 Stunden Abstand). Das entspricht in der deutschen Winterzeit 02 / 10 / 18 Uhr und in der Sommerzeit 03 / 11 / 19 Uhr. GitHub Actions kann geplante Jobs verzögert starten. Die zeitgesteuerte Ausführung erfolgt nur vom Standardbranch aus.
+`01:50 / 09:50 / 17:50 Uhr Europe/Berlin` täglich (8 Stunden Abstand), jeweils zehn Minuten vor dem ChatGPT-Bericht um 02:00 / 10:00 / 18:00 Uhr. GitHub Actions kann geplante Jobs verzögert starten. Die zeitgesteuerte Ausführung erfolgt nur vom Standardbranch aus.
 
 ## ChatGPT-Integration
 
-Wenn das Repository angebunden ist, kann die ChatGPT-Überwachung **GitHub `REPORT.md` bzw. `data/trades_inf.json`** über den verbundenen GitHub-Zugriff auswerten, ohne rokbattles.com selbst abrufen zu müssen. Dazu muss der Monitor-Task anschließend um Repositoryname und Pfade ergänzt werden. Der ChatGPT-Task kann unabhängig alle 8 Stunden weiterhin seine Berichte schicken; zeitliche Verschiebungen der beiden Jobs sind möglich.
+Wenn das Repository angebunden ist, kann die ChatGPT-Überwachung **GitHub `REPORT_INF.md` bzw. `data/trades_inf.json`** über den verbundenen GitHub-Zugriff auswerten, ohne rokbattles.com selbst abrufen zu müssen. Dazu muss der Monitor-Task anschließend um Repositoryname und Pfade ergänzt werden. Der ChatGPT-Task kann unabhängig alle 8 Stunden weiterhin seine Berichte schicken; zeitliche Verschiebungen der beiden Jobs sind möglich.
 
 ## Hinweise
 
-- Es werden genau sieben Kombinationen abgefragt (621/545, 621/596, 621/185, 595/621, 595/596, 545/185, 595/545). Die neu hinzugefügte Paarung ist **Sun Tzu / Bai Qi (595/545)**. Für diese neue Paarung beginnt die Vergleichshistorie mit dem ersten erfolgreichen 7-Tage-/Open-field-Snapshot; die bisherigen sechs behalten ihre Daten.
+- Es werden **11 Infantry-, 11 Cavalry- und 9 Archer-Paarungen** mit getrennten JSON-Dateien und Berichten abgefragt. Die Primär-/Sekundär-Richtung wird beibehalten; frühere verifizierte 7d/Open-field-Snapshots bleiben für Δ pp erhalten.
 - API-JSON: `/proxy/v2/global/combat-lab?primary=...&secondary=...`
 - Verglichen wird ausschließlich **7 Tage / Open field** (`summaries`-Tupel [3,1], 3=7 Tage, 1=Open field). Damit der Browser dieselben Werte zeigt, dort den Zeitraum manuell auf **7 days** und das Szenario auf **Open field** stellen. Die reine URL speichert diese Filterauswahl nicht.
 - Echte neue Daten werden nur akzeptiert, wenn die IDs exakt stimmen und Datenformate valide sind.
@@ -30,6 +30,6 @@ Wenn das Repository angebunden ist, kann die ChatGPT-Überwachung **GitHub `REPO
 
 ## Lokale Prüfung unter Windows
 
-Python 3.10+ installieren und im Ordner `python monitor.py` ausführen. Der Script nutzt nur Python-Standardbibliothek und schreibt `REPORT.md` + `data/trades_inf.json`.
+Python 3.10+ installieren und im Ordner `python monitor_inf.py` ausführen. Der Script nutzt nur Python-Standardbibliothek und schreibt `REPORT_INF.md` + `data/trades_inf.json`.
 
 **Keine Zugangsdaten oder Cookies erforderlich**, soweit der öffentliche JSON-Endpunkt erreichbar ist.
