@@ -14,7 +14,7 @@
       "sps": 77.16,
       "tps": 47.72,
       "hps": 2.574,
-      "checkedAtUTC": "2026-11-21T10:14:38Z"
+      "checkedAtUTC": "2026-11-21T10:40:23Z"
     },
     "619-575": {
       "generatedAtMs": 1795249512977,
@@ -30,7 +30,7 @@
       "sps": 70.305,
       "tps": 54.412,
       "hps": 3.83,
-      "checkedAtUTC": "2026-11-21T10:14:38Z"
+      "checkedAtUTC": "2026-11-21T10:40:23Z"
     },
     "540-619": {
       "generatedAtMs": 1795249512977,
@@ -46,7 +46,7 @@
       "sps": 77.807,
       "tps": 62.177,
       "hps": 5.888,
-      "checkedAtUTC": "2026-11-21T10:14:38Z"
+      "checkedAtUTC": "2026-11-21T10:40:23Z"
     },
     "540-579": {
       "generatedAtMs": 1795249512977,
@@ -62,7 +62,7 @@
       "sps": 45.254,
       "tps": 93.216,
       "hps": 141.595,
-      "checkedAtUTC": "2026-11-21T10:14:38Z"
+      "checkedAtUTC": "2026-11-21T10:40:23Z"
     },
     "540-576": {
       "generatedAtMs": 1795249512977,
@@ -78,7 +78,7 @@
       "sps": 60.535,
       "tps": 69.917,
       "hps": 2.757,
-      "checkedAtUTC": "2026-11-21T10:14:38Z"
+      "checkedAtUTC": "2026-11-21T10:40:23Z"
     },
     "575-579": {
       "generatedAtMs": 1795249512977,
@@ -94,7 +94,7 @@
       "sps": 51.815,
       "tps": 61.089,
       "hps": 248.327,
-      "checkedAtUTC": "2026-11-21T10:14:38Z"
+      "checkedAtUTC": "2026-11-21T10:40:23Z"
     },
     "575-616": {
       "generatedAtMs": 1795249512977,
@@ -110,7 +110,7 @@
       "sps": 57.248,
       "tps": 55.201,
       "hps": 37.417,
-      "checkedAtUTC": "2026-11-21T10:14:38Z"
+      "checkedAtUTC": "2026-11-21T10:40:23Z"
     },
     "575-620": {
       "generatedAtMs": 1795249512977,
@@ -126,7 +126,7 @@
       "sps": 59.628,
       "tps": 59.732,
       "hps": 6.474,
-      "checkedAtUTC": "2026-11-21T10:14:38Z"
+      "checkedAtUTC": "2026-11-21T10:40:23Z"
     },
     "540-575": {
       "generatedAtMs": 1795249512977,
@@ -142,7 +142,7 @@
       "sps": 63.239,
       "tps": 95.604,
       "hps": 6.53,
-      "checkedAtUTC": "2026-11-21T10:14:38Z"
+      "checkedAtUTC": "2026-11-21T10:40:23Z"
     },
     "620-575": {
       "generatedAtMs": 1795249512977,
@@ -158,7 +158,7 @@
       "sps": 60.752,
       "tps": 56.086,
       "hps": 2.011,
-      "checkedAtUTC": "2026-11-21T10:14:38Z"
+      "checkedAtUTC": "2026-11-21T10:40:23Z"
     },
     "620-619": {
       "generatedAtMs": 1795249512977,
@@ -174,7 +174,7 @@
       "sps": 100.691,
       "tps": 57.158,
       "hps": 0.523,
-      "checkedAtUTC": "2026-11-21T10:14:38Z"
+      "checkedAtUTC": "2026-11-21T10:40:23Z"
     }
   },
   "history": [
@@ -741,7 +741,7 @@
     }
   ],
   "scenario": "7d/openField",
-  "lastCheckedAtUTC": "2026-11-21T10:14:38Z",
+  "lastCheckedAtUTC": "2026-11-21T10:40:23Z",
   "lastRunSuccessCount": 11,
   "lastErrors": {
     "619-620": "Site snapshot unchanged after 3 attempts (cache bypass)",

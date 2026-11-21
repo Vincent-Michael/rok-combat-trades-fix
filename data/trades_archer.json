@@ -14,7 +14,7 @@
       "sps": 67.563,
       "tps": 47.143,
       "hps": 3.211,
-      "checkedAtUTC": "2026-11-21T10:15:36Z"
+      "checkedAtUTC": "2026-11-21T10:41:21Z"
     },
     "509-179": {
       "generatedAtMs": 1795249512977,
@@ -30,7 +30,7 @@
       "sps": 55.95,
       "tps": 45.403,
       "hps": 1.264,
-      "checkedAtUTC": "2026-11-21T10:15:36Z"
+      "checkedAtUTC": "2026-11-21T10:41:21Z"
     },
     "611-179": {
       "generatedAtMs": 1795249512977,
@@ -46,7 +46,7 @@
       "sps": 51.214,
       "tps": 80.757,
       "hps": 61.035,
-      "checkedAtUTC": "2026-11-21T10:15:36Z"
+      "checkedAtUTC": "2026-11-21T10:41:21Z"
     },
     "611-6": {
       "generatedAtMs": 1795249512977,
@@ -62,7 +62,7 @@
       "sps": 54.688,
       "tps": 61.349,
       "hps": 65.315,
-      "checkedAtUTC": "2026-11-21T10:15:36Z"
+      "checkedAtUTC": "2026-11-21T10:41:21Z"
     },
     "611-187": {
       "generatedAtMs": 1795249512977,
@@ -78,7 +78,7 @@
       "sps": 44.241,
       "tps": 76.009,
       "hps": 55.446,
-      "checkedAtUTC": "2026-11-21T10:15:36Z"
+      "checkedAtUTC": "2026-11-21T10:41:21Z"
     },
     "187-179": {
       "generatedAtMs": 1795249512977,
@@ -94,7 +94,7 @@
       "sps": 47.572,
       "tps": 71.636,
       "hps": 4.746,
-      "checkedAtUTC": "2026-11-21T10:15:36Z"
+      "checkedAtUTC": "2026-11-21T10:41:21Z"
     },
     "187-611": {
       "generatedAtMs": 1795249512977,
@@ -110,7 +110,7 @@
       "sps": 48.712,
       "tps": 64.209,
       "hps": 71.923,
-      "checkedAtUTC": "2026-11-21T10:15:36Z"
+      "checkedAtUTC": "2026-11-21T10:41:21Z"
     },
     "179-187": {
       "generatedAtMs": 1795249512977,
@@ -126,7 +126,7 @@
       "sps": 40.516,
       "tps": 81.868,
       "hps": 2.67,
-      "checkedAtUTC": "2026-11-21T10:15:36Z"
+      "checkedAtUTC": "2026-11-21T10:41:21Z"
     },
     "179-459": {
       "generatedAtMs": 1795249512977,
@@ -142,7 +142,7 @@
       "sps": 46.629,
       "tps": 77.177,
       "hps": 4.298,
-      "checkedAtUTC": "2026-11-21T10:15:36Z"
+      "checkedAtUTC": "2026-11-21T10:41:21Z"
     }
   },
   "history": [
@@ -301,7 +301,7 @@
     }
   ],
   "scenario": "7d/openField",
-  "lastCheckedAtUTC": "2026-11-21T10:15:36Z",
+  "lastCheckedAtUTC": "2026-11-21T10:41:21Z",
   "lastRunSuccessCount": 9,
   "lastErrors": {
     "509-6": "Site snapshot unchanged after 3 attempts (cache bypass)",
