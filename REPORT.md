@@ -1,6 +1,6 @@
 # RoK Combat Lab — Infantry Trade Report
 
-**Workflow checked UTC:** 2026-11-21T01:28:31Z  
+**Workflow checked UTC:** 2026-11-21T07:31:19Z  
 **API site-generated UTC:** 2026-11-21 00:25 UTC  
 **Successful monitor checks:** 11/11  
 **Fresh site snapshots (age <= 8h):** 11/11  
@@ -55,4 +55,4 @@ KP Gained and KP Lost are in millions (M). DPS, SPS and TPS are per-second rates
 **Largest dataset:** Sun Tzu / Bai Qi (829,174 reports). **Smallest dataset:** Yi Do / Ivar (3,767 reports; interpret cautiously).
 **Distinct-snapshot changes:** Sun Tzu / Yi Do -0.64 pp; Sun Tzu / Ivar +5.26 pp; Bai Qi / Yi Do -1.15 pp; Yi Do / Bai Qi +0.94 pp; Yi Do / Ivar -3.91 pp; Sun Tzu / Bai Qi -2.88 pp; Sun Tzu / Liu Che -1.97 pp; Yi Do / Liu Che -0.31 pp; Sun Tzu / Vercingetorix -7.02 pp; Bai Qi / Liu Che +1.21 pp; Bai Qi / Vercingetorix -3.23 pp.
 
-**Source / monitor status:** [trades.json](data/trades.json) · [REPORT.md](REPORT.md) · Workflow checked: 2026-11-21T01:28:31Z · API generated: 2026-11-21 00:25 UTC · Retrievals: 11/11 · Fresh site data: 11/11 · Stale source: 0/11 · Historical data preserved; no 1-year baselines.
+**Source / monitor status:** [trades.json](data/trades.json) · [REPORT.md](REPORT.md) · Workflow checked: 2026-11-21T07:31:19Z · API generated: 2026-11-21 00:25 UTC · Retrievals: 11/11 · Fresh site data: 11/11 · Stale source: 0/11 · Historical data preserved; no 1-year baselines.
