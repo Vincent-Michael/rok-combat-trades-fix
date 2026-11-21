@@ -1,4 +1,5 @@
 name: RoK Combat Trades
+# On-demand run trigger (2026-11-21): no change to workflow behavior.
 on:
   workflow_dispatch:
   push:
