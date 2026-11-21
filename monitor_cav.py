@@ -84,24 +84,42 @@ def parse_payload(payload, primary, secondary):
     }
 
 
-def fetch(primary, secondary):
-    path = f"?primary={primary}&secondary={secondary}"
-    # The same-origin proxy route is declared in rokbattles' Next.js source.
-    urls = [
-        "https://rokbattles.com/proxy/v2/global/combat-lab" + path,
-    ]
+def fetch(primary, secondary, previous_generated_ms=None):
+    """Retry old API snapshots using no-cache headers and cache-busting URLs."""
+    from urllib.parse import urlencode
+    base = "https://rokbattles.com/proxy/v2/global/combat-lab"
     errors = []
-    for url in urls:
+    last_valid = None
+    for attempt in range(3):
+        query = {"primary": primary, "secondary": secondary}
+        if attempt:
+            query["_cb"] = str(int(time.time() * 1000))
+        url = base + "?" + urlencode(query)
         try:
-            req = Request(url, headers={"Accept": "application/json", "User-Agent": "RoK-Combat-Trades-Monitor/1.0"})
+            req = Request(url, headers={
+                "Accept": "application/json",
+                "User-Agent": "Mozilla/5.0 (compatible; RoKCombatTradesMonitor/2.0)",
+                "Cache-Control": "no-cache, no-store, max-age=0",
+                "Pragma": "no-cache",
+            })
             with urlopen(req, timeout=25) as response:
                 if response.status != 200:
                     raise ValueError(f"HTTP {response.status}")
-                raw = response.read(12 * 1024 * 1024)
-                data = json.loads(raw)
-            return parse_payload(data, primary, secondary), None
-        except Exception as exc:  # Keep reporting even if fetch/parsing fails.
-            errors.append(f"{url}: {type(exc).__name__} {str(exc)[:180]}")
+                payload = json.loads(response.read(12 * 1024 * 1024))
+            snapshot = parse_payload(payload, primary, secondary)
+            if previous_generated_ms is None or snapshot["generatedAtMs"] > previous_generated_ms:
+                return snapshot, None
+            if snapshot["generatedAtMs"] == previous_generated_ms:
+                last_valid = snapshot
+                errors.append(f"attempt {attempt+1}: site snapshot unchanged")
+            else:
+                errors.append(f"attempt {attempt+1}: site snapshot older than stored")
+        except Exception as exc:
+            errors.append(f"attempt {attempt+1}: {type(exc).__name__} {str(exc)[:160]}")
+        if attempt < 2:
+            time.sleep(2)
+    if last_valid is not None:
+        return last_valid, "Site snapshot unchanged after 3 attempts (cache bypass)"
     return None, "; ".join(errors)
 
 
@@ -140,7 +158,7 @@ def build_report(store, results, now):
             trade_delta = (fmt_num(current["tradePercent"]-prior["tradePercent"],2) if prior and current.get("tradePercent") is not None and prior.get("tradePercent") is not None else "N/A")
             count_delta = fmt_num(current["battles"]-prior["battles"]) if prior else "N/A"
             stamp = current["generatedAtUTC"]
-            status = "Verified this run" if result["ok"] else "Old verified snapshot"
+            status = ("Site snapshot unchanged" if result["ok"] and result["error"] else "Verified new site snapshot" if result["ok"] else "Old verified snapshot")
         else:
             trade, trade_delta, battles, count_delta, stamp, status = "N/A", "N/A", "N/A", "N/A", "N/A", "Not yet verified"
         lines.append(f"| {rank} | [{name}]({url}) | {trade} | {trade_delta} | {battles} | {count_delta} | {stamp} | {status} |")
@@ -185,7 +203,7 @@ def main():
     for name, p, s, *_ in PAIRS:
         key = f"{p}-{s}"
         prior = store["snapshots"].get(key)
-        data, err = fetch(p, s)
+        data, err = fetch(p, s, prior.get('generatedAtMs') if prior else None)
         if data:
             if prior and data["generatedAtMs"] < prior["generatedAtMs"]:
                 err = "Site data older than last verified snapshot; retained last verified snapshot"
