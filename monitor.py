@@ -12,6 +12,7 @@ from urllib.request import Request, urlopen
 # Manual data-refresh trigger: retain 7d/Open field setting.
 SCENARIO_KEY = "7d/openField"
 SCENARIO_LABEL = "7 days / Open field"
+MAX_FRESH_AGE_HOURS = 8  # site-generation age, not retrieval success
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data" / "trades.json"
 REPORT = ROOT / "REPORT.md"
@@ -84,24 +85,39 @@ def parse_payload(payload, primary, secondary):
     }
 
 
+def site_age_hours(generated_at_ms):
+    """Age of the site's generatedAtMs; successful retrieval does not reset it."""
+    return max(0.0, (time.time() * 1000 - generated_at_ms) / 3_600_000)
+
+
 def fetch(primary, secondary):
-    path = f"?primary={primary}&secondary={secondary}"
-    # The same-origin proxy route is declared in rokbattles' Next.js source.
-    urls = [
-        "https://rokbattles.com/proxy/v2/global/combat-lab" + path,
-    ]
+    # Always parse the [3, 1] 7d/openField summary from the API response.
+    base = f"https://rokbattles.com/proxy/v2/global/combat-lab?primary={primary}&secondary={secondary}"
+    urls = [base, f"{base}&_ts={int(time.time() * 1000)}"]
     errors = []
+    best = None
     for url in urls:
         try:
-            req = Request(url, headers={"Accept": "application/json", "User-Agent": "RoK-Combat-Trades-Monitor/1.0"})
+            req = Request(url, headers={
+                "Accept": "application/json",
+                "User-Agent": "RoK-Combat-Trades-Monitor/1.0",
+                "Cache-Control": "no-cache, no-store, max-age=0",
+                "Pragma": "no-cache",
+            })
             with urlopen(req, timeout=25) as response:
                 if response.status != 200:
                     raise ValueError(f"HTTP {response.status}")
-                raw = response.read(12 * 1024 * 1024)
-                data = json.loads(raw)
-            return parse_payload(data, primary, secondary), None
-        except Exception as exc:  # Keep reporting even if fetch/parsing fails.
+                data = parse_payload(json.loads(response.read(12 * 1024 * 1024)), primary, secondary)
+            if best is None or data["generatedAtMs"] > best["generatedAtMs"]:
+                best = data
+            if site_age_hours(data["generatedAtMs"]) <= MAX_FRESH_AGE_HOURS:
+                return data, None
+            # The source generation time is old; try a cache-busting query once.
+        except Exception as exc:
             errors.append(f"{url}: {type(exc).__name__} {str(exc)[:180]}")
+    # Preserve a valid stale response even if the second attempt fails.
+    if best is not None:
+        return best, None
     return None, "; ".join(errors)
 
 
@@ -118,6 +134,8 @@ def build_report(store, results, now):
         return (trade is None, -(trade if trade is not None else 0))
     ranked_pairs = sorted(PAIRS, key=ranking)
     verified = sum(v["ok"] for v in results.values())
+    fresh = sum(bool(v["ok"] and v["snapshot"] and site_age_hours(v["snapshot"]["generatedAtMs"]) <= MAX_FRESH_AGE_HOURS) for v in results.values())
+    stale_count = sum(bool(v["snapshot"] and site_age_hours(v["snapshot"]["generatedAtMs"]) > MAX_FRESH_AGE_HOURS) for v in results.values())
     stamps = sorted(set(v["snapshot"]["generatedAtUTC"] for v in results.values() if v["snapshot"]))
     site_stamp = ", ".join(stamps) if stamps else "N/A"
     lines = [
@@ -125,9 +143,11 @@ def build_report(store, results, now):
         f"**Workflow checked UTC:** {now}  ",
         f"**API site-generated UTC:** {site_stamp}  ",
         f"**Successful monitor checks:** {verified}/{len(PAIRS)}  ",
+        f"**Fresh site snapshots (age <= {MAX_FRESH_AGE_HOURS}h):** {fresh}/{len(PAIRS)}  ",
+        f"**Stale site snapshots:** {stale_count}/{len(PAIRS)}  ",
         f"**Scenario:** 7 Days / Open Field ([3,1]); rolling seven days, independent of eight-hour monitoring.",
         "",
-        "**Data age:** Site-generated timestamps may be historical/stale. Retained results from failed checks are old verified snapshots, not fresh measurements.",
+        "**Data age:** Successful API retrieval does NOT imply newly generated statistics. Snapshots older than 8 hours are marked STALE, even if retrievals succeed. Cache bypass cannot force an upstream data refresh.",
         "",
         "## Trade Efficiency Ranking", "",
         "![Trade efficiency ranking](charts/infantry.svg)", "",
@@ -143,9 +163,9 @@ def build_report(store, results, now):
         battles = fmt_num(v.get("battles")) if v else "N/A"
         url = f"https://rokbattles.com/combat-lab?primary={p}&secondary={s}"
         lines.append(f"| {rank} | [{name}]({url}) | {trade} | {delta} | {battles} |")
-    stale = [name for name,p,s in ranked_pairs if results[f"{p}-{s}"]["snapshot"] and not results[f"{p}-{s}"]["ok"]]
+    stale_retained = [name for name,p,s in ranked_pairs if results[f"{p}-{s}"]["snapshot"] and not results[f"{p}-{s}"]["ok"]]
     unknown = [name for name,p,s in ranked_pairs if not results[f"{p}-{s}"]["snapshot"]]
-    lines += ["",f"Site-generated: {site_stamp} · Verified this run: {verified}/{len(PAIRS)} · Old verified snapshots: {len(stale)} · Unavailable: {len(unknown)}.", "",
+    lines += ["",f"Site-generated: {site_stamp} · Retrieved: {verified}/{len(PAIRS)} · Fresh site snapshots: {fresh}/{len(PAIRS)} · Stale site snapshots: {stale_count}/{len(PAIRS)} · Retained after errors: {len(stale_retained)} · Unavailable: {len(unknown)}.", "",
               "## Detailed Combat Statistics", "", "KP Gained and KP Lost are in millions (M). DPS, SPS and TPS are per-second rates.", "",
               "| Commander Pairing | KP Gained | KP Lost | DPS | SPS | TPS |", "|---|---:|---:|---:|---:|---:|"]
     for name,p,s in ranked_pairs:
@@ -170,13 +190,14 @@ def build_report(store, results, now):
         lines.append("**Distinct-snapshot changes:** " + "; ".join(f'{name} {v["tradePercent"]-old["tradePercent"]:+.2f} pp' for name,v,old in changes if old.get("tradePercent") is not None) + ".")
     else:
         lines.append("**Distinct-snapshot changes:** N/A (no preceding distinct valid 7-day/Open Field snapshot).")
-    if stale: lines.append("**Old verified snapshots:** " + ", ".join(stale) + ".")
+    if stale_retained: lines.append("**Old verified snapshots retained after failed requests:** " + ", ".join(stale_retained) + ".")
+    if stale_count: lines.append(f"**Source age warning:** {stale_count}/{len(PAIRS)} site-generated snapshots exceed {MAX_FRESH_AGE_HOURS} hours. These are historical 7-day rolling windows, NOT current live statistics.")
     if unknown: lines.append("**Unverified / N/A:** " + ", ".join(unknown) + ".")
     errors=[f'{name}: {results[f"{p}-{s}"]["error"]}' for name,p,s in ranked_pairs if results[f"{p}-{s}"]["error"]]
     if errors: lines.append("**Retrieval failures:** " + "; ".join(errors) + ".")
     lines += ["","**Source / monitor status:** [trades.json](data/trades.json) · [REPORT.md](REPORT.md) · "
               + f"Workflow checked: {now} · API generated: {site_stamp} · "
-              + f"Monitor: {verified}/{len(PAIRS)} · Historical data preserved; no 1-year baselines.",
+              + f"Retrievals: {verified}/{len(PAIRS)} · Fresh site data: {fresh}/{len(PAIRS)} · Stale source: {stale_count}/{len(PAIRS)} · Historical data preserved; no 1-year baselines.",
               ""]
     return "\n".join(lines)
 
@@ -258,6 +279,8 @@ def main():
         time.sleep(1)
     store["lastCheckedAtUTC"] = now
     store["lastRunSuccessCount"] = sum(v["ok"] for v in results.values())
+    store["lastRunFreshCount"] = sum(bool(v["ok"] and v["snapshot"] and site_age_hours(v["snapshot"]["generatedAtMs"]) <= MAX_FRESH_AGE_HOURS) for v in results.values())
+    store["lastRunStaleCount"] = sum(bool(v["snapshot"] and site_age_hours(v["snapshot"]["generatedAtMs"]) > MAX_FRESH_AGE_HOURS) for v in results.values())
     store["lastErrors"] = {key: value["error"] for key, value in results.items() if value["error"]}
     store["history"] = store["history"][-500:]
     DATA.parent.mkdir(parents=True, exist_ok=True)
