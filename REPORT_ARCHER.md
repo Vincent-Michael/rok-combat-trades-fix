@@ -1,6 +1,6 @@
 # RoK Combat Lab — Archer Trade Report
 
-**Checked:** 2026-11-21T09:59:55Z  
+**Checked:** 2026-11-21T10:05:24Z  
 **Scenario:** 7 days / Open field (7-day selected time window)  
 **Live retrieval:** 9/9 successful
 
