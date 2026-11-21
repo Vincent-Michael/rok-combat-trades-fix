@@ -36,7 +36,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add REPORT.md data/trades.json REPORT_CAV.md data/trades_cav.json REPORT_ARCHER.md data/trades_archer.json charts/infantry.svg
+          git add REPORT.md data/trades_inf.json REPORT_CAV.md data/trades_cav.json REPORT_ARCHER.md data/trades_archer.json charts/infantry.svg
           if ! git diff --cached --quiet; then
             git commit -m 'Update Combat Lab infantry, cavalry and archer trade reports'
             git push

@@ -8,7 +8,7 @@ Diese Lösung umgeht die DNS-Beschränkung **der ChatGPT-Abrufumgebung**, indem 
 2. Den Inhalt dieses ZIPs (einschließlich `.github/workflows/monitor.yml`) in das Stammverzeichnis des Repositorys hochladen.
 3. Unter **Settings > Actions > General > Workflow permissions** Schreibrechte für `GITHUB_TOKEN` zulassen (Read and write permissions), falls noch nicht aktiv.
 4. Unter **Actions > RoK Combat Trades > Run workflow** die erste Ausführung manuell starten.
-5. Danach werden `REPORT.md` und `data/trades.json` bei jedem Lauf erzeugt bzw. aktualisiert. Auch bei fehlgeschlagenem Zugriff wird ein neuer Fehlerbericht erstellt.
+5. Danach werden `REPORT.md` und `data/trades_inf.json` bei jedem Lauf erzeugt bzw. aktualisiert. Auch bei fehlgeschlagenem Zugriff wird ein neuer Fehlerbericht erstellt.
 
 ## Zeitplan
 
@@ -16,7 +16,7 @@ Diese Lösung umgeht die DNS-Beschränkung **der ChatGPT-Abrufumgebung**, indem 
 
 ## ChatGPT-Integration
 
-Wenn das Repository angebunden ist, kann die ChatGPT-Überwachung **GitHub `REPORT.md` bzw. `data/trades.json`** über den verbundenen GitHub-Zugriff auswerten, ohne rokbattles.com selbst abrufen zu müssen. Dazu muss der Monitor-Task anschließend um Repositoryname und Pfade ergänzt werden. Der ChatGPT-Task kann unabhängig alle 8 Stunden weiterhin seine Berichte schicken; zeitliche Verschiebungen der beiden Jobs sind möglich.
+Wenn das Repository angebunden ist, kann die ChatGPT-Überwachung **GitHub `REPORT.md` bzw. `data/trades_inf.json`** über den verbundenen GitHub-Zugriff auswerten, ohne rokbattles.com selbst abrufen zu müssen. Dazu muss der Monitor-Task anschließend um Repositoryname und Pfade ergänzt werden. Der ChatGPT-Task kann unabhängig alle 8 Stunden weiterhin seine Berichte schicken; zeitliche Verschiebungen der beiden Jobs sind möglich.
 
 ## Hinweise
 
@@ -30,6 +30,6 @@ Wenn das Repository angebunden ist, kann die ChatGPT-Überwachung **GitHub `REPO
 
 ## Lokale Prüfung unter Windows
 
-Python 3.10+ installieren und im Ordner `python monitor.py` ausführen. Der Script nutzt nur Python-Standardbibliothek und schreibt `REPORT.md` + `data/trades.json`.
+Python 3.10+ installieren und im Ordner `python monitor.py` ausführen. Der Script nutzt nur Python-Standardbibliothek und schreibt `REPORT.md` + `data/trades_inf.json`.
 
 **Keine Zugangsdaten oder Cookies erforderlich**, soweit der öffentliche JSON-Endpunkt erreichbar ist.

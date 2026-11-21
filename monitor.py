@@ -14,7 +14,7 @@ SCENARIO_KEY = "7d/openField"
 SCENARIO_LABEL = "7 days / Open field"
 MAX_FRESH_AGE_HOURS = 8  # site-generation age, not retrieval success
 ROOT = Path(__file__).resolve().parent
-DATA = ROOT / "data" / "trades.json"
+DATA = ROOT / "data" / "trades_inf.json"
 REPORT = ROOT / "REPORT.md"
 
 PAIRS = [
@@ -195,7 +195,7 @@ def build_report(store, results, now):
     if unknown: lines.append("**Unverified / N/A:** " + ", ".join(unknown) + ".")
     errors=[f'{name}: {results[f"{p}-{s}"]["error"]}' for name,p,s in ranked_pairs if results[f"{p}-{s}"]["error"]]
     if errors: lines.append("**Retrieval failures:** " + "; ".join(errors) + ".")
-    lines += ["","**Source / monitor status:** [trades.json](data/trades.json) · [REPORT.md](REPORT.md) · "
+    lines += ["","**Source / monitor status:** [trades_inf.json](data/trades_inf.json) · [REPORT.md](REPORT.md) · "
               + f"Workflow checked: {now} · API generated: {site_stamp} · "
               + f"Retrievals: {verified}/{len(PAIRS)} · Fresh site data: {fresh}/{len(PAIRS)} · Stale source: {stale_count}/{len(PAIRS)} · Historical data preserved; no 1-year baselines.",
               ""]
