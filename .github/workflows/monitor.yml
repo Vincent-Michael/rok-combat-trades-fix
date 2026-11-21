@@ -6,6 +6,7 @@ on:
     paths:
       - 'monitor.py'
       - 'monitor_cav.py'
+      - 'monitor_archer.py'
       - '.github/workflows/monitor.yml'
   schedule:
     # Collect data 30 minutes ahead of the 02/10/18 local ChatGPT reports.
@@ -25,16 +26,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Fetch 11 infantry and 11 cavalry pairings
+      - name: Fetch 11 infantry, 11 cavalry and 9 archer pairings
         run: |
           python monitor.py
           python monitor_cav.py
+          python monitor_archer.py
       - name: Commit report and data
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add REPORT.md data/trades.json REPORT_CAV.md data/trades_cav.json charts/infantry.svg
+          git add REPORT.md data/trades.json REPORT_CAV.md data/trades_cav.json REPORT_ARCHER.md data/trades_archer.json charts/infantry.svg
           if ! git diff --cached --quiet; then
-            git commit -m 'Update Combat Lab infantry and cavalry trade reports'
+            git commit -m 'Update Combat Lab infantry, cavalry and archer trade reports'
             git push
           fi
