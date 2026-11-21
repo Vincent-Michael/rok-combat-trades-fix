@@ -9,7 +9,7 @@ from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-# Cavalry-only snapshot history. Retain 7d/Open field setting.
+# Archer-only snapshot history. Retain 7d/Open field setting.
 SCENARIO_KEY = "7d/openField"
 SCENARIO_LABEL = "7 days / Open field"
 ROOT = Path(__file__).resolve().parent
@@ -17,15 +17,15 @@ DATA = ROOT / "data" / "trades_archer.json"
 REPORT = ROOT / "REPORT_ARCHER.md"
 
 PAIRS = [
-    ("Commander 509 / Commander 6", 509, 6),
-    ("Commander 509 / Commander 179", 509, 179),
-    ("Commander 611 / Commander 179", 611, 179),
-    ("Commander 611 / Commander 6", 611, 6),
-    ("Commander 611 / Commander 187", 611, 187),
-    ("Commander 187 / Commander 179", 187, 179),
-    ("Commander 187 / Commander 611", 187, 611),
-    ("Commander 179 / Commander 187", 179, 187),
-    ("Commander 179 / Commander 459", 179, 459),
+    ("Qin Shi Huang / Yi Seong-Gye", 509, 6),
+    ("Qin Shi Huang / Zhuge Liang", 509, 179),
+    ("Alp Arslan / Zhuge Liang", 611, 179),
+    ("Alp Arslan / Yi Seong-Gye", 611, 6),
+    ("Alp Arslan / Hermann", 611, 187),
+    ("Hermann / Zhuge Liang", 187, 179),
+    ("Hermann / Alp Arslan", 187, 611),
+    ("Zhuge Liang / Hermann", 179, 187),
+    ("Zhuge Liang / Philip II", 179, 459),
 ]
 
 
