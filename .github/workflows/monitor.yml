@@ -9,8 +9,8 @@ on:
       - 'monitor_archer.py'
       - '.github/workflows/monitor.yml'
   schedule:
-    # Collect data 30 minutes ahead of the 02/10/18 local ChatGPT reports.
-    - cron: '30 1,9,17 * * *'
+    # Collect data 10 minutes ahead of the 02/10/18 local ChatGPT reports.
+    - cron: '50 1,9,17 * * *'
       timezone: 'Europe/Berlin'
 permissions:
   contents: write
