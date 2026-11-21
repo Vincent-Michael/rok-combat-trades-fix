@@ -10,9 +10,9 @@ on:
       - 'monitor_archer.py'
       - '.github/workflows/monitor.yml'
   schedule:
-    # Collect data 10 minutes ahead of the 02/10/18 local ChatGPT reports.
-    - cron: '50 1,9,17 * * *'
-      timezone: 'Europe/Berlin'
+    # Candidate UTC hours for 01:50, 09:50 and 17:50 Europe/Berlin.
+    # Both CET and CEST are covered; the gate below runs collection only at the matching local hour.
+    - cron: '50 0,1,8,9,16,17 * * *'
 permissions:
   contents: write
 concurrency:
@@ -23,16 +23,35 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - name: Check Europe/Berlin collection window
+        id: window
+        shell: bash
+        run: |
+          if [[ "$GITHUB_EVENT_NAME" != "schedule" ]]; then
+            echo "collect=true" >> "$GITHUB_OUTPUT"
+          else
+            berlin_hour=$(TZ=Europe/Berlin date +%H)
+            if [[ "$berlin_hour" == "01" || "$berlin_hour" == "09" || "$berlin_hour" == "17" ]]; then
+              echo "collect=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "collect=false" >> "$GITHUB_OUTPUT"
+              echo "Skipping extra UTC candidate: Berlin local hour is $berlin_hour"
+            fi
+          fi
       - uses: actions/checkout@v5
+        if: steps.window.outputs.collect == 'true'
       - uses: actions/setup-python@v6
+        if: steps.window.outputs.collect == 'true'
         with:
           python-version: '3.12'
       - name: Fetch 11 infantry, 11 cavalry and 9 archer pairings
+        if: steps.window.outputs.collect == 'true'
         run: |
           python monitor_inf.py
           python monitor_cav.py
           python monitor_archer.py
       - name: Commit report and data
+        if: steps.window.outputs.collect == 'true'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
