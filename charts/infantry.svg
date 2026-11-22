@@ -3,60 +3,60 @@
 <circle cx="26" cy="31" r="7" fill="#22c55e"/><text x="43" y="37" fill="#22c55e" font-family="Arial,sans-serif" font-size="18" font-weight="600">Positive (&gt;100%)</text>
 <circle cx="280" cy="31" r="7" fill="#ef4444"/><text x="297" y="37" fill="#ef4444" font-family="Arial,sans-serif" font-size="18" font-weight="600">Negative (&lt;100%)</text>
 <rect x="328" y="65" width="660" height="32" rx="5" fill="#28374d"/>
-<rect x="328" y="65" width="543.33" height="32" rx="5" fill="#22c55e"/>
+<rect x="328" y="65" width="548.50" height="32" rx="5" fill="#22c55e"/>
 <text x="20" y="88" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">1</text>
 <text x="53" y="88" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Sun Tzu / Yi Do</text>
-<text x="1172" y="88" text-anchor="end" fill="#22c55e" font-family="Arial,sans-serif" font-weight="bold" font-size="22">139.95%</text>
+<text x="1172" y="88" text-anchor="end" fill="#22c55e" font-family="Arial,sans-serif" font-weight="bold" font-size="22">141.28%</text>
 <rect x="328" y="117" width="660" height="32" rx="5" fill="#28374d"/>
-<rect x="328" y="117" width="469.24" height="32" rx="5" fill="#22c55e"/>
+<rect x="328" y="117" width="461.28" height="32" rx="5" fill="#22c55e"/>
 <text x="20" y="140" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">2</text>
 <text x="53" y="140" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Sun Tzu / Ivar</text>
-<text x="1172" y="140" text-anchor="end" fill="#22c55e" font-family="Arial,sans-serif" font-weight="bold" font-size="22">120.86%</text>
+<text x="1172" y="140" text-anchor="end" fill="#22c55e" font-family="Arial,sans-serif" font-weight="bold" font-size="22">118.82%</text>
 <rect x="328" y="169" width="660" height="32" rx="5" fill="#28374d"/>
-<rect x="328" y="169" width="440.00" height="32" rx="5" fill="#22c55e"/>
+<rect x="328" y="169" width="417.49" height="32" rx="5" fill="#22c55e"/>
 <text x="20" y="192" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">3</text>
 <text x="53" y="192" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Bai Qi / Yi Do</text>
-<text x="1172" y="192" text-anchor="end" fill="#22c55e" font-family="Arial,sans-serif" font-weight="bold" font-size="22">113.33%</text>
+<text x="1172" y="192" text-anchor="end" fill="#22c55e" font-family="Arial,sans-serif" font-weight="bold" font-size="22">107.54%</text>
 <rect x="328" y="221" width="660" height="32" rx="5" fill="#28374d"/>
-<rect x="328" y="221" width="404.10" height="32" rx="5" fill="#22c55e"/>
+<rect x="328" y="221" width="397.10" height="32" rx="5" fill="#22c55e"/>
 <text x="20" y="244" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">4</text>
-<text x="53" y="244" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Yi Do / Bai Qi</text>
-<text x="1172" y="244" text-anchor="end" fill="#22c55e" font-family="Arial,sans-serif" font-weight="bold" font-size="22">104.09%</text>
+<text x="53" y="244" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Sun Tzu / Bai Qi</text>
+<text x="1172" y="244" text-anchor="end" fill="#22c55e" font-family="Arial,sans-serif" font-weight="bold" font-size="22">102.28%</text>
 <rect x="328" y="273" width="660" height="32" rx="5" fill="#28374d"/>
-<rect x="328" y="273" width="391.02" height="32" rx="5" fill="#22c55e"/>
+<rect x="328" y="273" width="388.87" height="32" rx="5" fill="#22c55e"/>
 <text x="20" y="296" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">5</text>
-<text x="53" y="296" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Sun Tzu / Bai Qi</text>
-<text x="1172" y="296" text-anchor="end" fill="#22c55e" font-family="Arial,sans-serif" font-weight="bold" font-size="22">100.72%</text>
+<text x="53" y="296" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Yi Do / Bai Qi</text>
+<text x="1172" y="296" text-anchor="end" fill="#22c55e" font-family="Arial,sans-serif" font-weight="bold" font-size="22">100.16%</text>
 <rect x="328" y="325" width="660" height="32" rx="5" fill="#28374d"/>
-<rect x="328" y="325" width="373.19" height="32" rx="5" fill="#ef4444"/>
+<rect x="328" y="325" width="371.10" height="32" rx="5" fill="#ef4444"/>
 <text x="20" y="348" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">6</text>
 <text x="53" y="348" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Yi Do / Liu Che</text>
-<text x="1172" y="348" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">96.12%</text>
+<text x="1172" y="348" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">95.59%</text>
 <rect x="328" y="377" width="660" height="32" rx="5" fill="#28374d"/>
-<rect x="328" y="377" width="370.22" height="32" rx="5" fill="#ef4444"/>
+<rect x="328" y="377" width="358.44" height="32" rx="5" fill="#ef4444"/>
 <text x="20" y="400" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">7</text>
 <text x="53" y="400" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Sun Tzu / Liu Che</text>
-<text x="1172" y="400" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">95.36%</text>
+<text x="1172" y="400" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">92.33%</text>
 <rect x="328" y="429" width="660" height="32" rx="5" fill="#28374d"/>
-<rect x="328" y="429" width="368.69" height="32" rx="5" fill="#ef4444"/>
+<rect x="328" y="429" width="332.54" height="32" rx="5" fill="#ef4444"/>
 <text x="20" y="452" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">8</text>
 <text x="53" y="452" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Yi Do / Ivar</text>
-<text x="1172" y="452" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">94.97%</text>
+<text x="1172" y="452" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">85.66%</text>
 <rect x="328" y="481" width="660" height="32" rx="5" fill="#28374d"/>
-<rect x="328" y="481" width="322.89" height="32" rx="5" fill="#ef4444"/>
+<rect x="328" y="481" width="310.26" height="32" rx="5" fill="#ef4444"/>
 <text x="20" y="504" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">9</text>
-<text x="53" y="504" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Sun Tzu / Vercingetorix</text>
-<text x="1172" y="504" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">83.17%</text>
+<text x="53" y="504" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Bai Qi / Liu Che</text>
+<text x="1172" y="504" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">79.92%</text>
 <rect x="328" y="533" width="660" height="32" rx="5" fill="#28374d"/>
-<rect x="328" y="533" width="306.03" height="32" rx="5" fill="#ef4444"/>
+<rect x="328" y="533" width="299.16" height="32" rx="5" fill="#ef4444"/>
 <text x="20" y="556" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">10</text>
-<text x="53" y="556" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Bai Qi / Liu Che</text>
-<text x="1172" y="556" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">78.83%</text>
+<text x="53" y="556" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Sun Tzu / Vercingetorix</text>
+<text x="1172" y="556" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">77.06%</text>
 <rect x="328" y="585" width="660" height="32" rx="5" fill="#28374d"/>
-<rect x="328" y="585" width="280.75" height="32" rx="5" fill="#ef4444"/>
+<rect x="328" y="585" width="256.67" height="32" rx="5" fill="#ef4444"/>
 <text x="20" y="608" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">11</text>
 <text x="53" y="608" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Bai Qi / Vercingetorix</text>
-<text x="1172" y="608" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">72.32%</text>
+<text x="1172" y="608" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">66.11%</text>
 <line x1="716.24" y1="53" x2="716.24" y2="633" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="6 7"/>
 <line x1="328" y1="631" x2="988" y2="631" stroke="#51617a"/>
 <text x="328" y="655" text-anchor="middle" fill="#b4c3d8" font-family="Arial" font-size="18">0%</text>
