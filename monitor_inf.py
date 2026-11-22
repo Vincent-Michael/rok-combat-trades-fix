@@ -7,7 +7,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
+from combat_source import fetch_snapshot, save_run_status, status_label, report_status_summary
 
 # Manual data-refresh trigger: retain 7d/Open field setting.
 SCENARIO_KEY = "7d/openField"
@@ -90,35 +90,9 @@ def site_age_hours(generated_at_ms):
     return max(0.0, (time.time() * 1000 - generated_at_ms) / 3_600_000)
 
 
-def fetch(primary, secondary):
-    # Always parse the [3, 1] 7d/openField summary from the API response.
-    base = f"https://rokbattles.com/proxy/v2/global/combat-lab?primary={primary}&secondary={secondary}"
-    urls = [base, f"{base}&_ts={int(time.time() * 1000)}"]
-    errors = []
-    best = None
-    for url in urls:
-        try:
-            req = Request(url, headers={
-                "Accept": "application/json",
-                "User-Agent": "RoK-Combat-Trades-Monitor/1.0",
-                "Cache-Control": "no-cache, no-store, max-age=0",
-                "Pragma": "no-cache",
-            })
-            with urlopen(req, timeout=25) as response:
-                if response.status != 200:
-                    raise ValueError(f"HTTP {response.status}")
-                data = parse_payload(json.loads(response.read(12 * 1024 * 1024)), primary, secondary)
-            if best is None or data["generatedAtMs"] > best["generatedAtMs"]:
-                best = data
-            if site_age_hours(data["generatedAtMs"]) <= MAX_FRESH_AGE_HOURS:
-                return data, None
-            # The source generation time is old; try a cache-busting query once.
-        except Exception as exc:
-            errors.append(f"{url}: {type(exc).__name__} {str(exc)[:180]}")
-    # Preserve a valid stale response even if the second attempt fails.
-    if best is not None:
-        return best, None
-    return None, "; ".join(errors)
+def fetch(primary, secondary, previous_generated_ms=None):
+    """Fetch only verified 7d/Open Field data using shared retry/freshness logic."""
+    return fetch_snapshot(primary, secondary, previous_generated_ms, parse_payload)
 
 
 def fmt_num(value, digits=0):
@@ -143,6 +117,7 @@ def build_report(store, results, now):
         f"**Workflow checked UTC:** {now}  ",
         f"**API site-generated UTC:** {site_stamp}  ",
         f"**Successful monitor checks:** {verified}/{len(PAIRS)}  ",
+        f"**Source verification:** {report_status_summary(results)}  ",
         f"**Fresh site snapshots (age <= {MAX_FRESH_AGE_HOURS}h):** {fresh}/{len(PAIRS)}  ",
         f"**Stale site snapshots:** {stale_count}/{len(PAIRS)}  ",
         f"**Scenario:** 7 Days / Open Field ([3,1]); rolling seven days, independent of eight-hour monitoring.",
@@ -152,8 +127,8 @@ def build_report(store, results, now):
         "## Trade Efficiency Ranking", "",
         "![Trade efficiency ranking](charts/infantry.svg)", "",
         "## Trade Ranking & Battle Reports", "",
-        "| Rank | Commander Pairing | Trade % | Δ pp | Reports |",
-        "|---:|---|---:|---:|---:|",
+        "| Rank | Commander Pairing | Trade % | Δ pp | Reports | Site-generated UTC | Source status |",
+        "|---:|---|---:|---:|---:|---|---|",
     ]
     for rank,(name,p,s) in enumerate(ranked_pairs,1):
         r = results[f"{p}-{s}"]
@@ -162,7 +137,7 @@ def build_report(store, results, now):
         delta = f'{v["tradePercent"]-old["tradePercent"]:+.2f}' if v and old and v.get("tradePercent") is not None and old.get("tradePercent") is not None else "N/A"
         battles = fmt_num(v.get("battles")) if v else "N/A"
         url = f"https://rokbattles.com/combat-lab?primary={p}&secondary={s}"
-        lines.append(f"| {rank} | [{name}]({url}) | {trade} | {delta} | {battles} |")
+        lines.append(f"| {rank} | [{name}]({url}) | {trade} | {delta} | {battles} | {v.get('generatedAtUTC', 'N/A') if v else 'N/A'} | {status_label(r['status'], v)} |")
     stale_retained = [name for name,p,s in ranked_pairs if results[f"{p}-{s}"]["snapshot"] and not results[f"{p}-{s}"]["ok"]]
     unknown = [name for name,p,s in ranked_pairs if not results[f"{p}-{s}"]["snapshot"]]
     lines += ["",f"Site-generated: {site_stamp} · Retrieved: {verified}/{len(PAIRS)} · Fresh site snapshots: {fresh}/{len(PAIRS)} · Stale site snapshots: {stale_count}/{len(PAIRS)} · Retained after errors: {len(stale_retained)} · Unavailable: {len(unknown)}.", "",
@@ -261,7 +236,7 @@ def main():
         prior = store["snapshots"].get(key)
         if not isinstance(prior, dict) or (prior.get("primary"), prior.get("secondary")) != (p, s):
             prior = None  # Never reuse another pairing's snapshot.
-        data, err = fetch(p, s)
+        data, status, err = fetch(p, s, prior.get("generatedAtMs") if prior else None)
         if data:
             data["checkedAtUTC"] = now
             if prior is None or data["generatedAtMs"] != prior["generatedAtMs"]:
@@ -273,15 +248,13 @@ def main():
         previous = max(candidates, key=lambda h: h["generatedAtMs"]) if candidates else None
         if prior and current and prior.get("generatedAtMs",0) < current["generatedAtMs"] and (previous is None or prior["generatedAtMs"] > previous["generatedAtMs"]):
             previous = prior
-        results[key] = {"ok": bool(data), "snapshot": current, "previous": previous, "error": err}
-        print(f"{name}: {'OK '+str(data['tradePercent'])+'%' if data else 'FAILED '+str(err)}")
+        results[key] = {"ok": bool(data), "snapshot": current, "previous": previous, "error": err, "status": status}
+        print(f"{name}: {status.upper()} | " +
+               (f"Trade={data['tradePercent']}% | Site-generated={data['generatedAtUTC']}" if data else f"retrieval failed: {err}"))
         # Avoid bursts against a shared resource.
         time.sleep(1)
     store["lastCheckedAtUTC"] = now
-    store["lastRunSuccessCount"] = sum(v["ok"] for v in results.values())
-    store["lastRunFreshCount"] = sum(bool(v["ok"] and v["snapshot"] and site_age_hours(v["snapshot"]["generatedAtMs"]) <= MAX_FRESH_AGE_HOURS) for v in results.values())
-    store["lastRunStaleCount"] = sum(bool(v["snapshot"] and site_age_hours(v["snapshot"]["generatedAtMs"]) > MAX_FRESH_AGE_HOURS) for v in results.values())
-    store["lastErrors"] = {key: value["error"] for key, value in results.items() if value["error"]}
+    save_run_status(store, results)
     store["history"] = store["history"][-500:]
     DATA.parent.mkdir(parents=True, exist_ok=True)
     DATA.write_text(json.dumps(store, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
