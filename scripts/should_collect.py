@@ -21,7 +21,7 @@ def reporting_window(moment: datetime) -> tuple[str, int]:
     """Identify the local date/hour of the last 01:50, 09:50 or 17:50 slot."""
     local = moment.astimezone(BERLIN)
     for hour in (17, 9, 1):
-        if local.hour >= hour:
+        if (local.hour, local.minute) >= (hour, 50):
             return local.date().isoformat(), hour
     return (local.date() - timedelta(days=1)).isoformat(), 17
 
