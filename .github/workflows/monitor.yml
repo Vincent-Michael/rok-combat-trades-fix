@@ -1,5 +1,4 @@
 name: RoK Combat Trades
-# On-demand run trigger #32 (2026-11-21): no change to workflow behavior.
 on:
   workflow_dispatch:
   push:
@@ -10,9 +9,13 @@ on:
       - 'monitor_archer.py'
       - '.github/workflows/monitor.yml'
   schedule:
-    # Candidate UTC hours for 01:50, 09:50 and 17:50 Europe/Berlin.
-    # Both CET and CEST are covered; the gate below runs collection only at the matching local hour.
-    - cron: '50 0,1,8,9,16,17 * * *'
+    # Main collection: 10 minutes before the 02:00, 10:00 and 18:00 Berlin reports.
+    # GitHub Actions supports IANA time zones and handles CET/CEST automatically.
+    - cron: '50 1,9,17 * * *'
+      timezone: 'Europe/Berlin'
+    # Backup: if the main run was missed or did not complete all three monitors.
+    - cron: '55 1,9,17 * * *'
+      timezone: 'Europe/Berlin'
 permissions:
   contents: write
 concurrency:
@@ -21,37 +24,67 @@ concurrency:
 jobs:
   monitor:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
-      - name: Check Europe/Berlin collection window
-        id: window
-        shell: bash
-        run: |
-          if [[ "$GITHUB_EVENT_NAME" != "schedule" ]]; then
-            echo "collect=true" >> "$GITHUB_OUTPUT"
-          else
-            berlin_hour=$(TZ=Europe/Berlin date +%H)
-            if [[ "$berlin_hour" == "01" || "$berlin_hour" == "09" || "$berlin_hour" == "17" ]]; then
-              echo "collect=true" >> "$GITHUB_OUTPUT"
-            else
-              echo "collect=false" >> "$GITHUB_OUTPUT"
-              echo "Skipping extra UTC candidate: Berlin local hour is $berlin_hour"
-            fi
-          fi
       - uses: actions/checkout@v5
-        if: steps.window.outputs.collect == 'true'
+      - name: Run backup only if this Berlin reporting window has not been collected
+        id: backup
+        shell: bash
+        env:
+          SCHEDULE_CRON: ${{ github.event.schedule }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timedelta, timezone
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+
+          run_backup = os.environ.get("GITHUB_EVENT_NAME") == "schedule" and os.environ.get("SCHEDULE_CRON") == "55 1,9,17 * * *"
+          collect = True
+          if run_backup:
+              berlin = ZoneInfo("Europe/Berlin")
+              now = datetime.now(berlin)
+              def report_window(dt):
+                  local = dt.astimezone(berlin)
+                  for hour in (17, 9, 1):
+                      if local.hour >= hour:
+                          return (local.date().isoformat(), hour)
+                  return ((local - timedelta(days=1)).date().isoformat(), 17)
+
+              expected = report_window(now)
+              checks = (("inf", 11), ("cav", 11), ("archer", 9))
+              completed = []
+              for troop, expected_count in checks:
+                  try:
+                      data = json.loads(Path(f"data/trades_{troop}.json").read_text(encoding="utf-8"))
+                      checked = datetime.fromisoformat(data["lastCheckedAtUTC"].replace("Z", "+00:00"))
+                      completed.append(
+                          report_window(checked) == expected
+                          and data.get("scenario") == "7d/openField"
+                          and data.get("lastRunSuccessCount") == expected_count
+                          and len(data.get("snapshots", {})) == expected_count
+                      )
+                  except (OSError, KeyError, ValueError, TypeError, json.JSONDecodeError):
+                      completed.append(False)
+              collect = not all(completed)
+              print(f"Backup check: window={expected}; complete={completed}; collect={collect}")
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"collect={'true' if collect else 'false'}\n")
+          PY
       - uses: actions/setup-python@v6
-        if: steps.window.outputs.collect == 'true'
+        if: steps.backup.outputs.collect == 'true'
         with:
           python-version: '3.12'
       - name: Fetch 11 infantry, 11 cavalry and 9 archer pairings
-        if: steps.window.outputs.collect == 'true'
+        if: steps.backup.outputs.collect == 'true'
         run: |
           python monitor_inf.py
           python monitor_cav.py
           python monitor_archer.py
       - name: Commit report and data
-        if: steps.window.outputs.collect == 'true'
+        if: steps.backup.outputs.collect == 'true'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
