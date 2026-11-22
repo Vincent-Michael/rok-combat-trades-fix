@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from combat_source import fetch_snapshot, save_run_status, status_label, report_status_summary
+from combat_presentation import build_trade_report, build_trade_svg
 
 # Archer-only snapshot history. Retain 7d/Open field setting.
 SCENARIO_KEY = "7d/openField"
@@ -92,59 +93,7 @@ def fmt_num(value, digits=0):
 
 
 def build_report(store, results, now):
-    # Rank by latest 7-day Open field trade; unknown values remain last.
-    def sort_key(pair):
-        key = f"{pair[1]}-{pair[2]}"
-        snapshot = results[key]["snapshot"]
-        trade = snapshot.get("tradePercent") if snapshot else None
-        return (trade is None, -(trade if trade is not None else 0))
-
-    ranked_pairs = sorted(PAIRS, key=sort_key)
-    lines = [
-        "# RoK Combat Lab — Archer Trade Report",
-        "",
-        f"**Workflow checked UTC:** {now}  ",
-        f"**Site-generated UTC:** {', '.join(sorted({v['snapshot']['generatedAtUTC'] for v in results.values() if v['snapshot']})) or 'N/A'}  ",
-        f"**Source verification:** {report_status_summary(results)}  ",
-        f"**Scenario:** {SCENARIO_LABEL} (7-day selected time window)  ",
-        f"**Live retrieval:** {sum(v['ok'] for v in results.values())}/{len(PAIRS)} successful",
-        "",
-        "| Rank | Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) | Status |",
-        "|---:|---|---:|---:|---:|---:|---|---|",
-    ]
-    for rank, (name, p, s) in enumerate(ranked_pairs, start=1):
-        k = f"{p}-{s}"
-        result = results[k]
-        current = result["snapshot"]
-        prior = result.get("previous")
-        url = f"https://rokbattles.com/combat-lab?primary={p}&secondary={s}"
-        if current:
-            trade = fmt_num(current.get("tradePercent"), 2) + "%" if current.get("tradePercent") is not None else "N/A"
-            battles = fmt_num(current.get("battles"))
-            trade_delta = (fmt_num(current["tradePercent"]-prior["tradePercent"],2) if prior and current.get("tradePercent") is not None and prior.get("tradePercent") is not None else "N/A")
-            count_delta = fmt_num(current["battles"]-prior["battles"]) if prior else "N/A"
-            stamp = current["generatedAtUTC"]
-            status = status_label(result["status"], current)
-        else:
-            trade, trade_delta, battles, count_delta, stamp, status = "N/A", "N/A", "N/A", "N/A", "N/A", "Not yet verified"
-        lines.append(f"| {rank} | [{name}]({url}) | {trade} | {trade_delta} | {battles} | {count_delta} | {stamp} | {status} |")
-    lines += ["", "## Detailed metrics (verified API responses only)", "", "| Pairing | KP gained | KP lost | DPS | SPS | TPS |", "|---|---:|---:|---:|---:|---:|"]
-    for name, p, s in ranked_pairs:
-        x = results[f"{p}-{s}"]
-        v = x["snapshot"]
-        if v:
-            cols = [fmt_num(v.get(n),3 if n in ("dps","sps","tps") else 0) for n in ("killPointsGained","killPointsLost","dps","sps","tps")]
-        else:
-            cols = ["N/A"] * 5
-        lines.append(f"| {name} | " + " | ".join(cols) + " |")
-    errors = [f"- **{name}:** {results[f'{p}-{s}']['error']}" for name,p,s in ranked_pairs if results[f"{p}-{s}"]["error"]]
-    if errors:
-        lines += ["", "## Retrieval errors", "", *errors]
-    if sum(v["ok"] for v in results.values()) == 0:
-        lines += ["", "**LIVE DATA UNAVAILABLE.** Any retained snapshots are older verified API data, not fresh measurements. No changes are claimed when retrieval fails."]
-    lines += ["", "## Scenario integrity", "",
-              "This report uses **7 days / Open field** (Combat Lab range index 3, scenario index 1). Older 1-year reports are archived and excluded from change calculations."]
-    return "\n".join(lines) + "\n"
+    return build_trade_report("archer", PAIRS, results, now)
 
 
 def main():
@@ -198,6 +147,9 @@ def main():
     DATA.parent.mkdir(parents=True, exist_ok=True)
     DATA.write_text(json.dumps(store, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     REPORT.write_text(build_report(store, results, now), encoding="utf-8")
+    chart_path = ROOT / "charts" / "archer.svg"
+    chart_path.parent.mkdir(parents=True, exist_ok=True)
+    chart_path.write_text(build_trade_svg("archer", PAIRS, results), encoding="utf-8")
     print(f"Saved {REPORT} and {DATA}")
     return 0
 
