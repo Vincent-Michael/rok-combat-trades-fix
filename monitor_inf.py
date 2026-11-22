@@ -182,7 +182,7 @@ def build_svg(results):
     ranked=sorted(PAIRS,key=lambda p:(results[f"{p[1]}-{p[2]}"]["snapshot"] is None or results[f"{p[1]}-{p[2]}"]["snapshot"].get("tradePercent") is None,
                                    -(results[f"{p[1]}-{p[2]}"]["snapshot"] or {}).get("tradePercent",0) if (results[f"{p[1]}-{p[2]}"]["snapshot"] or {}).get("tradePercent") is not None else 0))
     trades=[r["snapshot"].get("tradePercent") for r in results.values() if r["snapshot"] and r["snapshot"].get("tradePercent") is not None]
-    limit=max(170,10*(int(max(trades)/10)+1)) if trades else 170
+    limit = 200  # Fixed 0–200% axis, matching Cavalry and Archer
     x0, bw, y0, step=328,660,90,52
     yaxis=y0+len(PAIRS)*step
     h=yaxis+77
