@@ -16,6 +16,7 @@ on:
       - 'monitor_cav.py'
       - 'monitor_archer.py'
       - 'scripts/should_collect.py'
+      - 'combat_source.py'
       - '.github/workflows/monitor.yml'
   schedule:
     # GitHub backup only: five minutes after the external trigger.
