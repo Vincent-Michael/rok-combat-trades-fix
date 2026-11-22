@@ -17,6 +17,7 @@ on:
       - 'monitor_archer.py'
       - 'scripts/should_collect.py'
       - 'combat_source.py'
+      - 'tests/test_combat_source.py'
       - '.github/workflows/monitor.yml'
   schedule:
     # GitHub backup only: five minutes after the external trigger.
@@ -36,6 +37,9 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
+
+      - name: Test shared Combat Lab API handling
+        run: python3 -m unittest discover -s tests -v
 
       # Applies to scheduled, external dispatch and push-triggered runs.
       - name: Skip already verified report windows
