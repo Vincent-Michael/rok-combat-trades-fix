@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 635" role="img" aria-label="Archer trade efficiency ranking">
+<rect x="1" y="1" width="1198" height="633" rx="16" fill="#172234" stroke="#344258" stroke-width="2"/>
+<circle cx="26" cy="31" r="7" fill="#22c55e"/><text x="43" y="37" fill="#22c55e" font-family="Arial,sans-serif" font-size="18" font-weight="600">Positive (&gt;100%)</text>
+<circle cx="280" cy="31" r="7" fill="#ef4444"/><text x="297" y="37" fill="#ef4444" font-family="Arial,sans-serif" font-size="18" font-weight="600">Negative (&lt;100%)</text>
+<rect x="328" y="65" width="660" height="32" rx="5" fill="#28374d"/>
+<rect x="328" y="65" width="570.81" height="32" rx="5" fill="#22c55e"/>
+<text x="20" y="88" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">1</text>
+<text x="53" y="88" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Qin Shi Huang / Yi Seong-Gye</text>
+<text x="1172" y="88" text-anchor="end" fill="#22c55e" font-family="Arial,sans-serif" font-weight="bold" font-size="22">147.03%</text>
+<rect x="328" y="117" width="660" height="32" rx="5" fill="#28374d"/>
+<rect x="328" y="117" width="484.11" height="32" rx="5" fill="#22c55e"/>
+<text x="20" y="140" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">2</text>
+<text x="53" y="140" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Qin Shi Huang / Zhuge Liang</text>
+<text x="1172" y="140" text-anchor="end" fill="#22c55e" font-family="Arial,sans-serif" font-weight="bold" font-size="22">124.70%</text>
+<rect x="328" y="169" width="660" height="32" rx="5" fill="#28374d"/>
+<rect x="328" y="169" width="289.37" height="32" rx="5" fill="#ef4444"/>
+<text x="20" y="192" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">3</text>
+<text x="53" y="192" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Alp Arslan / Yi Seong-Gye</text>
+<text x="1172" y="192" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">74.53%</text>
+<rect x="328" y="221" width="660" height="32" rx="5" fill="#28374d"/>
+<rect x="328" y="221" width="267.79" height="32" rx="5" fill="#ef4444"/>
+<text x="20" y="244" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">4</text>
+<text x="53" y="244" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Hermann / Alp Arslan</text>
+<text x="1172" y="244" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">68.98%</text>
+<rect x="328" y="273" width="660" height="32" rx="5" fill="#28374d"/>
+<rect x="328" y="273" width="243.29" height="32" rx="5" fill="#ef4444"/>
+<text x="20" y="296" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">5</text>
+<text x="53" y="296" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Hermann / Zhuge Liang</text>
+<text x="1172" y="296" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">62.67%</text>
+<rect x="328" y="325" width="660" height="32" rx="5" fill="#28374d"/>
+<rect x="328" y="325" width="231.61" height="32" rx="5" fill="#ef4444"/>
+<text x="20" y="348" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">6</text>
+<text x="53" y="348" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Alp Arslan / Zhuge Liang</text>
+<text x="1172" y="348" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">59.66%</text>
+<rect x="328" y="377" width="660" height="32" rx="5" fill="#28374d"/>
+<rect x="328" y="377" width="230.48" height="32" rx="5" fill="#ef4444"/>
+<text x="20" y="400" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">7</text>
+<text x="53" y="400" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Alp Arslan / Hermann</text>
+<text x="1172" y="400" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">59.36%</text>
+<rect x="328" y="429" width="660" height="32" rx="5" fill="#28374d"/>
+<rect x="328" y="429" width="211.28" height="32" rx="5" fill="#ef4444"/>
+<text x="20" y="452" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">8</text>
+<text x="53" y="452" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Zhuge Liang / Hermann</text>
+<text x="1172" y="452" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">54.42%</text>
+<rect x="328" y="481" width="660" height="32" rx="5" fill="#28374d"/>
+<rect x="328" y="481" width="201.78" height="32" rx="5" fill="#ef4444"/>
+<text x="20" y="504" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">9</text>
+<text x="53" y="504" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Zhuge Liang / Philip II</text>
+<text x="1172" y="504" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">51.97%</text>
+<line x1="716.24" y1="53" x2="716.24" y2="529" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="6 7"/>
+<line x1="328" y1="527" x2="988" y2="527" stroke="#51617a"/>
+<text x="328" y="551" text-anchor="middle" fill="#b4c3d8" font-family="Arial" font-size="18">0%</text>
+<text x="716.24" y="551" text-anchor="middle" fill="#f1f5f9" font-family="Arial" font-size="18">100%</text>
+<text x="988" y="551" text-anchor="middle" fill="#b4c3d8" font-family="Arial" font-size="18">170%</text>
+<text x="600" y="595" text-anchor="middle" fill="#cbd5e1" font-family="Arial" font-size="16">Dashed line = 100% break-even · Latest verified site snapshot</text>
+</svg>
