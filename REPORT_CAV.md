@@ -1,52 +1,40 @@
 # RoK Combat Lab — Cavalry Trade Report
 
-**Checked:** 2026-11-22T16:50:49Z  
+**Workflow checked UTC:** 2026-11-22T17:14:18Z  
+**Site-generated UTC:** 2026-11-22 16:29 UTC  
+**Source verification:** API checks: 11/11; distinct site snapshots: 11/11; unchanged: 0/11; fresh site timestamps (<=8h): 11/11; stale site timestamps: 0/11  
 **Scenario:** 7 days / Open field (7-day selected time window)  
 **Live retrieval:** 11/11 successful
 
 | Rank | Commander pairing | Trade % | Δ Trade (pp) | Battle reports | Δ Reports | Site timestamp (UTC) | Status |
 |---:|---|---:|---:|---:|---:|---|---|
-| 1 | [William Marshal / Ivan IV](https://rokbattles.com/combat-lab?primary=620&secondary=619) | 164.47% | 0.41 | 99,958 | 13,156 | 2026-11-22 08:28 UTC | Site snapshot unchanged |
-| 2 | [Ivan IV / William Marshal](https://rokbattles.com/combat-lab?primary=619&secondary=620) | 151.46% | -0.67 | 200,209 | 24,461 | 2026-11-22 08:28 UTC | Site snapshot unchanged |
-| 3 | [Ivan IV / Achilles](https://rokbattles.com/combat-lab?primary=619&secondary=575) | 123.52% | 0.01 | 819,255 | 60,789 | 2026-11-22 08:28 UTC | Site snapshot unchanged |
-| 4 | [Arthur Pendragon / Ivan IV](https://rokbattles.com/combat-lab?primary=540&secondary=619) | 123.23% | -0.30 | 1,688,784 | 178,003 | 2026-11-22 08:28 UTC | Site snapshot unchanged |
-| 5 | [William Marshal / Achilles](https://rokbattles.com/combat-lab?primary=620&secondary=575) | 110.59% | -0.19 | 63,072 | 4,924 | 2026-11-22 08:28 UTC | Site snapshot unchanged |
-| 6 | [Achilles / Vercingetorix](https://rokbattles.com/combat-lab?primary=575&secondary=616) | 93.90% | -0.56 | 59,117 | 4,958 | 2026-11-22 08:28 UTC | Site snapshot unchanged |
-| 7 | [Achilles / William Marshal](https://rokbattles.com/combat-lab?primary=575&secondary=620) | 91.91% | 1.05 | 127,633 | 19,212 | 2026-11-22 08:28 UTC | Site snapshot unchanged |
-| 8 | [Achilles / Gang Gamchan](https://rokbattles.com/combat-lab?primary=575&secondary=579) | 82.03% | -0.22 | 1,072,610 | 125,260 | 2026-11-22 08:28 UTC | Site snapshot unchanged |
-| 9 | [Arthur Pendragon / Hector](https://rokbattles.com/combat-lab?primary=540&secondary=576) | 78.43% | 0.57 | 114,835 | 9,848 | 2026-11-22 08:28 UTC | Site snapshot unchanged |
-| 10 | [Arthur Pendragon / Achilles](https://rokbattles.com/combat-lab?primary=540&secondary=575) | 70.47% | 1.27 | 260,502 | 25,624 | 2026-11-22 08:28 UTC | Site snapshot unchanged |
-| 11 | [Arthur Pendragon / Gang Gamchan](https://rokbattles.com/combat-lab?primary=540&secondary=579) | 52.25% | 0.11 | 51,288 | 3,237 | 2026-11-22 08:28 UTC | Site snapshot unchanged |
+| 1 | [William Marshal / Ivan IV](https://rokbattles.com/combat-lab?primary=620&secondary=619) | 164.01% | -0.46 | 114,415 | 14,457 | 2026-11-22 16:29 UTC | Distinct site-generated snapshot; within 8h |
+| 2 | [Ivan IV / William Marshal](https://rokbattles.com/combat-lab?primary=619&secondary=620) | 151.05% | -0.41 | 223,618 | 23,409 | 2026-11-22 16:29 UTC | Distinct site-generated snapshot; within 8h |
+| 3 | [Ivan IV / Achilles](https://rokbattles.com/combat-lab?primary=619&secondary=575) | 123.41% | -0.11 | 870,462 | 51,207 | 2026-11-22 16:29 UTC | Distinct site-generated snapshot; within 8h |
+| 4 | [Arthur Pendragon / Ivan IV](https://rokbattles.com/combat-lab?primary=540&secondary=619) | 123.40% | 0.17 | 1,851,573 | 162,789 | 2026-11-22 16:29 UTC | Distinct site-generated snapshot; within 8h |
+| 5 | [William Marshal / Achilles](https://rokbattles.com/combat-lab?primary=620&secondary=575) | 110.43% | -0.15 | 65,876 | 2,804 | 2026-11-22 16:29 UTC | Distinct site-generated snapshot; within 8h |
+| 6 | [Achilles / William Marshal](https://rokbattles.com/combat-lab?primary=575&secondary=620) | 91.60% | -0.31 | 148,130 | 20,497 | 2026-11-22 16:29 UTC | Distinct site-generated snapshot; within 8h |
+| 7 | [Achilles / Vercingetorix](https://rokbattles.com/combat-lab?primary=575&secondary=616) | 91.52% | -2.38 | 65,042 | 5,925 | 2026-11-22 16:29 UTC | Distinct site-generated snapshot; within 8h |
+| 8 | [Achilles / Gang Gamchan](https://rokbattles.com/combat-lab?primary=575&secondary=579) | 81.86% | -0.16 | 1,187,001 | 114,391 | 2026-11-22 16:29 UTC | Distinct site-generated snapshot; within 8h |
+| 9 | [Arthur Pendragon / Hector](https://rokbattles.com/combat-lab?primary=540&secondary=576) | 78.56% | 0.13 | 131,282 | 16,447 | 2026-11-22 16:29 UTC | Distinct site-generated snapshot; within 8h |
+| 10 | [Arthur Pendragon / Achilles](https://rokbattles.com/combat-lab?primary=540&secondary=575) | 71.39% | 0.92 | 276,535 | 16,033 | 2026-11-22 16:29 UTC | Distinct site-generated snapshot; within 8h |
+| 11 | [Arthur Pendragon / Gang Gamchan](https://rokbattles.com/combat-lab?primary=540&secondary=579) | 53.37% | 1.12 | 54,039 | 2,751 | 2026-11-22 16:29 UTC | Distinct site-generated snapshot; within 8h |
 
 ## Detailed metrics (verified API responses only)
 
 | Pairing | KP gained | KP lost | DPS | SPS | TPS |
 |---|---:|---:|---:|---:|---:|
-| William Marshal / Ivan IV | 2,136,989,717 | 1,299,342,660 | 547.797 | 91.552 | 53.870 |
-| Ivan IV / William Marshal | 3,428,677,874 | 2,263,791,190 | 441.367 | 74.148 | 48.388 |
-| Ivan IV / Achilles | 12,397,940,335 | 10,037,396,050 | 413.635 | 67.514 | 53.860 |
-| Arthur Pendragon / Ivan IV | 27,723,637,011 | 22,498,203,346 | 478.545 | 76.966 | 61.727 |
-| William Marshal / Achilles | 898,635,487 | 812,618,492 | 385.462 | 59.892 | 53.810 |
-| Achilles / Vercingetorix | 707,965,340 | 753,961,720 | 327.308 | 51.040 | 53.468 |
-| Achilles / William Marshal | 1,606,831,386 | 1,748,267,610 | 370.484 | 57.245 | 61.212 |
-| Achilles / Gang Gamchan | 11,880,418,808 | 14,483,476,550 | 314.339 | 51.246 | 61.776 |
-| Arthur Pendragon / Hector | 1,501,556,645 | 1,914,557,370 | 391.407 | 60.044 | 75.514 |
-| Arthur Pendragon / Achilles | 3,490,684,426 | 4,953,305,840 | 401.845 | 61.888 | 88.872 |
-| Arthur Pendragon / Gang Gamchan | 483,196,297 | 924,754,200 | 300.778 | 46.771 | 91.642 |
-
-## Retrieval errors
-
-- **William Marshal / Ivan IV:** Site snapshot unchanged after 3 attempts (cache bypass)
-- **Ivan IV / William Marshal:** Site snapshot unchanged after 3 attempts (cache bypass)
-- **Ivan IV / Achilles:** Site snapshot unchanged after 3 attempts (cache bypass)
-- **Arthur Pendragon / Ivan IV:** Site snapshot unchanged after 3 attempts (cache bypass)
-- **William Marshal / Achilles:** Site snapshot unchanged after 3 attempts (cache bypass)
-- **Achilles / Vercingetorix:** Site snapshot unchanged after 3 attempts (cache bypass)
-- **Achilles / William Marshal:** Site snapshot unchanged after 3 attempts (cache bypass)
-- **Achilles / Gang Gamchan:** Site snapshot unchanged after 3 attempts (cache bypass)
-- **Arthur Pendragon / Hector:** Site snapshot unchanged after 3 attempts (cache bypass)
-- **Arthur Pendragon / Achilles:** Site snapshot unchanged after 3 attempts (cache bypass)
-- **Arthur Pendragon / Gang Gamchan:** Site snapshot unchanged after 3 attempts (cache bypass)
+| William Marshal / Ivan IV | 2,337,488,797 | 1,425,248,220 | 531.649 | 88.537 | 52.394 |
+| Ivan IV / William Marshal | 3,780,431,411 | 2,502,738,400 | 437.796 | 73.308 | 48.056 |
+| Ivan IV / Achilles | 13,117,031,021 | 10,628,806,224 | 412.222 | 67.281 | 53.666 |
+| Arthur Pendragon / Ivan IV | 30,275,979,336 | 24,535,172,556 | 476.684 | 76.651 | 61.386 |
+| William Marshal / Achilles | 934,628,317 | 846,318,852 | 385.075 | 59.823 | 53.995 |
+| Achilles / William Marshal | 1,848,320,953 | 2,017,736,060 | 368.767 | 56.864 | 61.066 |
+| Achilles / Vercingetorix | 766,151,700 | 837,186,240 | 321.787 | 50.124 | 53.979 |
+| Achilles / Gang Gamchan | 13,008,894,425 | 15,890,777,430 | 312.078 | 50.794 | 61.439 |
+| Arthur Pendragon / Hector | 1,692,799,495 | 2,154,736,940 | 389.457 | 59.704 | 74.928 |
+| Arthur Pendragon / Achilles | 3,727,808,094 | 5,221,879,040 | 404.601 | 62.192 | 88.323 |
+| Arthur Pendragon / Gang Gamchan | 516,327,157 | 967,501,860 | 304.855 | 47.468 | 90.680 |
 
 ## Scenario integrity
 

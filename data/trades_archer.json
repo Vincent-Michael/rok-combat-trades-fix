@@ -1,20 +1,20 @@
 {
   "snapshots": {
     "509-6": {
-      "generatedAtMs": 1795336133034,
-      "generatedAtUTC": "2026-11-22 08:28 UTC",
+      "generatedAtMs": 1795364964678,
+      "generatedAtUTC": "2026-11-22 16:29 UTC",
       "primary": 509,
       "secondary": 6,
-      "battles": 1732783,
-      "uniqueGovernors": 6451,
-      "killPointsGained": 28836450606,
-      "killPointsLost": 19727398398,
-      "tradePercent": 146.1746,
-      "dps": 438.173,
-      "sps": 65.29,
-      "tps": 44.211,
-      "hps": 2.221,
-      "checkedAtUTC": "2026-11-22T16:51:53Z"
+      "battles": 1936256,
+      "uniqueGovernors": 6592,
+      "killPointsGained": 31751946149,
+      "killPointsLost": 21596164318,
+      "tradePercent": 147.0259,
+      "dps": 430.997,
+      "sps": 64.231,
+      "tps": 43.256,
+      "hps": 2.061,
+      "checkedAtUTC": "2026-11-22T17:14:32Z"
     },
     "509-179": {
       "generatedAtMs": 1795364964678,
@@ -30,7 +30,7 @@
       "sps": 57.393,
       "tps": 45.708,
       "hps": 2.345,
-      "checkedAtUTC": "2026-11-22T16:51:53Z"
+      "checkedAtUTC": "2026-11-22T17:14:32Z"
     },
     "611-179": {
       "generatedAtMs": 1795364964678,
@@ -46,7 +46,7 @@
       "sps": 45.9,
       "tps": 76.191,
       "hps": 55.62,
-      "checkedAtUTC": "2026-11-22T16:51:53Z"
+      "checkedAtUTC": "2026-11-22T17:14:32Z"
     },
     "611-6": {
       "generatedAtMs": 1795364964678,
@@ -62,7 +62,7 @@
       "sps": 54.372,
       "tps": 73.369,
       "hps": 64.568,
-      "checkedAtUTC": "2026-11-22T16:51:53Z"
+      "checkedAtUTC": "2026-11-22T17:14:32Z"
     },
     "611-187": {
       "generatedAtMs": 1795364964678,
@@ -78,7 +78,7 @@
       "sps": 42.803,
       "tps": 71.074,
       "hps": 55.587,
-      "checkedAtUTC": "2026-11-22T16:51:53Z"
+      "checkedAtUTC": "2026-11-22T17:14:32Z"
     },
     "187-179": {
       "generatedAtMs": 1795364964678,
@@ -94,7 +94,7 @@
       "sps": 42.417,
       "tps": 66.939,
       "hps": 2.885,
-      "checkedAtUTC": "2026-11-22T16:51:53Z"
+      "checkedAtUTC": "2026-11-22T17:14:32Z"
     },
     "187-611": {
       "generatedAtMs": 1795364964678,
@@ -110,7 +110,7 @@
       "sps": 45.772,
       "tps": 65.689,
       "hps": 70.686,
-      "checkedAtUTC": "2026-11-22T16:51:53Z"
+      "checkedAtUTC": "2026-11-22T17:14:32Z"
     },
     "179-187": {
       "generatedAtMs": 1795364964678,
@@ -126,7 +126,7 @@
       "sps": 42.655,
       "tps": 79.207,
       "hps": 2.545,
-      "checkedAtUTC": "2026-11-22T16:51:53Z"
+      "checkedAtUTC": "2026-11-22T17:14:32Z"
     },
     "179-459": {
       "generatedAtMs": 1795364964678,
@@ -142,7 +142,7 @@
       "sps": 37.834,
       "tps": 70.548,
       "hps": 2.38,
-      "checkedAtUTC": "2026-11-22T16:51:53Z"
+      "checkedAtUTC": "2026-11-22T17:14:32Z"
     }
   },
   "history": [
@@ -893,12 +893,53 @@
       "tps": 70.548,
       "hps": 2.38,
       "checkedAtUTC": "2026-11-22T16:51:53Z"
+    },
+    {
+      "pairing": "Qin Shi Huang / Yi Seong-Gye",
+      "generatedAtMs": 1795364964678,
+      "generatedAtUTC": "2026-11-22 16:29 UTC",
+      "primary": 509,
+      "secondary": 6,
+      "battles": 1936256,
+      "uniqueGovernors": 6592,
+      "killPointsGained": 31751946149,
+      "killPointsLost": 21596164318,
+      "tradePercent": 147.0259,
+      "dps": 430.997,
+      "sps": 64.231,
+      "tps": 43.256,
+      "hps": 2.061,
+      "checkedAtUTC": "2026-11-22T17:14:32Z"
     }
   ],
   "scenario": "7d/openField",
-  "lastCheckedAtUTC": "2026-11-22T16:51:53Z",
+  "lastCheckedAtUTC": "2026-11-22T17:14:32Z",
   "lastRunSuccessCount": 9,
-  "lastErrors": {
-    "509-6": "Site snapshot unchanged after 3 attempts (cache bypass)"
+  "lastErrors": {},
+  "lastRunNewCount": 1,
+  "lastRunUnchangedCount": 8,
+  "lastRunFailureCount": 0,
+  "lastRunFreshCount": 9,
+  "lastRunStaleCount": 0,
+  "lastWarnings": {
+    "509-179": "Site-generated snapshot UNCHANGED; within 8h",
+    "611-179": "Site-generated snapshot UNCHANGED; within 8h",
+    "611-6": "Site-generated snapshot UNCHANGED; within 8h",
+    "611-187": "Site-generated snapshot UNCHANGED; within 8h",
+    "187-179": "Site-generated snapshot UNCHANGED; within 8h",
+    "187-611": "Site-generated snapshot UNCHANGED; within 8h",
+    "179-187": "Site-generated snapshot UNCHANGED; within 8h",
+    "179-459": "Site-generated snapshot UNCHANGED; within 8h"
+  },
+  "lastRunStatuses": {
+    "509-6": "new",
+    "509-179": "unchanged",
+    "611-179": "unchanged",
+    "611-6": "unchanged",
+    "611-187": "unchanged",
+    "187-179": "unchanged",
+    "187-611": "unchanged",
+    "179-187": "unchanged",
+    "179-459": "unchanged"
   }
 }
