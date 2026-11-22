@@ -27,7 +27,7 @@ def build_trade_svg(troop, pairs, results):
         for result in results.values()
         if result["snapshot"] and result["snapshot"].get("tradePercent") is not None
     ]
-    limit = max(170, 10 * (int(max(trades) / 10) + 1)) if trades else 170
+    limit = 200  # Fixed 0–200% axis for all Combat Lab trade charts
     x0, width, y0, step = 328, 660, 90, 52
     yaxis = y0 + len(ranked) * step
     height = yaxis + 77
