@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Skip duplicate RoK collections within one Europe/Berlin reporting window.
+"""Deduplicate successful Combat Lab collections in each Berlin reporting window.
 
-An unchanged API snapshot is valid; an old or failed API check is not.
-The external cron-job.org dispatcher runs at :50. GitHub's schedule is backup at :55.
+cron-job.org is the sole configured workflow scheduler. A site snapshot may stay
+unchanged or become older than eight hours; neither warrants a second collection
+after all three monitors completed successfully in this reporting window.
 """
-
 import json
 import os
 from datetime import datetime, timedelta, timezone
@@ -14,11 +14,10 @@ from zoneinfo import ZoneInfo
 BERLIN = ZoneInfo("Europe/Berlin")
 DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 EXPECTED_COUNTS = {"inf": 11, "cav": 11, "archer": 9}
-MAX_SITE_AGE = timedelta(hours=8)
 
 
 def reporting_window(moment: datetime) -> tuple[str, int]:
-    """Identify the local date/hour of the last 01:50, 09:50 or 17:50 slot."""
+    """Identify the last local 01:50, 09:50, or 17:50 collection window."""
     local = moment.astimezone(BERLIN)
     for hour in (17, 9, 1):
         if (local.hour, local.minute) >= (hour, 50):
@@ -26,28 +25,20 @@ def reporting_window(moment: datetime) -> tuple[str, int]:
     return (local.date() - timedelta(days=1)).isoformat(), 17
 
 
-def completed_in_window(troop: str, count: int, window: tuple[str, int], now: datetime) -> bool:
+def completed_in_window(troop: str, expected_count: int, window: tuple[str, int]) -> bool:
+    """Check monitor execution, not whether upstream site data changed."""
     try:
         data = json.loads((DATA_DIR / f"trades_{troop}.json").read_text(encoding="utf-8"))
         checked = datetime.fromisoformat(data["lastCheckedAtUTC"].replace("Z", "+00:00"))
         snapshots = data["snapshots"]
-
-        if (
-            reporting_window(checked) != window
-            or data.get("scenario") != "7d/openField"
-            or data.get("lastRunSuccessCount") != count
-            or data.get("lastErrors")
-            or len(snapshots) != count
-        ):
-            return False
-
-        # Check actual API generation times, not only the workflow check timestamp.
-        for snapshot in snapshots.values():
-            generated = datetime.fromtimestamp(snapshot["generatedAtMs"] / 1000, tz=timezone.utc)
-            age = now - generated
-            if age < -timedelta(minutes=5) or age > MAX_SITE_AGE:
-                return False
-        return True
+        return (
+            reporting_window(checked) == window
+            and data.get("scenario") == "7d/openField"
+            and data.get("lastRunSuccessCount") == expected_count
+            and not data.get("lastErrors")
+            and data.get("lastRunFailureCount", 0) == 0
+            and len(snapshots) == expected_count
+        )
     except (OSError, KeyError, ValueError, TypeError, OverflowError, json.JSONDecodeError):
         return False
 
@@ -55,13 +46,12 @@ def completed_in_window(troop: str, count: int, window: tuple[str, int], now: da
 def main() -> None:
     now = datetime.now(timezone.utc)
     window = reporting_window(now)
-    force = os.getenv("FORCE_COLLECTION", "false").lower() == "true"
     checks = {
-        troop: completed_in_window(troop, count, window, now)
+        troop: completed_in_window(troop, count, window)
         for troop, count in EXPECTED_COUNTS.items()
     }
-    collect = force or not all(checks.values())
-    print(f"Berlin reporting window: {window}; verified checks: {checks}; force={force}; collect={collect}")
+    collect = not all(checks.values())
+    print(f"Berlin reporting window: {window}; completed monitors: {checks}; collect={collect}")
     with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
         output.write(f"collect={'true' if collect else 'false'}\n")
 
