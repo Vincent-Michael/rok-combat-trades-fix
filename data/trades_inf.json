@@ -15,7 +15,7 @@
       "sps": 61.243,
       "tps": 60.48,
       "hps": 4.635,
-      "checkedAtUTC": "2026-11-22T09:30:39Z"
+      "checkedAtUTC": "2026-11-22T16:47:56Z"
     },
     "621-596": {
       "generatedAtMs": 1795336133034,
@@ -31,7 +31,7 @@
       "sps": 53.888,
       "tps": 61.245,
       "hps": 10.214,
-      "checkedAtUTC": "2026-11-22T09:30:39Z"
+      "checkedAtUTC": "2026-11-22T16:47:56Z"
     },
     "621-185": {
       "generatedAtMs": 1795336133034,
@@ -47,7 +47,7 @@
       "sps": 57.456,
       "tps": 59.52,
       "hps": 4.363,
-      "checkedAtUTC": "2026-11-22T09:30:39Z"
+      "checkedAtUTC": "2026-11-22T16:47:56Z"
     },
     "595-621": {
       "generatedAtMs": 1795336133034,
@@ -63,7 +63,7 @@
       "sps": 78.637,
       "tps": 55.063,
       "hps": 7.181,
-      "checkedAtUTC": "2026-11-22T09:30:39Z"
+      "checkedAtUTC": "2026-11-22T16:47:56Z"
     },
     "595-596": {
       "generatedAtMs": 1795336133034,
@@ -79,7 +79,7 @@
       "sps": 73.549,
       "tps": 60.664,
       "hps": 4.459,
-      "checkedAtUTC": "2026-11-22T09:30:39Z"
+      "checkedAtUTC": "2026-11-22T16:47:56Z"
     },
     "545-185": {
       "generatedAtMs": 1795336133034,
@@ -95,7 +95,7 @@
       "sps": 56.928,
       "tps": 71.549,
       "hps": 7.743,
-      "checkedAtUTC": "2026-11-22T09:30:39Z"
+      "checkedAtUTC": "2026-11-22T16:47:56Z"
     },
     "595-545": {
       "generatedAtMs": 1795336133034,
@@ -111,7 +111,7 @@
       "sps": 65.464,
       "tps": 63.939,
       "hps": 4.587,
-      "checkedAtUTC": "2026-11-22T09:30:39Z"
+      "checkedAtUTC": "2026-11-22T16:47:56Z"
     },
     "545-621": {
       "generatedAtMs": 1795336133034,
@@ -127,7 +127,7 @@
       "sps": 54.246,
       "tps": 51.104,
       "hps": 1.603,
-      "checkedAtUTC": "2026-11-22T09:30:39Z"
+      "checkedAtUTC": "2026-11-22T16:47:56Z"
     },
     "595-185": {
       "generatedAtMs": 1795336133034,
@@ -143,7 +143,7 @@
       "sps": 58.007,
       "tps": 62.421,
       "hps": 5.982,
-      "checkedAtUTC": "2026-11-22T09:30:39Z"
+      "checkedAtUTC": "2026-11-22T16:47:56Z"
     },
     "595-616": {
       "generatedAtMs": 1795336133034,
@@ -159,7 +159,7 @@
       "sps": 46.179,
       "tps": 59.439,
       "hps": 9.232,
-      "checkedAtUTC": "2026-11-22T09:30:39Z"
+      "checkedAtUTC": "2026-11-22T16:47:56Z"
     },
     "545-616": {
       "generatedAtMs": 1795336133034,
@@ -175,7 +175,7 @@
       "sps": 49.741,
       "tps": 75.161,
       "hps": 5.631,
-      "checkedAtUTC": "2026-11-22T09:30:39Z"
+      "checkedAtUTC": "2026-11-22T16:47:56Z"
     }
   },
   "history": [
@@ -1302,10 +1302,10 @@
       "checkedAtUTC": "2026-11-22T09:30:39Z"
     }
   ],
-  "lastCheckedAtUTC": "2026-11-22T09:30:39Z",
+  "lastCheckedAtUTC": "2026-11-22T16:47:56Z",
   "lastRunSuccessCount": 11,
   "lastErrors": {},
   "resetNote": "Manual reset requested; the next successful 7-day/Open field API run starts a new comparison baseline.",
-  "lastRunFreshCount": 11,
-  "lastRunStaleCount": 0
+  "lastRunFreshCount": 0,
+  "lastRunStaleCount": 11
 }

@@ -1,10 +1,10 @@
 # RoK Combat Lab — Infantry Trade Report
 
-**Workflow checked UTC:** 2026-11-22T09:30:39Z  
+**Workflow checked UTC:** 2026-11-22T16:47:56Z  
 **API site-generated UTC:** 2026-11-22 08:28 UTC  
 **Successful monitor checks:** 11/11  
-**Fresh site snapshots (age <= 8h):** 11/11  
-**Stale site snapshots:** 0/11  
+**Fresh site snapshots (age <= 8h):** 0/11  
+**Stale site snapshots:** 11/11  
 **Scenario:** 7 Days / Open Field ([3,1]); rolling seven days, independent of eight-hour monitoring.
 
 **Data age:** Successful API retrieval does NOT imply newly generated statistics. Snapshots older than 8 hours are marked STALE, even if retrievals succeed. Cache bypass cannot force an upstream data refresh.
@@ -29,7 +29,7 @@
 | 10 | [Sun Tzu / Vercingetorix](https://rokbattles.com/combat-lab?primary=595&secondary=616) | 76.45% | -0.60 | 24,103 |
 | 11 | [Bai Qi / Vercingetorix](https://rokbattles.com/combat-lab?primary=545&secondary=616) | 64.81% | -1.31 | 46,593 |
 
-Site-generated: 2026-11-22 08:28 UTC · Retrieved: 11/11 · Fresh site snapshots: 11/11 · Stale site snapshots: 0/11 · Retained after errors: 0 · Unavailable: 0.
+Site-generated: 2026-11-22 08:28 UTC · Retrieved: 11/11 · Fresh site snapshots: 0/11 · Stale site snapshots: 11/11 · Retained after errors: 0 · Unavailable: 0.
 
 ## Detailed Combat Statistics
 
@@ -54,5 +54,6 @@ KP Gained and KP Lost are in millions (M). DPS, SPS and TPS are per-second rates
 **Best trade:** Sun Tzu / Yi Do at 140.85%. **Worst trade:** Bai Qi / Vercingetorix at 64.81%.
 **Largest dataset:** Sun Tzu / Bai Qi (1,629,946 reports). **Smallest dataset:** Yi Do / Ivar (5,444 reports; interpret cautiously).
 **Distinct-snapshot changes:** Sun Tzu / Yi Do -0.43 pp; Sun Tzu / Ivar -0.34 pp; Bai Qi / Yi Do -3.13 pp; Sun Tzu / Bai Qi +0.14 pp; Yi Do / Bai Qi -0.57 pp; Yi Do / Liu Che -0.33 pp; Sun Tzu / Liu Che +0.64 pp; Yi Do / Ivar +4.52 pp; Bai Qi / Liu Che -0.45 pp; Sun Tzu / Vercingetorix -0.60 pp; Bai Qi / Vercingetorix -1.31 pp.
+**Source age warning:** 11/11 site-generated snapshots exceed 8 hours. These are historical 7-day rolling windows, NOT current live statistics.
 
-**Source / monitor status:** [trades_inf.json](data/trades_inf.json) · [REPORT_INF.md](REPORT_INF.md) · Workflow checked: 2026-11-22T09:30:39Z · API generated: 2026-11-22 08:28 UTC · Retrievals: 11/11 · Fresh site data: 11/11 · Stale source: 0/11 · Historical data preserved; no 1-year baselines.
+**Source / monitor status:** [trades_inf.json](data/trades_inf.json) · [REPORT_INF.md](REPORT_INF.md) · Workflow checked: 2026-11-22T16:47:56Z · API generated: 2026-11-22 08:28 UTC · Retrievals: 11/11 · Fresh site data: 0/11 · Stale source: 11/11 · Historical data preserved; no 1-year baselines.
