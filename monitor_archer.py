@@ -7,7 +7,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
+from combat_source import fetch_snapshot, save_run_status, status_label, report_status_summary
 
 # Archer-only snapshot history. Retain 7d/Open field setting.
 SCENARIO_KEY = "7d/openField"
@@ -83,42 +83,8 @@ def parse_payload(payload, primary, secondary):
 
 
 def fetch(primary, secondary, previous_generated_ms=None):
-    """Retry old API snapshots using no-cache headers and cache-busting URLs."""
-    from urllib.parse import urlencode
-    base = "https://rokbattles.com/proxy/v2/global/combat-lab"
-    errors = []
-    last_valid = None
-    for attempt in range(3):
-        query = {"primary": primary, "secondary": secondary}
-        if attempt:
-            query["_cb"] = str(int(time.time() * 1000))
-        url = base + "?" + urlencode(query)
-        try:
-            req = Request(url, headers={
-                "Accept": "application/json",
-                "User-Agent": "Mozilla/5.0 (compatible; RoKCombatTradesMonitor/2.0)",
-                "Cache-Control": "no-cache, no-store, max-age=0",
-                "Pragma": "no-cache",
-            })
-            with urlopen(req, timeout=25) as response:
-                if response.status != 200:
-                    raise ValueError(f"HTTP {response.status}")
-                payload = json.loads(response.read(12 * 1024 * 1024))
-            snapshot = parse_payload(payload, primary, secondary)
-            if previous_generated_ms is None or snapshot["generatedAtMs"] > previous_generated_ms:
-                return snapshot, None
-            if snapshot["generatedAtMs"] == previous_generated_ms:
-                last_valid = snapshot
-                errors.append(f"attempt {attempt+1}: site snapshot unchanged")
-            else:
-                errors.append(f"attempt {attempt+1}: site snapshot older than stored")
-        except Exception as exc:
-            errors.append(f"attempt {attempt+1}: {type(exc).__name__} {str(exc)[:160]}")
-        if attempt < 2:
-            time.sleep(2)
-    if last_valid is not None:
-        return last_valid, "Site snapshot unchanged after 3 attempts (cache bypass)"
-    return None, "; ".join(errors)
+    """Fetch only verified 7d/Open Field data using shared retry/freshness logic."""
+    return fetch_snapshot(primary, secondary, previous_generated_ms, parse_payload)
 
 
 def fmt_num(value, digits=0):
@@ -137,7 +103,9 @@ def build_report(store, results, now):
     lines = [
         "# RoK Combat Lab — Archer Trade Report",
         "",
-        f"**Checked:** {now}  ",
+        f"**Workflow checked UTC:** {now}  ",
+        f"**Site-generated UTC:** {', '.join(sorted({v['snapshot']['generatedAtUTC'] for v in results.values() if v['snapshot']})) or 'N/A'}  ",
+        f"**Source verification:** {report_status_summary(results)}  ",
         f"**Scenario:** {SCENARIO_LABEL} (7-day selected time window)  ",
         f"**Live retrieval:** {sum(v['ok'] for v in results.values())}/{len(PAIRS)} successful",
         "",
@@ -156,7 +124,7 @@ def build_report(store, results, now):
             trade_delta = (fmt_num(current["tradePercent"]-prior["tradePercent"],2) if prior and current.get("tradePercent") is not None and prior.get("tradePercent") is not None else "N/A")
             count_delta = fmt_num(current["battles"]-prior["battles"]) if prior else "N/A"
             stamp = current["generatedAtUTC"]
-            status = ("Site snapshot unchanged" if result["ok"] and result["error"] else "Verified new site snapshot" if result["ok"] else "Old verified snapshot")
+            status = status_label(result["status"], current)
         else:
             trade, trade_delta, battles, count_delta, stamp, status = "N/A", "N/A", "N/A", "N/A", "N/A", "Not yet verified"
         lines.append(f"| {rank} | [{name}]({url}) | {trade} | {trade_delta} | {battles} | {count_delta} | {stamp} | {status} |")
@@ -201,11 +169,7 @@ def main():
     for name, p, s, *_ in PAIRS:
         key = f"{p}-{s}"
         prior = store["snapshots"].get(key)
-        data, err = fetch(p, s, prior.get('generatedAtMs') if prior else None)
-        if data:
-            if prior and data["generatedAtMs"] < prior["generatedAtMs"]:
-                err = "Site data older than last verified snapshot; retained last verified snapshot"
-                data = None
+        data, status, err = fetch(p, s, prior.get('generatedAtMs') if prior else None)
         if data:
             data["checkedAtUTC"] = now
             if prior is None or data["generatedAtMs"] != prior["generatedAtMs"]:
@@ -223,13 +187,13 @@ def main():
             ]
             if old:
                 previous = max(old, key=lambda item: item["generatedAtMs"])
-        results[key] = {"ok": bool(data), "snapshot": current, "previous": previous, "error": err}
-        print(f"{name}: {'OK '+str(data['tradePercent'])+'%' if data else 'FAILED '+str(err)}")
+        results[key] = {"ok": bool(data), "snapshot": current, "previous": previous, "error": err, "status": status}
+        print(f"{name}: {status.upper()} | " +
+               (f"Trade={data['tradePercent']}% | Site-generated={data['generatedAtUTC']}" if data else f"retrieval failed: {err}"))
         # Avoid bursts against a shared resource.
         time.sleep(1)
     store["lastCheckedAtUTC"] = now
-    store["lastRunSuccessCount"] = sum(v["ok"] for v in results.values())
-    store["lastErrors"] = {key: value["error"] for key, value in results.items() if value["error"]}
+    save_run_status(store, results)
     store["history"] = store["history"][-500:]
     DATA.parent.mkdir(parents=True, exist_ok=True)
     DATA.write_text(json.dumps(store, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
