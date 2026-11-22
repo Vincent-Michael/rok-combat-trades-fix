@@ -1,32 +1,15 @@
 name: RoK Combat Trades
 
+# The only configured trigger is workflow_dispatch, called by cron-job.org
+# at 01:50, 09:50 and 17:50 Europe/Berlin.
 on:
-  # cron-job.org dispatches at 01:50, 09:50 and 17:50 Europe/Berlin.
   workflow_dispatch:
-    inputs:
-      force:
-        description: "Recheck data even if this reporting window already completed"
-        type: boolean
-        required: false
-        default: false
-  push:
-    branches: [main]
-    paths:
-      - 'monitor_inf.py'
-      - 'monitor_cav.py'
-      - 'monitor_archer.py'
-      - 'scripts/should_collect.py'
-      - 'combat_source.py'
-      - 'tests/test_combat_source.py'
-      - '.github/workflows/monitor.yml'
-  schedule:
-    # GitHub backup only: five minutes after the external trigger.
-    - cron: '55 1,9,17 * * *'
-      timezone: 'Europe/Berlin'
 
 permissions:
   contents: write
 
+# Serialize external dispatches; a second run checks the latest committed state
+# after the first finishes.
 concurrency:
   group: rok-combat-trades
   cancel-in-progress: false
@@ -41,11 +24,8 @@ jobs:
       - name: Test shared Combat Lab API handling
         run: python3 -m unittest discover -s tests -v
 
-      # Applies to scheduled, external dispatch and push-triggered runs.
-      - name: Skip already verified report windows
+      - name: Skip completed reporting windows
         id: gate
-        env:
-          FORCE_COLLECTION: ${{ inputs.force }}
         run: python3 scripts/should_collect.py
 
       - uses: actions/setup-python@v6
