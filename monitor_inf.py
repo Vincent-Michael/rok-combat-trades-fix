@@ -90,9 +90,9 @@ def site_age_hours(generated_at_ms):
     return max(0.0, (time.time() * 1000 - generated_at_ms) / 3_600_000)
 
 
-def fetch(primary, secondary, previous_generated_ms=None):
+def fetch(primary, secondary, previous_generated_ms=None, previous_snapshot=None):
     """Fetch only verified 7d/Open Field data using shared retry/freshness logic."""
-    return fetch_snapshot(primary, secondary, previous_generated_ms, parse_payload)
+    return fetch_snapshot(primary, secondary, previous_generated_ms, parse_payload, previous_snapshot)
 
 
 def fmt_num(value, digits=0):
@@ -236,7 +236,7 @@ def main():
         prior = store["snapshots"].get(key)
         if not isinstance(prior, dict) or (prior.get("primary"), prior.get("secondary")) != (p, s):
             prior = None  # Never reuse another pairing's snapshot.
-        data, status, err = fetch(p, s, prior.get("generatedAtMs") if prior else None)
+        data, status, err = fetch(p, s, prior.get("generatedAtMs") if prior else None, prior)
         if data:
             data["checkedAtUTC"] = now
             if prior is None or data["generatedAtMs"] != prior["generatedAtMs"]:
