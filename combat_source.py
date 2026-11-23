@@ -6,6 +6,7 @@ Never replace a verified snapshot with a response carrying an older generation t
 """
 import json
 import time
+from html.parser import HTMLParser
 from datetime import datetime, timezone
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -13,6 +14,75 @@ from urllib.request import Request, urlopen
 MAX_FRESH_AGE_HOURS = 8
 ENDPOINT = "https://rokbattles.com/proxy/v2/global/combat-lab"
 
+
+
+class _FlightScripts(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.in_script = False
+        self.scripts = []
+    def handle_starttag(self, tag, attrs):
+        self.in_script = tag == "script"
+    def handle_endtag(self, tag):
+        if tag == "script":
+            self.in_script = False
+    def handle_data(self, data):
+        if self.in_script and "self.__next_f.push(" in data and "generatedAtMs" in data:
+            self.scripts.append(data)
+
+
+def parse_page_snapshot(html, primary, secondary):
+    """Read the exact 7d/Open field summary embedded in Next.js Flight HTML."""
+    finder = _FlightScripts()
+    finder.feed(html)
+    for script in finder.scripts:
+        start = script.find("self.__next_f.push(")
+        raw = script[start + len("self.__next_f.push("):].rstrip()
+        if not raw.endswith(")"):
+            continue
+        flight = json.loads(raw[:-1])
+        if not isinstance(flight, list) or len(flight) < 2 or not isinstance(flight[1], str):
+            continue
+        payload = flight[1]
+        if ":" not in payload:
+            continue
+        tree = json.loads(payload.split(":", 1)[1])
+        if not isinstance(tree, list) or len(tree) < 4 or not isinstance(tree[3], dict):
+            continue
+        data = tree[3].get("data", {})
+        pairing = data.get("pairing", {})
+        if (pairing.get("primaryCommanderId"), pairing.get("secondaryCommanderId")) != (primary, secondary):
+            continue
+        summary = data["ranges"]["7d"]["scenarios"]["openField"]["summary"]
+        stamp = int(data["generatedAtMs"])
+        if stamp <= 0:
+            raise ValueError("Invalid site generation timestamp")
+        gained, lost = int(summary["killPointsGained"]), int(summary["killPointsLost"])
+        trade = round(gained / lost * 100, 4) if lost else (100.0 if not gained else None)
+        return {
+            "generatedAtMs": stamp,
+            "generatedAtUTC": datetime.fromtimestamp(stamp / 1000, timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+            "primary": primary, "secondary": secondary,
+            "battles": int(summary["battles"]),
+            "uniqueGovernors": int(summary["uniqueGovernors"]),
+            "killPointsGained": gained, "killPointsLost": lost,
+            "tradePercent": trade,
+            "dps": round(float(summary["dps"]), 3),
+            "sps": round(float(summary["sps"]), 3),
+            "tps": round(float(summary["tps"]), 3),
+            "hps": round(float(summary["hps"]), 3),
+        }
+    raise ValueError("No matching 7d/Open field Next.js data found")
+
+
+def fetch_page_snapshot(primary, secondary):
+    url = "https://rokbattles.com/combat-lab?" + urlencode({"primary": primary, "secondary": secondary})
+    request = Request(url, headers={"User-Agent": "Mozilla/5.0 (compatible; RoKCombatTradesMonitor/4.0)", "Accept": "text/html", "Cache-Control": "no-cache"})
+    with urlopen(request, timeout=35) as response:
+        if response.status != 200:
+            raise ValueError(f"HTML HTTP {response.status}")
+        html = response.read(8 * 1024 * 1024).decode("utf-8")
+    return parse_page_snapshot(html, primary, secondary)
 
 def site_age_hours(generated_ms):
     return max(0.0, (time.time() * 1000 - generated_ms) / 3_600_000)
@@ -31,6 +101,14 @@ def fetch_snapshot(primary, secondary, previous_generated_ms, parser, previous_s
     """
     issues = []
     best = None
+    try:
+        page_snapshot = fetch_page_snapshot(primary, secondary)
+        if previous_generated_ms is None or page_snapshot['generatedAtMs'] >= previous_generated_ms:
+            status = 'new' if previous_generated_ms is None or page_snapshot['generatedAtMs'] > previous_generated_ms else ('revised' if isinstance(previous_snapshot, dict) and any(page_snapshot.get(k) != previous_snapshot.get(k) for k in page_snapshot) else 'unchanged')
+            return page_snapshot, status, None
+        issues.append('HTML page snapshot older than stored data')
+    except Exception as exc:
+        issues.append(f'HTML source: {type(exc).__name__}: {str(exc)[:160]}')
     previous_core = ({k: v for k, v in previous_snapshot.items() if k not in ("checkedAtUTC",)}
                      if isinstance(previous_snapshot, dict) else None)
     for attempt in range(3):
