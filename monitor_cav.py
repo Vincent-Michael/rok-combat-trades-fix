@@ -85,9 +85,9 @@ def parse_payload(payload, primary, secondary):
     }
 
 
-def fetch(primary, secondary, previous_generated_ms=None):
+def fetch(primary, secondary, previous_generated_ms=None, previous_snapshot=None):
     """Fetch only verified 7d/Open Field data using shared retry/freshness logic."""
-    return fetch_snapshot(primary, secondary, previous_generated_ms, parse_payload)
+    return fetch_snapshot(primary, secondary, previous_generated_ms, parse_payload, previous_snapshot)
 
 
 def fmt_num(value, digits=0):
