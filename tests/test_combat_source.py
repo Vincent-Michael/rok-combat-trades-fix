@@ -30,7 +30,7 @@ def parser(payload, primary, secondary):
 
 class SourceFetchTests(unittest.TestCase):
     def check(self, values, previous):
-        with patch("combat_source.urlopen", side_effect=[
+        with patch("combat_source.fetch_page_snapshot", side_effect=ValueError("fixture has no HTML")) as page_mock, patch("combat_source.urlopen", side_effect=[
             FakeResponse(v) if isinstance(v, int) else v for v in values
         ]) as mocked, patch("combat_source.time.sleep"):
             result = fetch_snapshot(595, 621, previous, parser)
