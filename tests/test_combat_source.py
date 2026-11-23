@@ -4,7 +4,7 @@ import time
 import unittest
 from unittest.mock import patch
 
-from combat_source import fetch_snapshot, is_fresh, save_run_status, status_label
+from combat_source import fetch_snapshot, is_fresh, save_run_status, status_label, parse_page_snapshot
 
 
 class FakeResponse:
@@ -35,6 +35,22 @@ class SourceFetchTests(unittest.TestCase):
         ]) as mocked, patch("combat_source.time.sleep"):
             result = fetch_snapshot(595, 621, previous, parser)
         return result, mocked.call_count
+
+    def test_nextjs_page_matches_weighted_trade(self):
+        summary = {"battles": 1044316, "uniqueGovernors": 4733,
+                   "killPointsGained": 18849988023, "killPointsLost": 13507127397,
+                   "weightedTradePercent": 139.55586164965524,
+                   "dps": 458.42098323560936, "sps": 76.39694681958183,
+                   "tps": 54.1651927972214, "hps": 6.171207375831811}
+        data = {"generatedAtMs": 1795393831236,
+                "pairing": {"primaryCommanderId": 595, "secondaryCommanderId": 621},
+                "ranges": {"7d": {"scenarios": {"openField": {"summary": summary}}}}}
+        flight = "a:" + json.dumps(["$", "$L2d", None, {"data": data}])
+        html = "<script>self.__next_f.push(" + json.dumps([1, flight]) + ")</script>"
+        result = parse_page_snapshot(html, 595, 621)
+        self.assertEqual(result["battles"], 1044316)
+        self.assertEqual(result["tradePercent"], 139.5559)
+        self.assertEqual(result["dps"], 458.421)
 
     def test_new_generation_skips_retries_when_fresh(self):
         now = int(time.time() * 1000)
