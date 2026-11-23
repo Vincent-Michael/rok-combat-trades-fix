@@ -22,8 +22,8 @@ def is_fresh(snapshot):
     return bool(snapshot and site_age_hours(snapshot["generatedAtMs"]) <= MAX_FRESH_AGE_HOURS)
 
 
-def fetch_snapshot(primary, secondary, previous_generated_ms, parser):
-    """Return (verified snapshot, status, error). Status: new, unchanged, error.
+def fetch_snapshot(primary, secondary, previous_generated_ms, parser, previous_snapshot=None):
+    """Return (verified snapshot, status, error). Status: new, revised, unchanged, error.
 
     Try up to three requests with unique cache-busting URLs after the first.
     A stale source timestamp or unchanged generation time triggers retries, but
@@ -31,6 +31,8 @@ def fetch_snapshot(primary, secondary, previous_generated_ms, parser):
     """
     issues = []
     best = None
+    previous_core = ({k: v for k, v in previous_snapshot.items() if k not in ("checkedAtUTC",)}
+                     if isinstance(previous_snapshot, dict) else None)
     for attempt in range(3):
         params = {"primary": primary, "secondary": secondary}
         if attempt:
@@ -67,7 +69,8 @@ def fetch_snapshot(primary, secondary, previous_generated_ms, parser):
 
     if best is not None:
         changed = previous_generated_ms is None or best["generatedAtMs"] > previous_generated_ms
-        return best, "new" if changed else "unchanged", None
+        revised = (not changed and previous_core is not None and best != previous_core)
+        return best, "new" if changed else "revised" if revised else "unchanged", None
     return None, "error", "; ".join(issues) or "No valid 7d/openField response"
 
 
@@ -77,6 +80,8 @@ def status_label(status, snapshot):
     suffix = "STALE (>8h)" if not is_fresh(snapshot) else "within 8h"
     if status == "error":
         return f"Retained last verified snapshot; retrieval failed; {suffix}"
+    if status == "revised":
+        return f"Source values REVISED at same generation timestamp; {suffix}"
     if status == "unchanged":
         return f"Site-generated snapshot UNCHANGED; {suffix}"
     return f"Distinct site-generated snapshot; {suffix}"
@@ -86,6 +91,7 @@ def save_run_status(store, results):
     """Track retrieval, distinct generation, source age, and errors separately."""
     store["lastRunSuccessCount"] = sum(bool(x["ok"]) for x in results.values())
     store["lastRunNewCount"] = sum(x["status"] == "new" for x in results.values())
+    store["lastRunRevisedCount"] = sum(x["status"] == "revised" for x in results.values())
     store["lastRunUnchangedCount"] = sum(x["status"] == "unchanged" for x in results.values())
     store["lastRunFailureCount"] = sum(x["status"] == "error" for x in results.values())
     store["lastRunFreshCount"] = sum(bool(x["ok"] and is_fresh(x["snapshot"])) for x in results.values())
@@ -94,7 +100,7 @@ def save_run_status(store, results):
     store["lastWarnings"] = {
         key: status_label(x["status"], x["snapshot"])
         for key, x in results.items()
-        if x["status"] == "unchanged" or (x["snapshot"] and not is_fresh(x["snapshot"]))
+        if x["status"] in ("unchanged", "revised") or (x["snapshot"] and not is_fresh(x["snapshot"]))
     }
     store["lastRunStatuses"] = {key: x["status"] for key, x in results.items()}
 
@@ -104,8 +110,9 @@ def report_status_summary(results):
     ok = sum(bool(x["ok"]) for x in results.values())
     new = sum(x["status"] == "new" for x in results.values())
     unchanged = sum(x["status"] == "unchanged" for x in results.values())
+    revised = sum(x["status"] == "revised" for x in results.values())
     fresh = sum(bool(x["ok"] and is_fresh(x["snapshot"])) for x in results.values())
     stale = sum(bool(x["snapshot"] and not is_fresh(x["snapshot"])) for x in results.values())
     return (f"API checks: {ok}/{total}; distinct site snapshots: {new}/{total}; "
-            f"unchanged: {unchanged}/{total}; fresh site timestamps (<=8h): {fresh}/{total}; "
+            f"revised at same timestamp: {revised}/{total}; unchanged: {unchanged}/{total}; fresh site timestamps (<=8h): {fresh}/{total}; "
             f"stale site timestamps: {stale}/{total}")
