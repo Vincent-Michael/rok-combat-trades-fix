@@ -50,8 +50,9 @@ def main() -> None:
         troop: completed_in_window(troop, count, window)
         for troop, count in EXPECTED_COUNTS.items()
     }
-    collect = not all(checks.values())
-    print(f"Berlin reporting window: {window}; completed monitors: {checks}; collect={collect}")
+    force_refresh = os.environ.get('FORCE_REFRESH', 'false').strip().lower() in ('true', '1', 'yes')
+    collect = force_refresh or not all(checks.values())
+    print(f"Berlin reporting window: {window}; completed monitors: {checks}; force_refresh={force_refresh}; collect={collect}")
     with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
         output.write(f"collect={'true' if collect else 'false'}\n")
 
