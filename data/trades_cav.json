@@ -14,7 +14,7 @@
       "sps": 73.308,
       "tps": 48.056,
       "hps": 1.831,
-      "checkedAtUTC": "2026-11-22T17:14:18Z"
+      "checkedAtUTC": "2026-11-23T00:51:41Z"
     },
     "619-575": {
       "generatedAtMs": 1795364964678,
@@ -30,7 +30,7 @@
       "sps": 67.281,
       "tps": 53.666,
       "hps": 4.502,
-      "checkedAtUTC": "2026-11-22T17:14:18Z"
+      "checkedAtUTC": "2026-11-23T00:51:41Z"
     },
     "540-619": {
       "generatedAtMs": 1795364964678,
@@ -46,7 +46,7 @@
       "sps": 76.651,
       "tps": 61.386,
       "hps": 4.02,
-      "checkedAtUTC": "2026-11-22T17:14:18Z"
+      "checkedAtUTC": "2026-11-23T00:51:41Z"
     },
     "540-579": {
       "generatedAtMs": 1795364964678,
@@ -62,7 +62,7 @@
       "sps": 47.468,
       "tps": 90.68,
       "hps": 146.073,
-      "checkedAtUTC": "2026-11-22T17:14:18Z"
+      "checkedAtUTC": "2026-11-23T00:51:41Z"
     },
     "540-576": {
       "generatedAtMs": 1795364964678,
@@ -78,7 +78,7 @@
       "sps": 59.704,
       "tps": 74.928,
       "hps": 5.096,
-      "checkedAtUTC": "2026-11-22T17:14:18Z"
+      "checkedAtUTC": "2026-11-23T00:51:41Z"
     },
     "575-579": {
       "generatedAtMs": 1795364964678,
@@ -94,7 +94,7 @@
       "sps": 50.794,
       "tps": 61.439,
       "hps": 266.109,
-      "checkedAtUTC": "2026-11-22T17:14:18Z"
+      "checkedAtUTC": "2026-11-23T00:51:41Z"
     },
     "575-616": {
       "generatedAtMs": 1795364964678,
@@ -110,7 +110,7 @@
       "sps": 50.124,
       "tps": 53.979,
       "hps": 42.691,
-      "checkedAtUTC": "2026-11-22T17:14:18Z"
+      "checkedAtUTC": "2026-11-23T00:51:41Z"
     },
     "575-620": {
       "generatedAtMs": 1795364964678,
@@ -126,7 +126,7 @@
       "sps": 56.864,
       "tps": 61.066,
       "hps": 7.42,
-      "checkedAtUTC": "2026-11-22T17:14:18Z"
+      "checkedAtUTC": "2026-11-23T00:51:41Z"
     },
     "540-575": {
       "generatedAtMs": 1795364964678,
@@ -142,7 +142,7 @@
       "sps": 62.192,
       "tps": 88.323,
       "hps": 4.883,
-      "checkedAtUTC": "2026-11-22T17:14:18Z"
+      "checkedAtUTC": "2026-11-23T00:51:41Z"
     },
     "620-575": {
       "generatedAtMs": 1795364964678,
@@ -158,7 +158,7 @@
       "sps": 59.823,
       "tps": 53.995,
       "hps": 3.061,
-      "checkedAtUTC": "2026-11-22T17:14:18Z"
+      "checkedAtUTC": "2026-11-23T00:51:41Z"
     },
     "620-619": {
       "generatedAtMs": 1795364964678,
@@ -174,7 +174,7 @@
       "sps": 88.537,
       "tps": 52.394,
       "hps": 0.305,
-      "checkedAtUTC": "2026-11-22T17:14:18Z"
+      "checkedAtUTC": "2026-11-23T00:51:41Z"
     }
   },
   "history": [
@@ -1489,26 +1489,38 @@
     }
   ],
   "scenario": "7d/openField",
-  "lastCheckedAtUTC": "2026-11-22T17:14:18Z",
+  "lastCheckedAtUTC": "2026-11-23T00:51:41Z",
   "lastRunSuccessCount": 11,
   "lastErrors": {},
-  "lastRunNewCount": 11,
-  "lastRunUnchangedCount": 0,
+  "lastRunNewCount": 0,
+  "lastRunUnchangedCount": 11,
   "lastRunFailureCount": 0,
-  "lastRunFreshCount": 11,
-  "lastRunStaleCount": 0,
-  "lastWarnings": {},
+  "lastRunFreshCount": 0,
+  "lastRunStaleCount": 11,
+  "lastWarnings": {
+    "619-620": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "619-575": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "540-619": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "540-575": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "540-579": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "540-576": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "575-579": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "575-616": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "575-620": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "620-575": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "620-619": "Site-generated snapshot UNCHANGED; STALE (>8h)"
+  },
   "lastRunStatuses": {
-    "619-620": "new",
-    "619-575": "new",
-    "540-619": "new",
-    "540-575": "new",
-    "540-579": "new",
-    "540-576": "new",
-    "575-579": "new",
-    "575-616": "new",
-    "575-620": "new",
-    "620-575": "new",
-    "620-619": "new"
+    "619-620": "unchanged",
+    "619-575": "unchanged",
+    "540-619": "unchanged",
+    "540-575": "unchanged",
+    "540-579": "unchanged",
+    "540-576": "unchanged",
+    "575-579": "unchanged",
+    "575-616": "unchanged",
+    "575-620": "unchanged",
+    "620-575": "unchanged",
+    "620-619": "unchanged"
   }
 }

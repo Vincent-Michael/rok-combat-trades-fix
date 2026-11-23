@@ -8,7 +8,7 @@
 <text x="53" y="88" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Qin Shi Huang / Yi Seong-Gye</text>
 <text x="1172" y="88" text-anchor="end" fill="#22c55e" font-family="Arial,sans-serif" font-weight="bold" font-size="22">147.03%</text>
 <rect x="328" y="117" width="660" height="32" rx="5" fill="#28374d"/>
-<rect x="328" y="117" width="411.49" height="32" rx="5" fill="#22c55e"/>
+<rect x="328" y="117" width="411.50" height="32" rx="5" fill="#22c55e"/>
 <text x="20" y="140" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">2</text>
 <text x="53" y="140" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Qin Shi Huang / Zhuge Liang</text>
 <text x="1172" y="140" text-anchor="end" fill="#22c55e" font-family="Arial,sans-serif" font-weight="bold" font-size="22">124.70%</text>
@@ -33,7 +33,7 @@
 <text x="53" y="348" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Alp Arslan / Zhuge Liang</text>
 <text x="1172" y="348" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">59.66%</text>
 <rect x="328" y="377" width="660" height="32" rx="5" fill="#28374d"/>
-<rect x="328" y="377" width="195.91" height="32" rx="5" fill="#ef4444"/>
+<rect x="328" y="377" width="195.90" height="32" rx="5" fill="#ef4444"/>
 <text x="20" y="400" fill="#9baec9" font-family="Arial,sans-serif" font-size="18">7</text>
 <text x="53" y="400" fill="#f1f5f9" font-family="Arial,sans-serif" font-size="19">Alp Arslan / Hermann</text>
 <text x="1172" y="400" text-anchor="end" fill="#ef4444" font-family="Arial,sans-serif" font-weight="bold" font-size="22">59.36%</text>
