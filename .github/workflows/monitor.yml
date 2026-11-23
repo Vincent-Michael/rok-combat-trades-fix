@@ -4,6 +4,12 @@ name: RoK Combat Trades
 # at 01:50, 09:50 and 17:50 Europe/Berlin.
 on:
   workflow_dispatch:
+    inputs:
+      force_refresh:
+        description: 'Force re-collection for manual tests (bypass completed-window gate)'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -26,6 +32,8 @@ jobs:
 
       - name: Skip completed reporting windows
         id: gate
+        env:
+          FORCE_REFRESH: ${{ inputs.force_refresh || 'false' }}
         run: python3 scripts/should_collect.py
 
       - uses: actions/setup-python@v6
