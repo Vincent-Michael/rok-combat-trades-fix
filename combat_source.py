@@ -58,7 +58,7 @@ def parse_page_snapshot(html, primary, secondary):
         if stamp <= 0:
             raise ValueError("Invalid site generation timestamp")
         gained, lost = int(summary["killPointsGained"]), int(summary["killPointsLost"])
-        trade = round(gained / lost * 100, 4) if lost else (100.0 if not gained else None)
+        trade = round(float(summary["weightedTradePercent"]), 4)
         return {
             "generatedAtMs": stamp,
             "generatedAtUTC": datetime.fromtimestamp(stamp / 1000, timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
