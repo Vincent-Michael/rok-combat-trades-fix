@@ -14,7 +14,7 @@
       "sps": 61.189,
       "tps": 41.377,
       "hps": 1.82,
-      "checkedAtUTC": "2026-11-23T08:18:59Z"
+      "checkedAtUTC": "2026-11-23T08:51:04Z"
     },
     "509-179": {
       "generatedAtMs": 1795393831236,
@@ -30,7 +30,7 @@
       "sps": 56.578,
       "tps": 44.972,
       "hps": 2.192,
-      "checkedAtUTC": "2026-11-23T08:18:59Z"
+      "checkedAtUTC": "2026-11-23T08:51:04Z"
     },
     "611-179": {
       "generatedAtMs": 1795393831236,
@@ -46,7 +46,7 @@
       "sps": 45.368,
       "tps": 74.779,
       "hps": 55.498,
-      "checkedAtUTC": "2026-11-23T08:18:59Z"
+      "checkedAtUTC": "2026-11-23T08:51:04Z"
     },
     "611-6": {
       "generatedAtMs": 1795393831236,
@@ -62,7 +62,7 @@
       "sps": 52.945,
       "tps": 75.744,
       "hps": 62.963,
-      "checkedAtUTC": "2026-11-23T08:18:59Z"
+      "checkedAtUTC": "2026-11-23T08:51:04Z"
     },
     "611-187": {
       "generatedAtMs": 1795393831236,
@@ -78,7 +78,7 @@
       "sps": 42.273,
       "tps": 69.927,
       "hps": 55.392,
-      "checkedAtUTC": "2026-11-23T08:18:59Z"
+      "checkedAtUTC": "2026-11-23T08:51:04Z"
     },
     "187-179": {
       "generatedAtMs": 1795393831236,
@@ -94,7 +94,7 @@
       "sps": 41.105,
       "tps": 63.713,
       "hps": 2.466,
-      "checkedAtUTC": "2026-11-23T08:18:59Z"
+      "checkedAtUTC": "2026-11-23T08:51:04Z"
     },
     "187-611": {
       "generatedAtMs": 1795393831236,
@@ -110,7 +110,7 @@
       "sps": 44.313,
       "tps": 64.32,
       "hps": 69.254,
-      "checkedAtUTC": "2026-11-23T08:18:59Z"
+      "checkedAtUTC": "2026-11-23T08:51:04Z"
     },
     "179-187": {
       "generatedAtMs": 1795393831236,
@@ -126,7 +126,7 @@
       "sps": 41.577,
       "tps": 78.701,
       "hps": 2.358,
-      "checkedAtUTC": "2026-11-23T08:18:59Z"
+      "checkedAtUTC": "2026-11-23T08:51:04Z"
     },
     "179-459": {
       "generatedAtMs": 1795393831236,
@@ -142,7 +142,7 @@
       "sps": 36.299,
       "tps": 68.471,
       "hps": 2.075,
-      "checkedAtUTC": "2026-11-23T08:18:59Z"
+      "checkedAtUTC": "2026-11-23T08:51:04Z"
     }
   },
   "history": [
@@ -1066,25 +1066,35 @@
     }
   ],
   "scenario": "7d/openField",
-  "lastCheckedAtUTC": "2026-11-23T08:18:59Z",
+  "lastCheckedAtUTC": "2026-11-23T08:51:04Z",
   "lastRunSuccessCount": 9,
   "lastErrors": {},
-  "lastRunNewCount": 9,
-  "lastRunUnchangedCount": 0,
+  "lastRunNewCount": 0,
+  "lastRunUnchangedCount": 9,
   "lastRunFailureCount": 0,
-  "lastRunFreshCount": 9,
-  "lastRunStaleCount": 0,
-  "lastWarnings": {},
+  "lastRunFreshCount": 0,
+  "lastRunStaleCount": 9,
+  "lastWarnings": {
+    "509-6": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "509-179": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "611-179": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "611-6": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "611-187": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "187-179": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "187-611": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "179-187": "Site-generated snapshot UNCHANGED; STALE (>8h)",
+    "179-459": "Site-generated snapshot UNCHANGED; STALE (>8h)"
+  },
   "lastRunStatuses": {
-    "509-6": "new",
-    "509-179": "new",
-    "611-179": "new",
-    "611-6": "new",
-    "611-187": "new",
-    "187-179": "new",
-    "187-611": "new",
-    "179-187": "new",
-    "179-459": "new"
+    "509-6": "unchanged",
+    "509-179": "unchanged",
+    "611-179": "unchanged",
+    "611-6": "unchanged",
+    "611-187": "unchanged",
+    "187-179": "unchanged",
+    "187-611": "unchanged",
+    "179-187": "unchanged",
+    "179-459": "unchanged"
   },
   "lastRunRevisedCount": 0
 }
