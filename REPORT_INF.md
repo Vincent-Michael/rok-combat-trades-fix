@@ -1,7 +1,7 @@
 # RoK Combat Lab — Infantry Trade Report
 
-**Workflow checked UTC:** 2026-11-24T17:15:33Z  
-**API site-generated UTC:** 2026-11-24 16:32 UTC  
+**Workflow checked UTC:** 2026-11-25T01:15:37Z  
+**API site-generated UTC:** 2026-11-25 00:32 UTC  
 **Successful monitor checks:** 11/11  
 **Source verification:** API checks: 11/11; distinct site snapshots: 11/11; revised at same timestamp: 0/11; unchanged: 0/11; fresh site timestamps (<=8h): 11/11; stale site timestamps: 0/11  
 **Fresh site snapshots (age <= 8h):** 11/11  
@@ -18,19 +18,19 @@
 
 | Rank | Commander Pairing | Trade % | Δ pp | Reports | Site-generated UTC | Source status |
 |---:|---|---:|---:|---:|---|---|
-| 1 | [Sun Tzu / Yi Do](https://rokbattles.com/combat-lab?primary=595&secondary=621) | 137.37% | -0.14 | 1,402,491 | 2026-11-24 16:32 UTC | Distinct site-generated snapshot; within 8h |
-| 2 | [Sun Tzu / Ivar](https://rokbattles.com/combat-lab?primary=595&secondary=596) | 117.02% | -0.17 | 442,361 | 2026-11-24 16:32 UTC | Distinct site-generated snapshot; within 8h |
-| 3 | [Sun Tzu / Bai Qi](https://rokbattles.com/combat-lab?primary=595&secondary=545) | 102.34% | -0.17 | 2,507,919 | 2026-11-24 16:32 UTC | Distinct site-generated snapshot; within 8h |
-| 4 | [Yi Do / Bai Qi](https://rokbattles.com/combat-lab?primary=621&secondary=545) | 99.79% | -0.26 | 128,141 | 2026-11-24 16:32 UTC | Distinct site-generated snapshot; within 8h |
-| 5 | [Bai Qi / Yi Do](https://rokbattles.com/combat-lab?primary=545&secondary=621) | 98.39% | +0.99 | 138,548 | 2026-11-24 16:32 UTC | Distinct site-generated snapshot; within 8h |
-| 6 | [Sun Tzu / Liu Che](https://rokbattles.com/combat-lab?primary=595&secondary=185) | 94.84% | +0.19 | 616,733 | 2026-11-24 16:32 UTC | Distinct site-generated snapshot; within 8h |
-| 7 | [Yi Do / Liu Che](https://rokbattles.com/combat-lab?primary=621&secondary=185) | 92.92% | -0.31 | 1,724,568 | 2026-11-24 16:32 UTC | Distinct site-generated snapshot; within 8h |
-| 8 | [Yi Do / Ivar](https://rokbattles.com/combat-lab?primary=621&secondary=596) | 91.21% | -0.04 | 10,410 | 2026-11-24 16:32 UTC | Distinct site-generated snapshot; within 8h |
-| 9 | [Bai Qi / Liu Che](https://rokbattles.com/combat-lab?primary=545&secondary=185) | 78.84% | -0.10 | 1,362,327 | 2026-11-24 16:32 UTC | Distinct site-generated snapshot; within 8h |
-| 10 | [Sun Tzu / Vercingetorix](https://rokbattles.com/combat-lab?primary=595&secondary=616) | 73.95% | -0.01 | 28,599 | 2026-11-24 16:32 UTC | Distinct site-generated snapshot; within 8h |
-| 11 | [Bai Qi / Vercingetorix](https://rokbattles.com/combat-lab?primary=545&secondary=616) | 61.39% | -0.05 | 72,937 | 2026-11-24 16:32 UTC | Distinct site-generated snapshot; within 8h |
+| 1 | [Sun Tzu / Yi Do](https://rokbattles.com/combat-lab?primary=595&secondary=621) | 136.16% | -1.21 | 1,412,808 | 2026-11-25 00:32 UTC | Distinct site-generated snapshot; within 8h |
+| 2 | [Sun Tzu / Ivar](https://rokbattles.com/combat-lab?primary=595&secondary=596) | 116.71% | -0.31 | 399,678 | 2026-11-25 00:32 UTC | Distinct site-generated snapshot; within 8h |
+| 3 | [Sun Tzu / Bai Qi](https://rokbattles.com/combat-lab?primary=595&secondary=545) | 102.03% | -0.30 | 2,359,485 | 2026-11-25 00:32 UTC | Distinct site-generated snapshot; within 8h |
+| 4 | [Yi Do / Bai Qi](https://rokbattles.com/combat-lab?primary=621&secondary=545) | 98.35% | -1.43 | 131,074 | 2026-11-25 00:32 UTC | Distinct site-generated snapshot; within 8h |
+| 5 | [Bai Qi / Yi Do](https://rokbattles.com/combat-lab?primary=545&secondary=621) | 97.42% | -0.98 | 139,095 | 2026-11-25 00:32 UTC | Distinct site-generated snapshot; within 8h |
+| 6 | [Sun Tzu / Liu Che](https://rokbattles.com/combat-lab?primary=595&secondary=185) | 95.35% | +0.51 | 578,328 | 2026-11-25 00:32 UTC | Distinct site-generated snapshot; within 8h |
+| 7 | [Yi Do / Liu Che](https://rokbattles.com/combat-lab?primary=621&secondary=185) | 92.24% | -0.68 | 1,631,066 | 2026-11-25 00:32 UTC | Distinct site-generated snapshot; within 8h |
+| 8 | [Yi Do / Ivar](https://rokbattles.com/combat-lab?primary=621&secondary=596) | 91.42% | +0.22 | 10,133 | 2026-11-25 00:32 UTC | Distinct site-generated snapshot; within 8h |
+| 9 | [Bai Qi / Liu Che](https://rokbattles.com/combat-lab?primary=545&secondary=185) | 78.75% | -0.09 | 1,291,534 | 2026-11-25 00:32 UTC | Distinct site-generated snapshot; within 8h |
+| 10 | [Sun Tzu / Vercingetorix](https://rokbattles.com/combat-lab?primary=595&secondary=616) | 68.34% | -5.61 | 23,512 | 2026-11-25 00:32 UTC | Distinct site-generated snapshot; within 8h |
+| 11 | [Bai Qi / Vercingetorix](https://rokbattles.com/combat-lab?primary=545&secondary=616) | 61.39% | +0.00 | 70,794 | 2026-11-25 00:32 UTC | Distinct site-generated snapshot; within 8h |
 
-Site-generated: 2026-11-24 16:32 UTC · Retrieved: 11/11 · Fresh site snapshots: 11/11 · Stale site snapshots: 0/11 · Retained after errors: 0 · Unavailable: 0.
+Site-generated: 2026-11-25 00:32 UTC · Retrieved: 11/11 · Fresh site snapshots: 11/11 · Stale site snapshots: 0/11 · Retained after errors: 0 · Unavailable: 0.
 
 ## Detailed Combat Statistics
 
@@ -38,22 +38,22 @@ KP Gained and KP Lost are in millions (M). DPS, SPS and TPS are per-second rates
 
 | Commander Pairing | KP Gained | KP Lost | DPS | SPS | TPS |
 |---|---:|---:|---:|---:|---:|
-| Sun Tzu / Yi Do | 24,726.662M | 18,000.633M | 452.559 | 74.776 | 53.892 |
-| Sun Tzu / Ivar | 6,962.977M | 5,950.223M | 424.602 | 71.242 | 59.748 |
-| Sun Tzu / Bai Qi | 35,746.680M | 34,929.753M | 382.588 | 63.627 | 62.192 |
-| Yi Do / Bai Qi | 1,648.008M | 1,651.522M | 347.470 | 57.249 | 56.669 |
-| Bai Qi / Yi Do | 1,576.958M | 1,602.682M | 307.173 | 49.701 | 50.103 |
-| Sun Tzu / Liu Che | 7,883.894M | 8,312.953M | 365.913 | 57.379 | 60.484 |
-| Yi Do / Liu Che | 21,577.949M | 23,222.059M | 352.091 | 55.789 | 59.328 |
-| Yi Do / Ivar | 144.600M | 158.538M | 372.926 | 58.627 | 69.909 |
-| Bai Qi / Liu Che | 16,500.104M | 20,928.753M | 345.384 | 55.466 | 70.153 |
-| Sun Tzu / Vercingetorix | 301.495M | 407.709M | 278.291 | 46.251 | 60.859 |
-| Bai Qi / Vercingetorix | 790.989M | 1,288.566M | 288.599 | 46.284 | 74.137 |
+| Sun Tzu / Yi Do | 24,897.230M | 18,285.533M | 451.530 | 74.251 | 54.032 |
+| Sun Tzu / Ivar | 6,411.370M | 5,493.603M | 430.349 | 71.834 | 60.434 |
+| Sun Tzu / Bai Qi | 34,128.021M | 33,447.364M | 384.974 | 63.782 | 62.552 |
+| Yi Do / Bai Qi | 1,655.146M | 1,682.868M | 341.739 | 56.244 | 56.538 |
+| Bai Qi / Yi Do | 1,594.864M | 1,637.130M | 304.902 | 48.893 | 49.856 |
+| Sun Tzu / Liu Che | 7,545.731M | 7,913.869M | 368.784 | 57.591 | 60.406 |
+| Yi Do / Liu Che | 20,642.069M | 22,379.699M | 353.320 | 55.895 | 59.902 |
+| Yi Do / Ivar | 142.040M | 155.365M | 375.735 | 59.086 | 70.543 |
+| Bai Qi / Liu Che | 15,874.012M | 20,156.642M | 346.636 | 55.554 | 70.404 |
+| Sun Tzu / Vercingetorix | 250.909M | 367.160M | 278.524 | 45.510 | 64.969 |
+| Bai Qi / Vercingetorix | 777.210M | 1,266.050M | 289.479 | 46.330 | 74.230 |
 
 ## Key Findings
 
-**Best trade:** Sun Tzu / Yi Do at 137.37%. **Worst trade:** Bai Qi / Vercingetorix at 61.39%.
-**Largest dataset:** Sun Tzu / Bai Qi (2,507,919 reports). **Smallest dataset:** Yi Do / Ivar (10,410 reports; interpret cautiously).
-**Distinct-snapshot changes:** Sun Tzu / Yi Do -0.14 pp; Sun Tzu / Ivar -0.17 pp; Sun Tzu / Bai Qi -0.17 pp; Yi Do / Bai Qi -0.26 pp; Bai Qi / Yi Do +0.99 pp; Sun Tzu / Liu Che +0.19 pp; Yi Do / Liu Che -0.31 pp; Yi Do / Ivar -0.04 pp; Bai Qi / Liu Che -0.10 pp; Sun Tzu / Vercingetorix -0.01 pp; Bai Qi / Vercingetorix -0.05 pp.
+**Best trade:** Sun Tzu / Yi Do at 136.16%. **Worst trade:** Bai Qi / Vercingetorix at 61.39%.
+**Largest dataset:** Sun Tzu / Bai Qi (2,359,485 reports). **Smallest dataset:** Yi Do / Ivar (10,133 reports; interpret cautiously).
+**Distinct-snapshot changes:** Sun Tzu / Yi Do -1.21 pp; Sun Tzu / Ivar -0.31 pp; Sun Tzu / Bai Qi -0.30 pp; Yi Do / Bai Qi -1.43 pp; Bai Qi / Yi Do -0.98 pp; Sun Tzu / Liu Che +0.51 pp; Yi Do / Liu Che -0.68 pp; Yi Do / Ivar +0.22 pp; Bai Qi / Liu Che -0.09 pp; Sun Tzu / Vercingetorix -5.61 pp; Bai Qi / Vercingetorix +0.00 pp.
 
-**Source / monitor status:** [trades_inf.json](data/trades_inf.json) · [REPORT_INF.md](REPORT_INF.md) · Workflow checked: 2026-11-24T17:15:33Z · API generated: 2026-11-24 16:32 UTC · Retrievals: 11/11 · Fresh site data: 11/11 · Stale source: 0/11 · Historical data preserved; no 1-year baselines.
+**Source / monitor status:** [trades_inf.json](data/trades_inf.json) · [REPORT_INF.md](REPORT_INF.md) · Workflow checked: 2026-11-25T01:15:37Z · API generated: 2026-11-25 00:32 UTC · Retrievals: 11/11 · Fresh site data: 11/11 · Stale source: 0/11 · Historical data preserved; no 1-year baselines.
