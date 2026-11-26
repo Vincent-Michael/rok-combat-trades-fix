@@ -24,6 +24,7 @@ PAIRS = [
     ("Alp Arslan / Yi Seong-Gye", 611, 6),
     ("Alp Arslan / Hermann", 611, 187),
     ("Hermann / Zhuge Liang", 187, 179),
+    ("Hermann / Commander 186", 187, 186),
     ("Hermann / Alp Arslan", 187, 611),
     ("Zhuge Liang / Hermann", 179, 187),
     ("Zhuge Liang / Philip II", 179, 459),
