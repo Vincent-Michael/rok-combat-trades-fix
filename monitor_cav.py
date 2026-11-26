@@ -24,6 +24,7 @@ PAIRS = [
     ("Arthur Pendragon / Achilles", 540, 575),
     ("Arthur Pendragon / Gang Gamchan", 540, 579),
     ("Arthur Pendragon / Hector", 540, 576),
+    ("Arthur Pendragon / Vercingetorix", 540, 616),
     ("Achilles / Gang Gamchan", 575, 579),
     ("Achilles / Vercingetorix", 575, 616),
     ("Achilles / William Marshal", 575, 620),
