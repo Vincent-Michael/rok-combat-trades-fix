@@ -15,7 +15,7 @@
       "sps": 55.426,
       "tps": 56.909,
       "hps": 2.366,
-      "checkedAtUTC": "2026-11-26T17:05:22Z"
+      "checkedAtUTC": "2026-11-26T17:15:33Z"
     },
     "621-596": {
       "generatedAtMs": 1795710817911,
@@ -31,7 +31,7 @@
       "sps": 58.546,
       "tps": 73.542,
       "hps": 5.426,
-      "checkedAtUTC": "2026-11-26T17:05:22Z"
+      "checkedAtUTC": "2026-11-26T17:15:33Z"
     },
     "621-185": {
       "generatedAtMs": 1795710817911,
@@ -47,7 +47,7 @@
       "sps": 55.729,
       "tps": 59.986,
       "hps": 2.665,
-      "checkedAtUTC": "2026-11-26T17:05:22Z"
+      "checkedAtUTC": "2026-11-26T17:15:33Z"
     },
     "595-621": {
       "generatedAtMs": 1795710817911,
@@ -63,7 +63,7 @@
       "sps": 74.91,
       "tps": 54.259,
       "hps": 4.435,
-      "checkedAtUTC": "2026-11-26T17:05:22Z"
+      "checkedAtUTC": "2026-11-26T17:15:33Z"
     },
     "595-596": {
       "generatedAtMs": 1795710817911,
@@ -79,7 +79,7 @@
       "sps": 71.849,
       "tps": 61.198,
       "hps": 3.586,
-      "checkedAtUTC": "2026-11-26T17:05:22Z"
+      "checkedAtUTC": "2026-11-26T17:15:33Z"
     },
     "545-185": {
       "generatedAtMs": 1795710817911,
@@ -95,7 +95,7 @@
       "sps": 55.535,
       "tps": 70.235,
       "hps": 5.252,
-      "checkedAtUTC": "2026-11-26T17:05:22Z"
+      "checkedAtUTC": "2026-11-26T17:15:33Z"
     },
     "595-545": {
       "generatedAtMs": 1795710817911,
@@ -111,7 +111,7 @@
       "sps": 63.902,
       "tps": 62.392,
       "hps": 3.102,
-      "checkedAtUTC": "2026-11-26T17:05:22Z"
+      "checkedAtUTC": "2026-11-26T17:15:33Z"
     },
     "545-621": {
       "generatedAtMs": 1795710817911,
@@ -127,7 +127,7 @@
       "sps": 47.427,
       "tps": 50.414,
       "hps": 1.499,
-      "checkedAtUTC": "2026-11-26T17:05:22Z"
+      "checkedAtUTC": "2026-11-26T17:15:33Z"
     },
     "595-185": {
       "generatedAtMs": 1795710817911,
@@ -143,7 +143,7 @@
       "sps": 57.526,
       "tps": 60.6,
       "hps": 4.806,
-      "checkedAtUTC": "2026-11-26T17:05:22Z"
+      "checkedAtUTC": "2026-11-26T17:15:33Z"
     },
     "595-616": {
       "generatedAtMs": 1795710817911,
@@ -159,7 +159,7 @@
       "sps": 45.294,
       "tps": 69.744,
       "hps": 12.691,
-      "checkedAtUTC": "2026-11-26T17:05:22Z"
+      "checkedAtUTC": "2026-11-26T17:15:33Z"
     },
     "545-616": {
       "generatedAtMs": 1795710817911,
@@ -175,7 +175,7 @@
       "sps": 45.284,
       "tps": 75.014,
       "hps": 7.376,
-      "checkedAtUTC": "2026-11-26T17:05:22Z"
+      "checkedAtUTC": "2026-11-26T17:15:33Z"
     },
     "545-596": {
       "generatedAtMs": 1795710817911,
@@ -191,7 +191,7 @@
       "sps": 48.685,
       "tps": 85.343,
       "hps": 3.523,
-      "checkedAtUTC": "2026-11-26T17:05:22Z"
+      "checkedAtUTC": "2026-11-26T17:15:33Z"
     },
     "595-194": {
       "generatedAtMs": 1795710817911,
@@ -207,7 +207,7 @@
       "sps": 58.456,
       "tps": 65.002,
       "hps": 2.602,
-      "checkedAtUTC": "2026-11-26T17:05:22Z"
+      "checkedAtUTC": "2026-11-26T17:15:33Z"
     },
     "10-621": {
       "generatedAtMs": 1795710817911,
@@ -223,7 +223,7 @@
       "sps": 219.549,
       "tps": 154.795,
       "hps": 51.97,
-      "checkedAtUTC": "2026-11-26T17:05:22Z"
+      "checkedAtUTC": "2026-11-26T17:15:33Z"
     }
   },
   "history": [
@@ -3866,31 +3866,46 @@
       "checkedAtUTC": "2026-11-26T17:05:22Z"
     }
   ],
-  "lastCheckedAtUTC": "2026-11-26T17:05:22Z",
+  "lastCheckedAtUTC": "2026-11-26T17:15:33Z",
   "lastRunSuccessCount": 14,
   "lastErrors": {},
   "resetNote": "Manual reset requested; the next successful 7-day/Open field API run starts a new comparison baseline.",
   "lastRunFreshCount": 14,
   "lastRunStaleCount": 0,
-  "lastRunNewCount": 14,
-  "lastRunUnchangedCount": 0,
+  "lastRunNewCount": 0,
+  "lastRunUnchangedCount": 14,
   "lastRunFailureCount": 0,
-  "lastWarnings": {},
+  "lastWarnings": {
+    "10-621": "Site-generated snapshot UNCHANGED; within 8h",
+    "621-545": "Site-generated snapshot UNCHANGED; within 8h",
+    "621-596": "Site-generated snapshot UNCHANGED; within 8h",
+    "621-185": "Site-generated snapshot UNCHANGED; within 8h",
+    "595-621": "Site-generated snapshot UNCHANGED; within 8h",
+    "595-596": "Site-generated snapshot UNCHANGED; within 8h",
+    "545-596": "Site-generated snapshot UNCHANGED; within 8h",
+    "595-194": "Site-generated snapshot UNCHANGED; within 8h",
+    "545-185": "Site-generated snapshot UNCHANGED; within 8h",
+    "595-545": "Site-generated snapshot UNCHANGED; within 8h",
+    "545-621": "Site-generated snapshot UNCHANGED; within 8h",
+    "595-185": "Site-generated snapshot UNCHANGED; within 8h",
+    "595-616": "Site-generated snapshot UNCHANGED; within 8h",
+    "545-616": "Site-generated snapshot UNCHANGED; within 8h"
+  },
   "lastRunStatuses": {
-    "10-621": "new",
-    "621-545": "new",
-    "621-596": "new",
-    "621-185": "new",
-    "595-621": "new",
-    "595-596": "new",
-    "545-596": "new",
-    "595-194": "new",
-    "545-185": "new",
-    "595-545": "new",
-    "545-621": "new",
-    "595-185": "new",
-    "595-616": "new",
-    "545-616": "new"
+    "10-621": "unchanged",
+    "621-545": "unchanged",
+    "621-596": "unchanged",
+    "621-185": "unchanged",
+    "595-621": "unchanged",
+    "595-596": "unchanged",
+    "545-596": "unchanged",
+    "595-194": "unchanged",
+    "545-185": "unchanged",
+    "595-545": "unchanged",
+    "545-621": "unchanged",
+    "595-185": "unchanged",
+    "595-616": "unchanged",
+    "545-616": "unchanged"
   },
   "lastRunRevisedCount": 0
 }
