@@ -14,7 +14,7 @@
       "sps": 58.967,
       "tps": 39.191,
       "hps": 1.066,
-      "checkedAtUTC": "2026-11-26T09:16:09Z"
+      "checkedAtUTC": "2026-11-26T15:43:23Z"
     },
     "509-179": {
       "generatedAtMs": 1795682000371,
@@ -30,7 +30,7 @@
       "sps": 54.916,
       "tps": 44.493,
       "hps": 1.922,
-      "checkedAtUTC": "2026-11-26T09:16:09Z"
+      "checkedAtUTC": "2026-11-26T15:43:23Z"
     },
     "611-179": {
       "generatedAtMs": 1795682000371,
@@ -46,7 +46,7 @@
       "sps": 43.771,
       "tps": 73.729,
       "hps": 54.549,
-      "checkedAtUTC": "2026-11-26T09:16:09Z"
+      "checkedAtUTC": "2026-11-26T15:43:23Z"
     },
     "611-6": {
       "generatedAtMs": 1795682000371,
@@ -62,7 +62,7 @@
       "sps": 50.752,
       "tps": 93.197,
       "hps": 61.945,
-      "checkedAtUTC": "2026-11-26T09:16:09Z"
+      "checkedAtUTC": "2026-11-26T15:43:23Z"
     },
     "611-187": {
       "generatedAtMs": 1795682000371,
@@ -78,7 +78,7 @@
       "sps": 41.567,
       "tps": 68.942,
       "hps": 54.2,
-      "checkedAtUTC": "2026-11-26T09:16:09Z"
+      "checkedAtUTC": "2026-11-26T15:43:23Z"
     },
     "187-179": {
       "generatedAtMs": 1795682000371,
@@ -94,7 +94,7 @@
       "sps": 37.227,
       "tps": 60.328,
       "hps": 1.208,
-      "checkedAtUTC": "2026-11-26T09:16:09Z"
+      "checkedAtUTC": "2026-11-26T15:43:23Z"
     },
     "187-611": {
       "generatedAtMs": 1795682000371,
@@ -110,7 +110,7 @@
       "sps": 42.184,
       "tps": 63.437,
       "hps": 67.142,
-      "checkedAtUTC": "2026-11-26T09:16:09Z"
+      "checkedAtUTC": "2026-11-26T15:43:23Z"
     },
     "179-187": {
       "generatedAtMs": 1795682000371,
@@ -126,7 +126,7 @@
       "sps": 41.355,
       "tps": 78.636,
       "hps": 2.351,
-      "checkedAtUTC": "2026-11-26T09:16:09Z"
+      "checkedAtUTC": "2026-11-26T15:43:23Z"
     },
     "179-459": {
       "generatedAtMs": 1795682000371,
@@ -142,7 +142,23 @@
       "sps": 35.616,
       "tps": 65.442,
       "hps": 1.019,
-      "checkedAtUTC": "2026-11-26T09:16:09Z"
+      "checkedAtUTC": "2026-11-26T15:43:23Z"
+    },
+    "187-186": {
+      "generatedAtMs": 1795682000371,
+      "generatedAtUTC": "2026-11-26 08:33 UTC",
+      "primary": 187,
+      "secondary": 186,
+      "battles": 47246,
+      "uniqueGovernors": 92,
+      "killPointsGained": 365953164,
+      "killPointsLost": 676384650,
+      "tradePercent": 54.1043,
+      "dps": 220.51,
+      "sps": 34.833,
+      "tps": 63.083,
+      "hps": 0.759,
+      "checkedAtUTC": "2026-11-26T15:43:23Z"
     }
   },
   "history": [
@@ -2593,28 +2609,56 @@
       "tps": 65.442,
       "hps": 1.019,
       "checkedAtUTC": "2026-11-26T09:16:09Z"
+    },
+    {
+      "pairing": "Hermann / Ashurbanipal",
+      "generatedAtMs": 1795682000371,
+      "generatedAtUTC": "2026-11-26 08:33 UTC",
+      "primary": 187,
+      "secondary": 186,
+      "battles": 47246,
+      "uniqueGovernors": 92,
+      "killPointsGained": 365953164,
+      "killPointsLost": 676384650,
+      "tradePercent": 54.1043,
+      "dps": 220.51,
+      "sps": 34.833,
+      "tps": 63.083,
+      "hps": 0.759,
+      "checkedAtUTC": "2026-11-26T15:43:23Z"
     }
   ],
   "scenario": "7d/openField",
-  "lastCheckedAtUTC": "2026-11-26T09:16:09Z",
-  "lastRunSuccessCount": 9,
+  "lastCheckedAtUTC": "2026-11-26T15:43:23Z",
+  "lastRunSuccessCount": 10,
   "lastErrors": {},
-  "lastRunNewCount": 9,
-  "lastRunUnchangedCount": 0,
+  "lastRunNewCount": 1,
+  "lastRunUnchangedCount": 9,
   "lastRunFailureCount": 0,
-  "lastRunFreshCount": 9,
+  "lastRunFreshCount": 10,
   "lastRunStaleCount": 0,
-  "lastWarnings": {},
+  "lastWarnings": {
+    "509-6": "Site-generated snapshot UNCHANGED; within 8h",
+    "509-179": "Site-generated snapshot UNCHANGED; within 8h",
+    "611-179": "Site-generated snapshot UNCHANGED; within 8h",
+    "611-6": "Site-generated snapshot UNCHANGED; within 8h",
+    "611-187": "Site-generated snapshot UNCHANGED; within 8h",
+    "187-179": "Site-generated snapshot UNCHANGED; within 8h",
+    "187-611": "Site-generated snapshot UNCHANGED; within 8h",
+    "179-187": "Site-generated snapshot UNCHANGED; within 8h",
+    "179-459": "Site-generated snapshot UNCHANGED; within 8h"
+  },
   "lastRunStatuses": {
-    "509-6": "new",
-    "509-179": "new",
-    "611-179": "new",
-    "611-6": "new",
-    "611-187": "new",
-    "187-179": "new",
-    "187-611": "new",
-    "179-187": "new",
-    "179-459": "new"
+    "509-6": "unchanged",
+    "509-179": "unchanged",
+    "611-179": "unchanged",
+    "611-6": "unchanged",
+    "611-187": "unchanged",
+    "187-179": "unchanged",
+    "187-186": "new",
+    "187-611": "unchanged",
+    "179-187": "unchanged",
+    "179-459": "unchanged"
   },
   "lastRunRevisedCount": 0
 }

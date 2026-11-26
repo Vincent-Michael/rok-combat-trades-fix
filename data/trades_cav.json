@@ -14,7 +14,7 @@
       "sps": 68.906,
       "tps": 48.624,
       "hps": 1.627,
-      "checkedAtUTC": "2026-11-26T09:15:51Z"
+      "checkedAtUTC": "2026-11-26T15:43:01Z"
     },
     "619-575": {
       "generatedAtMs": 1795682000371,
@@ -30,7 +30,7 @@
       "sps": 66.052,
       "tps": 51.097,
       "hps": 3.31,
-      "checkedAtUTC": "2026-11-26T09:15:51Z"
+      "checkedAtUTC": "2026-11-26T15:43:01Z"
     },
     "540-619": {
       "generatedAtMs": 1795682000371,
@@ -46,7 +46,7 @@
       "sps": 73.456,
       "tps": 58.682,
       "hps": 2.561,
-      "checkedAtUTC": "2026-11-26T09:15:51Z"
+      "checkedAtUTC": "2026-11-26T15:43:01Z"
     },
     "540-579": {
       "generatedAtMs": 1795682000371,
@@ -62,7 +62,7 @@
       "sps": 49.012,
       "tps": 87.673,
       "hps": 148.055,
-      "checkedAtUTC": "2026-11-26T09:15:51Z"
+      "checkedAtUTC": "2026-11-26T15:43:01Z"
     },
     "540-576": {
       "generatedAtMs": 1795682000371,
@@ -78,7 +78,7 @@
       "sps": 57.536,
       "tps": 73.859,
       "hps": 4.846,
-      "checkedAtUTC": "2026-11-26T09:15:51Z"
+      "checkedAtUTC": "2026-11-26T15:43:01Z"
     },
     "575-579": {
       "generatedAtMs": 1795682000371,
@@ -94,7 +94,7 @@
       "sps": 48.925,
       "tps": 60.364,
       "hps": 267.646,
-      "checkedAtUTC": "2026-11-26T09:15:51Z"
+      "checkedAtUTC": "2026-11-26T15:43:01Z"
     },
     "575-616": {
       "generatedAtMs": 1795682000371,
@@ -110,7 +110,7 @@
       "sps": 46.121,
       "tps": 51.408,
       "hps": 25.919,
-      "checkedAtUTC": "2026-11-26T09:15:51Z"
+      "checkedAtUTC": "2026-11-26T15:43:01Z"
     },
     "575-620": {
       "generatedAtMs": 1795682000371,
@@ -126,7 +126,7 @@
       "sps": 54.27,
       "tps": 62.484,
       "hps": 8.204,
-      "checkedAtUTC": "2026-11-26T09:15:51Z"
+      "checkedAtUTC": "2026-11-26T15:43:01Z"
     },
     "540-575": {
       "generatedAtMs": 1795682000371,
@@ -142,7 +142,7 @@
       "sps": 63.318,
       "tps": 81.979,
       "hps": 2.904,
-      "checkedAtUTC": "2026-11-26T09:15:51Z"
+      "checkedAtUTC": "2026-11-26T15:43:01Z"
     },
     "620-575": {
       "generatedAtMs": 1795682000371,
@@ -158,7 +158,7 @@
       "sps": 59.979,
       "tps": 52.622,
       "hps": 2.211,
-      "checkedAtUTC": "2026-11-26T09:15:51Z"
+      "checkedAtUTC": "2026-11-26T15:43:01Z"
     },
     "620-619": {
       "generatedAtMs": 1795682000371,
@@ -174,7 +174,55 @@
       "sps": 85.924,
       "tps": 50.859,
       "hps": 0.136,
-      "checkedAtUTC": "2026-11-26T09:15:51Z"
+      "checkedAtUTC": "2026-11-26T15:43:01Z"
+    },
+    "103-575": {
+      "generatedAtMs": 1795682000371,
+      "generatedAtUTC": "2026-11-26 08:33 UTC",
+      "primary": 103,
+      "secondary": 575,
+      "battles": 138644,
+      "uniqueGovernors": 878,
+      "killPointsGained": 2087343181,
+      "killPointsLost": 2666867173,
+      "tradePercent": 78.2695,
+      "dps": 405.403,
+      "sps": 77.74,
+      "tps": 95.175,
+      "hps": 7.676,
+      "checkedAtUTC": "2026-11-26T15:43:01Z"
+    },
+    "619-616": {
+      "generatedAtMs": 1795682000371,
+      "generatedAtUTC": "2026-11-26 08:33 UTC",
+      "primary": 619,
+      "secondary": 616,
+      "battles": 19564,
+      "uniqueGovernors": 75,
+      "killPointsGained": 330685042,
+      "killPointsLost": 261055240,
+      "tradePercent": 126.6724,
+      "dps": 411.242,
+      "sps": 75.245,
+      "tps": 57.698,
+      "hps": 1.474,
+      "checkedAtUTC": "2026-11-26T15:43:01Z"
+    },
+    "540-616": {
+      "generatedAtMs": 1795682000371,
+      "generatedAtUTC": "2026-11-26 08:33 UTC",
+      "primary": 540,
+      "secondary": 616,
+      "battles": 79098,
+      "uniqueGovernors": 245,
+      "killPointsGained": 872182640,
+      "killPointsLost": 1394260250,
+      "tradePercent": 62.5552,
+      "dps": 323.18,
+      "sps": 48.626,
+      "tps": 77.183,
+      "hps": 1.556,
+      "checkedAtUTC": "2026-11-26T15:43:01Z"
     }
   },
   "history": [
@@ -3543,30 +3591,96 @@
       "tps": 50.859,
       "hps": 0.136,
       "checkedAtUTC": "2026-11-26T09:15:51Z"
+    },
+    {
+      "pairing": "Attila / Achilles",
+      "generatedAtMs": 1795682000371,
+      "generatedAtUTC": "2026-11-26 08:33 UTC",
+      "primary": 103,
+      "secondary": 575,
+      "battles": 138644,
+      "uniqueGovernors": 878,
+      "killPointsGained": 2087343181,
+      "killPointsLost": 2666867173,
+      "tradePercent": 78.2695,
+      "dps": 405.403,
+      "sps": 77.74,
+      "tps": 95.175,
+      "hps": 7.676,
+      "checkedAtUTC": "2026-11-26T15:43:01Z"
+    },
+    {
+      "pairing": "Ivan IV / Vercingetorix",
+      "generatedAtMs": 1795682000371,
+      "generatedAtUTC": "2026-11-26 08:33 UTC",
+      "primary": 619,
+      "secondary": 616,
+      "battles": 19564,
+      "uniqueGovernors": 75,
+      "killPointsGained": 330685042,
+      "killPointsLost": 261055240,
+      "tradePercent": 126.6724,
+      "dps": 411.242,
+      "sps": 75.245,
+      "tps": 57.698,
+      "hps": 1.474,
+      "checkedAtUTC": "2026-11-26T15:43:01Z"
+    },
+    {
+      "pairing": "Arthur Pendragon / Vercingetorix",
+      "generatedAtMs": 1795682000371,
+      "generatedAtUTC": "2026-11-26 08:33 UTC",
+      "primary": 540,
+      "secondary": 616,
+      "battles": 79098,
+      "uniqueGovernors": 245,
+      "killPointsGained": 872182640,
+      "killPointsLost": 1394260250,
+      "tradePercent": 62.5552,
+      "dps": 323.18,
+      "sps": 48.626,
+      "tps": 77.183,
+      "hps": 1.556,
+      "checkedAtUTC": "2026-11-26T15:43:01Z"
     }
   ],
   "scenario": "7d/openField",
-  "lastCheckedAtUTC": "2026-11-26T09:15:51Z",
-  "lastRunSuccessCount": 11,
+  "lastCheckedAtUTC": "2026-11-26T15:43:01Z",
+  "lastRunSuccessCount": 14,
   "lastErrors": {},
-  "lastRunNewCount": 11,
-  "lastRunUnchangedCount": 0,
+  "lastRunNewCount": 3,
+  "lastRunUnchangedCount": 11,
   "lastRunFailureCount": 0,
-  "lastRunFreshCount": 11,
+  "lastRunFreshCount": 14,
   "lastRunStaleCount": 0,
-  "lastWarnings": {},
+  "lastWarnings": {
+    "619-620": "Site-generated snapshot UNCHANGED; within 8h",
+    "619-575": "Site-generated snapshot UNCHANGED; within 8h",
+    "540-619": "Site-generated snapshot UNCHANGED; within 8h",
+    "540-575": "Site-generated snapshot UNCHANGED; within 8h",
+    "540-579": "Site-generated snapshot UNCHANGED; within 8h",
+    "540-576": "Site-generated snapshot UNCHANGED; within 8h",
+    "575-579": "Site-generated snapshot UNCHANGED; within 8h",
+    "575-616": "Site-generated snapshot UNCHANGED; within 8h",
+    "575-620": "Site-generated snapshot UNCHANGED; within 8h",
+    "620-575": "Site-generated snapshot UNCHANGED; within 8h",
+    "620-619": "Site-generated snapshot UNCHANGED; within 8h"
+  },
   "lastRunStatuses": {
-    "619-620": "new",
-    "619-575": "new",
-    "540-619": "new",
-    "540-575": "new",
-    "540-579": "new",
-    "540-576": "new",
-    "575-579": "new",
-    "575-616": "new",
-    "575-620": "new",
-    "620-575": "new",
-    "620-619": "new"
+    "619-620": "unchanged",
+    "619-575": "unchanged",
+    "103-575": "new",
+    "619-616": "new",
+    "540-619": "unchanged",
+    "540-575": "unchanged",
+    "540-579": "unchanged",
+    "540-576": "unchanged",
+    "540-616": "new",
+    "575-579": "unchanged",
+    "575-616": "unchanged",
+    "575-620": "unchanged",
+    "620-575": "unchanged",
+    "620-619": "unchanged"
   },
   "lastRunRevisedCount": 0
 }

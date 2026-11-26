@@ -15,7 +15,7 @@
       "sps": 55.353,
       "tps": 56.893,
       "hps": 2.37,
-      "checkedAtUTC": "2026-11-26T09:15:33Z"
+      "checkedAtUTC": "2026-11-26T15:42:39Z"
     },
     "621-596": {
       "generatedAtMs": 1795682000371,
@@ -31,7 +31,7 @@
       "sps": 58.584,
       "tps": 73.467,
       "hps": 5.411,
-      "checkedAtUTC": "2026-11-26T09:15:33Z"
+      "checkedAtUTC": "2026-11-26T15:42:39Z"
     },
     "621-185": {
       "generatedAtMs": 1795682000371,
@@ -47,7 +47,7 @@
       "sps": 55.726,
       "tps": 59.986,
       "hps": 2.667,
-      "checkedAtUTC": "2026-11-26T09:15:33Z"
+      "checkedAtUTC": "2026-11-26T15:42:39Z"
     },
     "595-621": {
       "generatedAtMs": 1795682000371,
@@ -63,7 +63,7 @@
       "sps": 74.885,
       "tps": 54.236,
       "hps": 4.441,
-      "checkedAtUTC": "2026-11-26T09:15:33Z"
+      "checkedAtUTC": "2026-11-26T15:42:39Z"
     },
     "595-596": {
       "generatedAtMs": 1795682000371,
@@ -79,7 +79,7 @@
       "sps": 71.867,
       "tps": 61.166,
       "hps": 3.574,
-      "checkedAtUTC": "2026-11-26T09:15:33Z"
+      "checkedAtUTC": "2026-11-26T15:42:39Z"
     },
     "545-185": {
       "generatedAtMs": 1795682000371,
@@ -95,7 +95,7 @@
       "sps": 55.559,
       "tps": 70.209,
       "hps": 5.262,
-      "checkedAtUTC": "2026-11-26T09:15:33Z"
+      "checkedAtUTC": "2026-11-26T15:42:39Z"
     },
     "595-545": {
       "generatedAtMs": 1795682000371,
@@ -111,7 +111,7 @@
       "sps": 63.933,
       "tps": 62.42,
       "hps": 3.108,
-      "checkedAtUTC": "2026-11-26T09:15:33Z"
+      "checkedAtUTC": "2026-11-26T15:42:39Z"
     },
     "545-621": {
       "generatedAtMs": 1795682000371,
@@ -127,7 +127,7 @@
       "sps": 47.434,
       "tps": 50.398,
       "hps": 1.5,
-      "checkedAtUTC": "2026-11-26T09:15:33Z"
+      "checkedAtUTC": "2026-11-26T15:42:39Z"
     },
     "595-185": {
       "generatedAtMs": 1795682000371,
@@ -143,7 +143,7 @@
       "sps": 57.505,
       "tps": 60.562,
       "hps": 4.813,
-      "checkedAtUTC": "2026-11-26T09:15:33Z"
+      "checkedAtUTC": "2026-11-26T15:42:39Z"
     },
     "595-616": {
       "generatedAtMs": 1795682000371,
@@ -159,7 +159,7 @@
       "sps": 45.197,
       "tps": 69.474,
       "hps": 12.592,
-      "checkedAtUTC": "2026-11-26T09:15:33Z"
+      "checkedAtUTC": "2026-11-26T15:42:39Z"
     },
     "545-616": {
       "generatedAtMs": 1795682000371,
@@ -175,7 +175,39 @@
       "sps": 45.252,
       "tps": 74.91,
       "hps": 7.382,
-      "checkedAtUTC": "2026-11-26T09:15:33Z"
+      "checkedAtUTC": "2026-11-26T15:42:39Z"
+    },
+    "545-596": {
+      "generatedAtMs": 1795682000371,
+      "generatedAtUTC": "2026-11-26 08:33 UTC",
+      "primary": 545,
+      "secondary": 596,
+      "battles": 56483,
+      "uniqueGovernors": 237,
+      "killPointsGained": 576449957,
+      "killPointsLost": 1022913340,
+      "tradePercent": 56.3537,
+      "dps": 305.653,
+      "sps": 48.693,
+      "tps": 85.321,
+      "hps": 3.524,
+      "checkedAtUTC": "2026-11-26T15:42:39Z"
+    },
+    "595-194": {
+      "generatedAtMs": 1795682000371,
+      "generatedAtUTC": "2026-11-26 08:33 UTC",
+      "primary": 595,
+      "secondary": 194,
+      "battles": 362370,
+      "uniqueGovernors": 2450,
+      "killPointsGained": 4704688366,
+      "killPointsLost": 5261341622,
+      "tradePercent": 89.4199,
+      "dps": 359.98,
+      "sps": 58.466,
+      "tps": 65.005,
+      "hps": 2.603,
+      "checkedAtUTC": "2026-11-26T15:42:39Z"
     }
   },
   "history": [
@@ -3544,30 +3576,78 @@
       "tps": 74.91,
       "hps": 7.382,
       "checkedAtUTC": "2026-11-26T09:15:33Z"
+    },
+    {
+      "pairing": "Bai Qi / Ivar",
+      "generatedAtMs": 1795682000371,
+      "generatedAtUTC": "2026-11-26 08:33 UTC",
+      "primary": 545,
+      "secondary": 596,
+      "battles": 56483,
+      "uniqueGovernors": 237,
+      "killPointsGained": 576449957,
+      "killPointsLost": 1022913340,
+      "tradePercent": 56.3537,
+      "dps": 305.653,
+      "sps": 48.693,
+      "tps": 85.321,
+      "hps": 3.524,
+      "checkedAtUTC": "2026-11-26T15:42:39Z"
+    },
+    {
+      "pairing": "Sun Tzu / William Wallace",
+      "generatedAtMs": 1795682000371,
+      "generatedAtUTC": "2026-11-26 08:33 UTC",
+      "primary": 595,
+      "secondary": 194,
+      "battles": 362370,
+      "uniqueGovernors": 2450,
+      "killPointsGained": 4704688366,
+      "killPointsLost": 5261341622,
+      "tradePercent": 89.4199,
+      "dps": 359.98,
+      "sps": 58.466,
+      "tps": 65.005,
+      "hps": 2.603,
+      "checkedAtUTC": "2026-11-26T15:42:39Z"
     }
   ],
-  "lastCheckedAtUTC": "2026-11-26T09:15:33Z",
-  "lastRunSuccessCount": 11,
+  "lastCheckedAtUTC": "2026-11-26T15:42:39Z",
+  "lastRunSuccessCount": 13,
   "lastErrors": {},
   "resetNote": "Manual reset requested; the next successful 7-day/Open field API run starts a new comparison baseline.",
-  "lastRunFreshCount": 11,
+  "lastRunFreshCount": 13,
   "lastRunStaleCount": 0,
-  "lastRunNewCount": 11,
-  "lastRunUnchangedCount": 0,
+  "lastRunNewCount": 2,
+  "lastRunUnchangedCount": 11,
   "lastRunFailureCount": 0,
-  "lastWarnings": {},
+  "lastWarnings": {
+    "621-545": "Site-generated snapshot UNCHANGED; within 8h",
+    "621-596": "Site-generated snapshot UNCHANGED; within 8h",
+    "621-185": "Site-generated snapshot UNCHANGED; within 8h",
+    "595-621": "Site-generated snapshot UNCHANGED; within 8h",
+    "595-596": "Site-generated snapshot UNCHANGED; within 8h",
+    "545-185": "Site-generated snapshot UNCHANGED; within 8h",
+    "595-545": "Site-generated snapshot UNCHANGED; within 8h",
+    "545-621": "Site-generated snapshot UNCHANGED; within 8h",
+    "595-185": "Site-generated snapshot UNCHANGED; within 8h",
+    "595-616": "Site-generated snapshot UNCHANGED; within 8h",
+    "545-616": "Site-generated snapshot UNCHANGED; within 8h"
+  },
   "lastRunStatuses": {
-    "621-545": "new",
-    "621-596": "new",
-    "621-185": "new",
-    "595-621": "new",
-    "595-596": "new",
-    "545-185": "new",
-    "595-545": "new",
-    "545-621": "new",
-    "595-185": "new",
-    "595-616": "new",
-    "545-616": "new"
+    "621-545": "unchanged",
+    "621-596": "unchanged",
+    "621-185": "unchanged",
+    "595-621": "unchanged",
+    "595-596": "unchanged",
+    "545-596": "new",
+    "595-194": "new",
+    "545-185": "unchanged",
+    "595-545": "unchanged",
+    "545-621": "unchanged",
+    "595-185": "unchanged",
+    "595-616": "unchanged",
+    "545-616": "unchanged"
   },
   "lastRunRevisedCount": 0
 }
