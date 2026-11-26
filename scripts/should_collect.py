@@ -13,7 +13,7 @@ from zoneinfo import ZoneInfo
 
 BERLIN = ZoneInfo("Europe/Berlin")
 DATA_DIR = Path(__file__).resolve().parents[1] / "data"
-EXPECTED_COUNTS = {"inf": 13, "cav": 14, "archer": 9}
+EXPECTED_COUNTS = {"inf": 13, "cav": 14, "archer": 10}
 
 
 def reporting_window(moment: datetime) -> tuple[str, int]:
