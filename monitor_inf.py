@@ -18,6 +18,7 @@ DATA = ROOT / "data" / "trades_inf.json"
 REPORT = ROOT / "REPORT_INF.md"
 
 PAIRS = [
+    ("Charles Martel / Yi Do", 10, 621),
     ("Yi Do / Bai Qi", 621, 545),
     ("Yi Do / Ivar", 621, 596),
     ("Yi Do / Liu Che", 621, 185),
