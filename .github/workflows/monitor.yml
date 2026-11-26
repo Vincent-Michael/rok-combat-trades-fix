@@ -41,7 +41,7 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Fetch 13 infantry, 14 cavalry and 10 archer pairings
+      - name: Fetch 14 infantry, 14 cavalry and 10 archer pairings
         if: steps.gate.outputs.collect == 'true'
         run: |
           python monitor_inf.py
