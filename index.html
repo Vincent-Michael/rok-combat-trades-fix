@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b111d">
+  <meta name="description" content="Rise of Kingdoms combat trade analytics: 7 days, Open Field, Infantry, Cavalry and Archer, battle reports and detailed statistics.">
+  <title>RoK Combat Lab | Infantry, Cavalry & Archer Trade Dashboard</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b111d;--panel:#121c2b;--chart:#172234;--stroke:#344258;--stroke2:#263347;--text:#ecf0f6;--muted:#a1aec2;--muted2:#7889a2;--green:#22c55e;--red:#ef4444;--gold:#f1bf6b;--gold-muted:#a67f47;--blue:#90b4e5;--shadow:0 16px 58px rgba(0,0,0,.19)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse 68% 430px at 50% -180px,rgba(215,145,59,.115),transparent 74%),linear-gradient(180deg,#0c1421 0,#0b111d 460px);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.45;min-height:100vh}button,input{font:inherit}button{cursor:pointer}a{color:#aacaf7;text-decoration:none}a:hover{text-decoration:underline;color:#e0ebfc}button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:4px}button:disabled{opacity:.6;cursor:wait}
+    .shell{max-width:1320px;margin:0 auto;padding:0 30px}.topbar{border-bottom:1px solid #273245a8;background:#0b111dcc}.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}.crest{height:43px;width:43px;display:grid;place-items:center;border-radius:11px;border:1px solid #b88b4d;background:linear-gradient(135deg,#5d482c,#2b2731);box-shadow:inset 0 0 0 3px #e2bd7230;font-family:Georgia,serif;font-size:27px;font-weight:bold;color:#f2c77e}.brand-title{font-size:13px;letter-spacing:.20em;text-transform:uppercase;font-weight:800}.brand-sub{font-size:11px;color:var(--muted2);letter-spacing:.05em}.top-right{display:flex;align-items:center;gap:13px}.pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:7px 11px;background:#1a2838;border:1px solid #374558;font-size:10px;font-weight:760;letter-spacing:.10em;text-transform:uppercase;color:#c8d4e6;white-space:nowrap}.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px #22c55e66}.toplink{font-size:12px;color:var(--muted);font-weight:600}
+    .hero{padding:43px 0 25px;display:flex;justify-content:space-between;align-items:end;gap:26px}.eyebrow{display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:800}.eyebrow:before{content:"";width:24px;height:1px;background:var(--gold)}h1{font-size:clamp(30px,4vw,50px);letter-spacing:-.044em;margin:9px 0 8px;font-weight:760;line-height:1.14}.gold{color:var(--gold)}.intro{color:var(--muted);font-size:14px;max-width:680px;margin:0}.context{display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.context .mini{background:#121e2e;border:1px solid #2b3c51;padding:9px 12px;border-radius:8px;font-size:11px;color:#b2c0d4;font-weight:650;white-space:nowrap}.context .mini b{color:var(--gold);margin-right:5px}
+    .overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:17px 0 24px}.overview-card{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;background:linear-gradient(125deg,#1a2739,#121c2b);border:1px solid #334156;border-radius:13px;padding:17px 19px;min-width:0;box-shadow:var(--shadow)}.overview-card .small{text-transform:uppercase;letter-spacing:.14em;color:var(--muted2);font-size:10px;font-weight:800}.overview-card .leader{margin-top:7px;font-size:17px;font-weight:690}.overview-card .tip{font-size:11px;color:var(--muted);margin-top:4px}.overview-card .rate{font-size:26px;font-weight:780;letter-spacing:-.055em;white-space:nowrap;color:var(--green)}
+    .report-toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin:26px 0 14px}.tabs{display:flex;align-items:center;gap:4px;padding:5px;background:#162131;border:1px solid #354154;border-radius:12px}.tab{border:0;border-radius:8px;padding:11px 18px;color:#aabbcf;font-weight:700;background:transparent;font-size:13px;transition:background .15s,color .15s}.tab[aria-selected="true"]{background:#33465e;color:#fff;box-shadow:0 2px 8px #0003}.tab .count{font-size:10px;opacity:.75;margin-left:6px}.toolbar-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.search{height:39px;background:#152031;color:var(--text);border:1px solid #34445b;border-radius:9px;padding:0 13px;width:230px;font-size:12px}.search::placeholder{color:#8293ac}.action{border:1px solid #394a60;background:#19283a;color:#d9e3f1;border-radius:9px;padding:10px 12px;min-height:39px;font-size:12px;font-weight:690;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}.action:hover{background:#2b3b50;text-decoration:none}.action.primary{background:#5d482f;border-color:#9a7440;color:#ffe4b3}.action.primary:hover{background:#735632}.action svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .statusline{display:flex;justify-content:space-between;flex-wrap:wrap;align-items:center;gap:7px 20px;margin:0 0 21px;color:var(--muted);font-size:11px}.status{display:flex;align-items:center;gap:7px}.status .s-dot{width:7px;height:7px;border-radius:50%;background:var(--gold)}.status.good .s-dot{background:var(--green)}.status.warn .s-dot{background:#f59e0b}.timestamps{font-variant-numeric:tabular-nums}.timestamps strong{color:#dbe4ef;font-weight:660}
+    .kpi-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:28px}.kpi{background:#121d2d;border:1px solid #2b394f;border-radius:12px;padding:16px 18px;min-width:0}.kpi-label{font-size:10px;color:#96a6bc;letter-spacing:.11em;text-transform:uppercase;font-weight:750}.kpi-value{font-size:25px;font-weight:770;line-height:1.2;letter-spacing:-.035em;margin-top:7px;font-variant-numeric:tabular-nums}.kpi-value.green{color:var(--green)}.kpi-value.amber{color:var(--gold)}.kpi-sub{font-size:10px;color:var(--muted2);margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .section{margin:0 0 32px}.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 12px;flex-wrap:wrap}.section h2{font-size:19px;font-weight:750;letter-spacing:-.025em;margin:0}.section-sub{color:var(--muted2);font-size:11px}.chart-card{background:var(--chart);border:1px solid var(--stroke);border-radius:16px;padding:20px 22px 18px;box-shadow:var(--shadow)}.legend{display:flex;align-items:center;justify-content:flex-start;gap:22px;font-weight:700;font-size:11px;margin:0 0 12px;flex-wrap:wrap}.legend .positive{color:var(--green)}.legend .negative{color:var(--red)}.legend .positive:before,.legend .negative:before{content:'●';margin-right:7px}
+    .chart-row{display:grid;grid-template-columns:minmax(235px,36%) minmax(110px,1fr) 76px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid #ffffff12}.chart-row:last-child{border-bottom:0}.chart-name{font-size:12px;font-weight:615;line-height:1.35;min-width:0}.chart-name .rank{color:#8396af;font-size:11px;font-variant-numeric:tabular-nums;margin-right:12px;font-weight:750}.chart-name a{color:#e5eaf3}.chart-name a:hover{color:var(--gold)}.chart-name .tiny{color:#8394ae;font-size:10px;margin:3px 0 0 28px}.track{height:15px;background:#29374b;border-radius:4px;position:relative;overflow:visible}.track .marker{height:27px;position:absolute;top:-6px;z-index:2;border-left:2px dashed #c8d2df;opacity:.78}.track .bar{height:100%;border-radius:4px;box-shadow:0 0 0 1px #ffffff0b inset}.track .bar.pos{background:var(--green)}.track .bar.neg{background:var(--red)}.track .bar.neutral{background:#9ca3af}.rate-label{text-align:right;font-variant-numeric:tabular-nums;font-weight:785;font-size:13px}.rate-label.pos{color:var(--green)}.rate-label.neg{color:var(--red)}.rate-label.neutral{color:#c2c8d1}.chart-axis{display:grid;grid-template-columns:minmax(235px,36%) minmax(110px,1fr) 76px;gap:12px}.axis-track{position:relative;height:24px;color:#9cacc1;font-size:10px;font-weight:650}.axis-track span{position:absolute;top:8px;transform:translateX(-50%)}.axis-track span:first-child{left:0;transform:none}.axis-track span:last-child{right:0;left:auto;transform:none}.chart-foot{font-size:11px;color:#9eafc6;margin-top:8px}.low-sample{display:inline-block;color:#dca65d;font-size:10px;margin-left:5px;font-weight:650}
+    .table-box{overflow:auto;max-width:100%;border-radius:12px;border:1px solid #334157;background:#121d2c}.data-table{border-collapse:collapse;width:100%;min-width:695px;font-size:12px;font-variant-numeric:tabular-nums}.data-table th{color:#aebbd0;background:#1b293b;text-align:left;font-size:11px;font-weight:800;padding:14px 16px;white-space:nowrap;border-bottom:1px solid #35465d}.data-table td{padding:12px 16px;border-bottom:1px solid #ffffff11;color:#d4deeb;white-space:nowrap}.data-table tbody tr:last-child td{border-bottom:0}.data-table tbody tr:hover{background:#2131496e}.data-table th.num,.data-table td.num{text-align:right}.data-table .pair-link{color:#dce9fa;font-weight:650}.data-table .pair-link:hover{color:var(--gold)}.data-table .trade{font-weight:780}.data-table .pos{color:var(--green)}.data-table .neg{color:var(--red)}.data-table .neutral{color:#c6cbd5}.data-table .ranknum{color:#9fb0c9}.data-table .small-mark{color:#dba863;font-size:10px;margin-left:5px}.data-table td.mono{font-feature-settings:'tnum' 1}.table-note{margin:9px 0 0;font-size:11px;color:var(--muted2)}.insights{background:#141f2e;border:1px solid #304056;border-radius:12px;padding:20px 23px;color:#bccadd;font-size:13px;line-height:1.8}.insights p{margin:0 0 10px}.insights p:last-child{margin-bottom:0}.insights strong{color:#f0f3f9}.sourcebox{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid #2d3b50;margin-top:19px;padding-top:15px;font-size:11px;color:#93a5bd}.source-links{display:flex;gap:17px;flex-wrap:wrap}.source-links a{font-weight:700}.creator-credit{white-space:nowrap;color:#b0bdd1}.creator-credit strong{color:var(--gold);font-weight:750;letter-spacing:.01em}.footer{border-top:1px solid #29374b;margin:32px 0 0;padding:22px 0 38px;color:#8395ac;font-size:11px;display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}.empty{border:1px dashed #43546b;border-radius:10px;padding:28px;text-align:center;color:var(--muted);font-size:13px}.hidden{display:none!important}.toast{position:fixed;bottom:22px;right:22px;z-index:10;border:1px solid #52647d;background:#243347;color:#f4f8ff;padding:11px 16px;border-radius:10px;box-shadow:0 10px 38px #0008;font-size:12px;max-width:min(360px,calc(100vw - 35px));transition:opacity .2s;pointer-events:none}.toast.hidden{opacity:0}
+    @media(max-width:960px){.overview{grid-template-columns:repeat(2,minmax(0,1fr))}.overview-card:last-child{grid-column:1/-1}.shell{padding:0 20px}.hero{align-items:start;flex-direction:column}.context{justify-content:flex-start}.toolbar-actions{width:100%}.search{flex:1;min-width:160px}.chart-row,.chart-axis{grid-template-columns:minmax(215px,39%) minmax(100px,1fr) 75px}.kpi-row{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:610px){.overview-card:last-child{grid-column:auto}.shell{padding:0 15px}.topbar-inner{padding:13px 0}.toplink{display:none}.brand-title{font-size:12px}.hero{padding-top:30px}.overview{grid-template-columns:1fr;gap:9px}.report-toolbar{margin-top:15px}.tabs{width:100%}.tab{flex:1}.search{width:100%;flex-basis:100%}.toolbar-actions{gap:7px}.action{flex:1;justify-content:center}.kpi-row{gap:8px}.kpi{padding:13px}.kpi-value{font-size:21px}.chart-card{padding:14px}.chart-row{display:grid;grid-template-columns:minmax(0,1fr) 72px;gap:5px 10px;padding:10px 0}.chart-name{grid-column:1/-1;line-height:1.3;font-size:12px}.track{grid-column:1;grid-row:2}.rate-label{grid-column:2;grid-row:2}.chart-axis{display:grid;grid-template-columns:minmax(0,1fr) 72px;gap:10px}.axis-track{grid-column:1}.chart-foot{font-size:10px}.legend{font-size:10px;gap:16px}.section h2{font-size:18px}.statusline{font-size:10px}.insights{padding:16px}}
+
+
+    /* Source-backed 7/14/30-day trade timeline. No statistical history is embedded in this HTML. */
+    .trend-controls{display:flex;align-items:center;justify-content:flex-end;gap:9px;flex-wrap:wrap}
+    .trend-select{background:#19283a;border:1px solid #40516a;border-radius:9px;color:#e5ecf6;min-height:38px;padding:7px 11px;font-size:12px;font-weight:650;max-width:290px}
+    .trend-select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+    .trend-back{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:7px 11px;background:#293b52;border:1px solid #586e8d;border-radius:9px;color:#e5ecf6;font-size:12px;font-weight:700;white-space:nowrap}
+    .trend-back:hover{background:#3b506c}.trend-back:focus-visible{outline:2px solid var(--gold);outline-offset:2px}.trend-back[hidden]{display:none!important}
+    .trend-card{background:#172234;border:1px solid var(--stroke);border-radius:16px;padding:18px 21px 17px;box-shadow:var(--shadow)}
+    .trend-summary{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:8px;align-items:center;font-size:12px;color:#bbcadc}
+    .trend-summary strong{color:#edf3fb;font-variant-numeric:tabular-nums}
+    .trend-summary .pos{color:var(--green)}.trend-summary .neg{color:var(--red)}
+    .trend-scroller{overflow-x:auto;scrollbar-color:#425671 #172234}
+    .trend-plot{display:block;width:100%;min-width:680px;height:auto}
+    .trend-legend{display:flex;flex-wrap:wrap;gap:7px 17px;margin-top:12px}
+    .trend-key{font-size:11px;display:inline-flex;align-items:center;gap:7px;border:0;border-radius:7px;padding:4px 6px;background:transparent;color:#c1cfe2;text-align:left}
+    .trend-key:hover{background:#27384e;color:white}.trend-key:focus-visible{outline:2px solid var(--gold)}
+    .trend-swatch{display:inline-block;width:17px;height:3px;border-radius:2px;flex-shrink:0}
+    .trend-foot{color:#94a5ba;font-size:11px;line-height:1.5;margin:13px 0 0}
+    .trend-guide{color:#c6d3e6;font-size:11px}
+    .trend-plot circle{transition:r .12s ease}.trend-plot circle:hover{r:7}
+    @media(max-width:610px){.trend-controls{width:100%;justify-content:stretch}.trend-select{flex:1;max-width:none;min-width:135px}.trend-card{padding:13px}.trend-legend{gap:5px 10px}.trend-summary{font-size:11px}}
+
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+
+    .capture-actions{display:flex;gap:5px;align-items:center}.capture-mode{border:1px solid #394a60;background:#19283a;color:#d9e3f1;border-radius:9px;min-height:39px;padding:0 8px;font-size:12px;font-weight:650;max-width:116px;cursor:pointer}.capture-button{border-color:#9a7440;background:#493824;color:#ffe4b3}.capture-button:hover{background:#675035}.capture-mode:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+    @media(max-width:610px){.capture-actions{flex:1 1 100%}.capture-mode{max-width:none;flex:1}.capture-button{flex:1}.capture-actions .action{flex:1}}
+
+  </style>
+</head>
+<body>
+  <header class="topbar"><div class="shell topbar-inner">
+    <a class="brand" href="#top" aria-label="RoK Combat Lab home"><span class="crest" aria-hidden="true">R</span><span><span class="brand-title">RoK Combat Lab</span><br><span class="brand-sub">TRADE INTELLIGENCE / OPEN FIELD</span></span></a>
+    <div class="top-right"><span class="pill"><span class="dot"></span>7 Days / Open Field</span><a class="toplink" href="https://rokbattles.com/combat-lab" target="_blank" rel="noopener">ROK Battles ↗</a></div>
+  </div></header>
+  <main id="top" class="shell">
+    <section class="hero"><div><div class="eyebrow">Verified combat analytics</div><h1>Trade performance.<br><span class="gold">Beyond the headlines.</span></h1><p class="intro">Track commander pairings using 7-day Open Field battle reports. Compare Kill Point efficiency, damage, sample size and combat statistics with directional accuracy.</p></div><div class="context"><span class="mini"><b id="monitoredPairsTotal">37</b> Monitored pairings</span><span class="mini"><b>3</b> Troop types</span><span class="mini">Primary → Secondary</span></div></section>
+    <div class="overview" aria-label="Overview of the top commander pairings"><div class="overview-card"><div><div class="small">🛡 Infantry leader</div><div class="leader" id="heroInfPair">Loading from GitHub…</div><div class="tip" id="heroInfTip">Trade efficiency · 7-day Open Field</div></div><div class="rate" id="heroInfRate">—</div></div><div class="overview-card"><div><div class="small">♞ Cavalry leader</div><div class="leader" id="heroCavPair">Loading from GitHub…</div><div class="tip" id="heroCavTip">Trade efficiency · 7-day Open Field</div></div><div class="rate" id="heroCavRate">—</div></div><div class="overview-card"><div><div class="small">🏹 Archer leader</div><div class="leader" id="heroArchPair">Loading from GitHub…</div><div class="tip" id="heroArchTip">Trade efficiency · 7-day Open Field</div></div><div class="rate" id="heroArchRate">—</div></div></div>
+    <div class="report-toolbar"><div class="tabs" role="tablist" aria-label="Troop class"><button class="tab" id="tab-inf" role="tab" aria-controls="reportPanel" aria-selected="true" data-tab="inf">🛡 Infantry <span class="count">13</span></button><button class="tab" id="tab-cav" role="tab" aria-controls="reportPanel" aria-selected="false" data-tab="cav">♞ Cavalry <span class="count">14</span></button><button class="tab" id="tab-arch" role="tab" aria-controls="reportPanel" aria-selected="false" data-tab="arch">🏹 Archer <span class="count">10</span></button></div><div class="toolbar-actions"><input class="search" id="search" type="search" autocomplete="off" aria-label="Filter commander pairings" placeholder="Search commander pairing…"><div class="capture-actions"><select class="capture-mode" id="screenshotMode" aria-label="Screenshot contents"><option value="report">Full report</option><option value="chart">Trade chart</option><option value="trend" id="trendScreenshotOption">30-day trend</option></select><button class="action capture-button" id="screenshotBtn" title="Save a high-resolution PNG after verified GitHub statistics are loaded"><svg viewBox="0 0 24 24"><path d="M4 7h4l2-3h4l2 3h4a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><circle cx="12" cy="13" r="4"/></svg>Screenshot PNG</button></div><button class="action" id="exportBtn" title="Export currently visible rows as CSV"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v4h16v-4"/></svg>Export CSV</button><button class="action" id="discordBtn" title="Copy a compact report"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg>Discord Summary</button><button class="action primary" id="refreshBtn" title="Re-fetch the latest saved GitHub monitor data"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.5-4.6L3 9m0-6v6h6M4 13a8 8 0 0 0 14.5 4.6L21 15m0 6v-6h-6"/></svg>Sync GitHub</button></div></div>
+    <section id="reportPanel" role="tabpanel" aria-labelledby="tab-inf">
+      <div class="statusline"><div id="monitorStatus" class="status warn"><span class="s-dot"></span><span>Loading verified statistics from GitHub…</span></div><div class="timestamps" id="times">Workflow checked: — · Site generated: —</div></div>
+      <div class="kpi-row" aria-label="Statistics overview"><div class="kpi"><div class="kpi-label">Verified pairs</div><div class="kpi-value" id="kpiVerified">—</div><div class="kpi-sub" id="kpiVerifiedSub">Waiting for GitHub</div></div><div class="kpi"><div class="kpi-label">Best trade efficiency</div><div class="kpi-value green" id="kpiBest">—</div><div class="kpi-sub" id="kpiBestSub">Awaiting GitHub data</div></div><div class="kpi"><div class="kpi-label">Highest DPS</div><div class="kpi-value amber" id="kpiDps">—</div><div class="kpi-sub" id="kpiDpsSub">Awaiting GitHub data</div></div><div class="kpi"><div class="kpi-label">Largest report sample</div><div class="kpi-value" id="kpiReports">—</div><div class="kpi-sub" id="kpiReportsSub">Awaiting GitHub data</div></div></div>
+      <section class="section" id="chartSection"><div class="section-head"><h2>Trade Efficiency Ranking</h2><div class="section-sub" id="chartSub">All verified commander pairings · Highest to lowest</div></div><div class="chart-card"><div class="legend"><span class="positive">Positive (&gt;100%)</span><span class="negative">Negative (&lt;100%)</span></div><div id="chartRows"></div><div class="chart-axis" id="chartAxis"></div><div class="chart-foot">Dashed line = 100% break-even · Latest verified site snapshot</div></div></section>
+      <section class="section" id="tradeTrendSection" aria-label="Trade history for the selected 7, 14 or 30 days">
+        <div class="section-head"><h2 id="trendHeading">Trade Efficiency — Last 30 Days</h2><div class="trend-controls">
+          <button type="button" class="trend-back" id="trendBack" aria-label="Back to all commander pairings" hidden>← Back to all pairings</button>
+          <label class="trend-guide" for="trendPair">Pairing</label><select class="trend-select" id="trendPair" aria-label="Commander pairing in trade history"><option value="all">All pairings</option></select>
+          <label class="trend-guide" for="trendDays">Compare</label><select class="trend-select" id="trendDays" aria-label="Trade history comparison period"><option value="7">7 days</option><option value="14">14 days</option><option value="30" selected>30 days</option></select>
+          <label class="trend-guide" for="trendMetric">Show</label><select class="trend-select" id="trendMetric" aria-label="Trade history measurement"><option value="trade">Trade %</option><option value="delta">Change (Δ pp)</option></select>
+        </div></div>
+        <div class="trend-card">
+          <div class="trend-summary" id="trendSummary" role="status">Loading the 30-day trade history from GitHub…</div>
+          <div class="trend-scroller" id="trendGraphic"><div class="empty">Loading recorded site snapshots…</div></div>
+          <div class="trend-legend" id="trendLegend"></div>
+          <p class="trend-foot" id="trendFoot">30-day rolling window · 7-day Open Field snapshots. Data points are actual RoK Battles site generations from the GitHub monitor history; no missing days are invented.</p>
+        </div>
+      </section>
+      <section class="section"><div class="section-head"><h2>Trade Ranking &amp; Battle Reports</h2><div class="section-sub" id="rankingSub">Trade = KP gained ÷ KP lost × 100</div></div><div class="table-box"><table class="data-table" id="rankingTable"><thead><tr><th>Rank</th><th>Commander Pairing</th><th class="num">Trade %</th><th class="num">Δ pp</th><th class="num">Reports</th></tr></thead><tbody id="rankingRows"></tbody></table></div><p class="table-note">Δ pp compares distinct verified 7-day Open Field snapshots only. N/A means no earlier valid distinct snapshot.</p></section>
+      <section class="section"><div class="section-head"><h2>Detailed Combat Statistics</h2><div class="section-sub">Same rank order · KP = Kill Points</div></div><div class="table-box"><table class="data-table" id="metricsTable"><thead><tr><th>Commander Pairing</th><th class="num">KP Gained</th><th class="num">KP Lost</th><th class="num">DPS</th><th class="num">SPS</th><th class="num">TPS</th></tr></thead><tbody id="metricRows"></tbody></table></div><p class="table-note">KP presented in billions (B) or millions (M); hover to see exact values. DPS / SPS / TPS sourced from the verified monitor, not estimated.</p></section>
+      <section class="section"><div class="section-head"><h2>Key Findings</h2><div class="section-sub">Directional insights &amp; sample quality</div></div><div class="insights" id="findings"></div><div class="sourcebox"><div id="sourceStatus">Source / monitor status</div><div class="source-links" id="sourceLinks"></div></div></section>
+    </section>
+    <footer class="footer"><span>RoK Combat Lab · Community analytics dashboard · 7d / Open Field</span><span>Data source: RoK Battles via the linked GitHub monitoring repository. Not affiliated with Lilith Games.</span><span class="creator-credit">Made by <strong>Vinc69cmAløT</strong></span></footer>
+  </main>
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+  <script>
+  (()=>{'use strict';
+    // Only commander names and pairing IDs are bundled. All combat statistics come from GitHub.
+    const commanderNames={"595":"Sun Tzu","621":"Yi Do","545":"Bai Qi","596":"Ivar","185":"Liu Che","620":"William Marshal","619":"Ivan IV","575":"Achilles","540":"Arthur Pendragon","579":"Gang Gamchan","576":"Hector","616":"Vercingetorix","509":"Qin Shi Huang","6":"Yi Seong-Gye","179":"Zhuge Liang","611":"Alp Arslan","187":"Hermann","459":"Philip II","194":"William Wallace","103":"Attila","186":"Ashurbanipal"};
+    const repo='Vincent-Michael/rok-combat-trades-fix';
+    const TRADE_AXIS_MAX=200; // Fixed scale for web charts and PNG exports
+    const HISTORY_DAY_MS=24*60*60*1000;
+    const HISTORY_PERIODS=[7,14,30];
+    const HISTORY_COLORS=['#f1bf6b','#72adff','#4adea2','#d99cff','#ff9680','#63d6d9','#c5d374','#f4b4dd','#b0adff','#ed9c5f','#83b9dd'];
+    const LOW_SAMPLE_GOVERNORS=250; // Same cutoff for the webpage and PNG exports
+    const cfg={
+      inf:{name:'Infantry',ids:['621-545','621-596','621-185','595-621','595-596','545-185','595-545','545-621','595-185','595-616','545-616','545-596','595-194'],file:'data/trades_inf.json',report:'REPORT_INF.md'},
+      cav:{name:'Cavalry',ids:['619-620','619-575','540-619','540-575','540-579','540-576','575-579','575-616','575-620','620-575','620-619','103-575','619-616','540-616'],file:'data/trades_cav.json',report:'REPORT_CAV.md'},
+      arch:{name:'Archer',ids:['509-6','509-179','611-179','611-6','611-187','187-179','187-611','179-187','179-459','187-186'],file:'data/trades_archer.json',report:'REPORT_ARCHER.md'}
+    };
+    const emptyStore=()=>({scenario:'7d/openField',snapshots:{},history:[],lastCheckedAtUTC:null,lastRunSuccessCount:null,lastErrors:{}});
+    const state={active:'inf',query:'',trendPair:{inf:'all',cav:'all',arch:'all'},trendMetric:'trade',trendDays:30,data:{inf:emptyStore(),cav:emptyStore(),arch:emptyStore()},sync:{inf:'loading',cav:'loading',arch:'loading'},syncError:{inf:null,cav:null,arch:null}};
+    const $=id=>document.getElementById(id);
+    const fmt=new Intl.NumberFormat('en-US');
+    const esc=v=>String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+    const pairName=id=>id.split('-').map(n=>commanderNames[n]||('Commander '+n)).join(' / ');
+    const pairURL=id=>{const [p,s]=id.split('-');return `https://rokbattles.com/combat-lab?primary=${p}&secondary=${s}`;};
+    const link=(id,title)=>`<a href="${pairURL(id)}" target="_blank" rel="noopener noreferrer" title="Open pairing on ROK Battles">${esc(title??pairName(id))}</a>`;
+    const num=v=>Number.isFinite(Number(v))?fmt.format(Number(v)):'N/A';
+    const three=v=>Number.isFinite(Number(v))?Number(v).toFixed(3):'N/A';
+    const kp=v=>{if(!Number.isFinite(Number(v)))return 'N/A';let n=Number(v);return n>=1e9?(n/1e9).toFixed(3)+'B':n>=1e6?(n/1e6).toFixed(2)+'M':n>=1e3?(n/1e3).toFixed(1)+'K':String(n)};
+    const trade=v=>Number.isFinite(Number(v))?Number(v).toFixed(2)+'%':'N/A';
+    const cls=v=>!Number.isFinite(Number(v))?'neutral':Number(v)>100?'pos':Number(v)<100?'neg':'neutral';
+    const deltaCls=v=>v==null||!Number.isFinite(Number(v))?'neutral':Math.round(Number(v)*100)>0?'pos':Math.round(Number(v)*100)<0?'neg':'neutral';
+    const deltaText=v=>v==null||!Number.isFinite(Number(v))?'N/A':(Math.round(Number(v)*100)>0?'+':'')+(Math.round(Number(v)*100)/100).toFixed(2);
+    const isLowSample=s=>Boolean(s)&&s.uniqueGovernors!=null&&Number.isFinite(Number(s.uniqueGovernors))&&Number(s.uniqueGovernors)<LOW_SAMPLE_GOVERNORS;
+    function validRecord(key,s){if(!s||typeof s!=='object')return false;const [p,sec]=key.split('-').map(Number);const ratio=Number(s.killPointsGained)/Number(s.killPointsLost)*100;return Number(s.primary)===p&&Number(s.secondary)===sec&&Number.isFinite(ratio)&&Number(s.killPointsLost)>0&&Number.isFinite(Number(s.tradePercent))&&Math.abs(ratio-Number(s.tradePercent))<.2&&Number.isFinite(Number(s.battles))&&Number(s.battles)>=0&&Number.isFinite(Number(s.generatedAtMs));}
+    function loadStore(type,remote){
+      if(remote?.scenario!=='7d/openField'||!remote.snapshots||typeof remote.snapshots!=='object')throw Error('Invalid 7d/openField source; refusing to mix scenarios');
+      // Discover newly monitored pairs directly from each verified repository JSON.
+      // Pair IDs and commander labels are configuration only; no combat values are embedded.
+      const discovered=Object.keys(remote.snapshots).filter(id=>/^\d{1,5}-\d{1,5}$/.test(id)&&validRecord(id,remote.snapshots[id]));
+      const ids=[...new Set([...cfg[type].ids,...discovered])];
+      const snaps={};let success=0;
+      for(const id of ids){
+        if(validRecord(id,remote.snapshots[id])){snaps[id]=remote.snapshots[id];success++;}
+      }
+      if(!success)throw Error('No matching validated commander snapshots in GitHub JSON');
+      cfg[type].ids=ids;
+      const historyCandidate=(Array.isArray(remote.history)?remote.history:[]).filter(h=>{const key=`${h.primary}-${h.secondary}`;return ids.includes(key)&&validRecord(key,h)});
+      const seen=new Set();const history=historyCandidate.filter(h=>{const key=`${h.primary}-${h.secondary}-${h.generatedAtMs}`;if(seen.has(key))return false;seen.add(key);return true;});
+      return {scenario:'7d/openField',snapshots:snaps,history,
+        lastCheckedAtUTC:remote.lastCheckedAtUTC||null,
+        lastRunSuccessCount:Number.isFinite(Number(remote.lastRunSuccessCount))?Number(remote.lastRunSuccessCount):success,
+        lastErrors:remote.lastErrors||{},remoteValidated:success};
+    }
+    function previous(type,id,latest){
+      const options=(state.data[type].history||[]).filter(h=>Number(h.primary)===latest.primary&&Number(h.secondary)===latest.secondary&&validRecord(id,h)&&Number(h.generatedAtMs)<Number(latest.generatedAtMs));
+      options.sort((a,b)=>Number(b.generatedAtMs)-Number(a.generatedAtMs));return options[0]||null;
+    }
+    function rows(type){const d=state.data[type];return cfg[type].ids.map(id=>{const s=d.snapshots[id];if(!validRecord(id,s))return{id,s:null,delta:null};const prev=previous(type,id,s);return{id,s,delta:prev?Number(s.tradePercent)-Number(prev.tradePercent):null};}).sort((a,b)=>{if(!a.s)return 1;if(!b.s)return -1;return Number(b.s.tradePercent)-Number(a.s.tradePercent);});}
+    function selected(){return rows(state.active).filter(x=>pairName(x.id).toLowerCase().includes(state.query));}
+    function simpleDate(value){if(!value)return 'Unknown';const d=new Date(value);if(isNaN(d.getTime()))return String(value);return new Intl.DateTimeFormat('en-GB',{timeZone:'UTC',year:'numeric',month:'short',day:'2-digit',hour:'2-digit',minute:'2-digit'}).format(d)+' UTC';}
+    function generation(type){let list=rows(type).filter(r=>r.s);let times=[...new Set(list.map(x=>x.s.generatedAtUTC).filter(Boolean))];return times.length===1?times[0]:times.length?`${times.length} site-generation timestamps`:'N/A';}
+    function ageStatus(type){const latest=rows(type).filter(r=>r.s).sort((a,b)=>Number(b.s.generatedAtMs)-Number(a.s.generatedAtMs))[0];if(!latest)return 'No validated snapshot';const age=(Date.now()-Number(latest.s.generatedAtMs))/36e5;if(age>24)return 'Historical snapshot · site data is over 24h old';if(age>6)return 'Historical site snapshot · generated over 6h ago';return 'Latest saved site snapshot';}
+    function renderHero(){
+      $('monitoredPairsTotal').textContent=String(Object.values(cfg).reduce((n,c)=>n+c.ids.length,0));
+      for(const t of ['inf','cav','arch'])$('tab-'+t).querySelector('.count').textContent=String(cfg[t].ids.length);
+      for(const t of ['inf','cav','arch']){const top=rows(t).find(x=>x.s),waiting=state.sync[t]==='loading';$('hero'+({inf:'Inf',cav:'Cav',arch:'Arch'}[t])+'Pair').textContent=top?pairName(top.id):waiting?'Loading from GitHub…':'Data unavailable';$('hero'+({inf:'Inf',cav:'Cav',arch:'Arch'}[t])+'Rate').textContent=top?trade(top.s.tradePercent):'—';}}
+    function kpis(r){const valid=r.filter(x=>x.s), best=valid[0],dps=valid.reduce((a,b)=>!a||b.s.dps>a.s.dps?b:a,null),size=valid.reduce((a,b)=>!a||b.s.battles>a.s.battles?b:a,null);$('kpiVerified').textContent=`${valid.length?valid.length:state.sync[state.active]==='github'?0:'—'}/${cfg[state.active].ids.length}`;$('kpiVerifiedSub').textContent=state.sync[state.active]==='loading'?'Loading from GitHub…':state.sync[state.active]==='error'&&!valid.length?'GitHub unavailable':`${state.data[state.active].lastRunSuccessCount??'?'} monitor checks in GitHub`; $('kpiBest').textContent=best?trade(best.s.tradePercent):'N/A';$('kpiBestSub').textContent=best?pairName(best.id):'Unavailable';$('kpiDps').textContent=dps?three(dps.s.dps):'N/A';$('kpiDpsSub').textContent=dps?pairName(dps.id):'Unavailable';$('kpiReports').textContent=size?num(size.s.battles):'N/A';$('kpiReportsSub').textContent=size?pairName(size.id):'Unavailable';}
+    function renderChart(r){if(!r.length){$('chartRows').innerHTML='<div class="empty">No commander pairings match your search.</div>';$('chartAxis').innerHTML='';return;}
+      const max=TRADE_AXIS_MAX;
+      $('chartRows').innerHTML=r.map((x,i)=>{const v=x.s?.tradePercent;const width=x.s?Math.max(0,Math.min(100,v/max*100)):0;const marker=100/max*100;const sample=isLowSample(x.s)?`<span class="low-sample" title="Only ${esc(x.s.uniqueGovernors)} unique governors">Low sample</span>`:'';return `<div class="chart-row"><div class="chart-name"><span class="rank">${String(i+1).padStart(2,'0')}</span>${link(x.id)}${sample}</div><div class="track">${x.s?`<div class="bar ${cls(v)}" style="width:${width.toFixed(3)}%"></div>`:''}<div class="marker" style="left:${marker.toFixed(3)}%"></div></div><div class="rate-label ${cls(v)}">${trade(v)}</div></div>`;}).join('');
+      const at=(100/max*100).toFixed(3);$('chartAxis').innerHTML=`<div></div><div class="axis-track"><span style="left:0">0%</span><span style="left:${at}%">100%</span><span>${max}%</span></div><div></div>`;
+    }
+    function renderTables(r){$('rankingRows').innerHTML=r.map((x,i)=>`<tr><td class="ranknum">${String(i+1).padStart(2,'0')}</td><td class="pair-link">${link(x.id)}</td><td class="num trade ${cls(x.s?.tradePercent)}">${trade(x.s?.tradePercent)}</td><td class="num ${deltaCls(x.delta)}">${deltaText(x.delta)}</td><td class="num">${x.s?num(x.s.battles):'N/A'}</td></tr>`).join('')||'<tr><td colspan="5" class="empty">No matching pairings.</td></tr>';
+      $('metricRows').innerHTML=r.map(x=>{const s=x.s;return `<tr><td class="pair-link">${link(x.id)}</td><td class="num" title="${s?num(s.killPointsGained):'N/A'}">${s?kp(s.killPointsGained):'N/A'}</td><td class="num" title="${s?num(s.killPointsLost):'N/A'}">${s?kp(s.killPointsLost):'N/A'}</td><td class="num">${s?three(s.dps):'N/A'}</td><td class="num">${s?three(s.sps):'N/A'}</td><td class="num">${s?three(s.tps):'N/A'}</td></tr>`}).join('')||'<tr><td colspan="6" class="empty">No matching pairings.</td></tr>';
+      $('rankingSub').textContent=`${r.length} pairings shown · Trade = KP gained ÷ KP lost × 100`;$('chartSub').textContent=`${r.length} pairings · Ranked by verified Trade %`;
+    }
+    function findings(){const type=state.active,r=rows(type).filter(x=>x.s),q=state.data[type];if(!r.length){$('findings').innerHTML='<p>No validated statistics are available for this troop class.</p>';return;}
+      const best=r[0],worst=r[r.length-1],dps=r.reduce((a,b)=>b.s.dps>a.s.dps?b:a),biggest=r.reduce((a,b)=>b.s.battles>a.s.battles?b:a),low=r.filter(x=>isLowSample(x.s)),changed=r.filter(x=>x.delta!=null);
+      let html=`<p><strong>${esc(pairName(best.id))}</strong> leads ${cfg[type].name} at <strong>${trade(best.s.tradePercent)}</strong>. <strong>${esc(pairName(worst.id))}</strong> ranks lowest at <strong>${trade(worst.s.tradePercent)}</strong>.</p>`;
+      html+=`<p>Highest DPS: <strong>${esc(pairName(dps.id))}</strong> (${three(dps.s.dps)}). Largest battle dataset: <strong>${esc(pairName(biggest.id))}</strong> (${num(biggest.s.battles)} reports, ${num(biggest.s.uniqueGovernors)} unique governors).</p>`;
+      if(low.length)html+=`<p><strong>Sample caution:</strong> ${low.map(x=>`${esc(pairName(x.id))} (${num(x.s.uniqueGovernors)} governors)`).join('; ')}. These results may be less representative than the larger samples.</p>`;
+      if(changed.length){let c=changed.sort((a,b)=>Math.abs(b.delta)-Math.abs(a.delta))[0];html+=`<p>Largest confirmed distinct-snapshot change: <strong>${esc(pairName(c.id))}</strong> (${c.delta>=0?'+':''}${c.delta.toFixed(2)} percentage points). Changes are compared only against earlier verified 7d/Open Field site generations.</p>`;}else html+='<p><strong>Historical comparison:</strong> No earlier distinct validated 7-day/Open Field snapshot is available; Δ pp remains N/A instead of reporting artificial zero changes.</p>';
+      if(type==='inf')html+='<p><strong>Direction matters:</strong> Bai Qi / Yi Do and Yi Do / Bai Qi are separate, non-interchangeable test groups.</p>';else if(type==='cav')html+='<p><strong>Direction matters:</strong> William Marshal / Ivan IV is separate from Ivan IV / William Marshal; the same applies to both Achilles / William Marshal directions.</p>';else html+='<p><strong>Direction matters:</strong> Hermann / Zhuge Liang and Zhuge Liang / Hermann are separate primary-secondary configurations, not interchangeable results.</p>';
+      $('findings').innerHTML=html;
+      const base=`https://github.com/${repo}/blob/main/`;$('sourceLinks').innerHTML=`<a href="${base+cfg[type].file}" target="_blank" rel="noopener">Snapshot JSON ↗</a><a href="${base+cfg[type].report}" target="_blank" rel="noopener">Monitor report ↗</a>`;
+      $('sourceStatus').textContent=`Source / monitor status · ${ageStatus(type)} · Checked ${simpleDate(q.lastCheckedAtUTC)}`;
+    }
+
+    // Build a rolling 7/14/30-day history from GitHub's validated per-pair site generations.
+    // One generation = one observation, irrespective of how often the workflow checked it.
+    function tradeHistory(type,now=Date.now()){
+      const cutoff=now-state.trendDays*HISTORY_DAY_MS;
+      return cfg[type].ids.map((id,index)=>{
+        const observed=new Map();
+        for(const h of state.data[type].history||[]){
+          if(`${h.primary}-${h.secondary}`!==id||!validRecord(id,h))continue;
+          const stamp=Number(h.generatedAtMs);
+          if(stamp>=cutoff&&stamp<=now+5*60*1000)observed.set(stamp,{time:stamp,trade:Number(h.tradePercent),reports:Number(h.battles),governors:Number(h.uniqueGovernors)});
+        }
+        const current=state.data[type].snapshots?.[id];
+        if(validRecord(id,current)){
+          const stamp=Number(current.generatedAtMs);
+          if(stamp>=cutoff&&stamp<=now+5*60*1000)observed.set(stamp,{time:stamp,trade:Number(current.tradePercent),reports:Number(current.battles),governors:Number(current.uniqueGovernors)});
+        }
+        const points=[...observed.values()].sort((a,b)=>a.time-b.time);
+        const baseline=points[0]?.trade;
+        return{id,name:pairName(id),color:HISTORY_COLORS[index%HISTORY_COLORS.length],points,baseline,delta:points.length>=2?points[points.length-1].trade-baseline:null};
+      });
+    }
+    const historyDate=time=>new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'short',timeZone:'UTC'}).format(new Date(time));
+    const historyStamp=time=>new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'UTC'}).format(new Date(time))+' UTC';
+    function historyView(type=state.active,allowedIds=null){
+      const all=tradeHistory(type),visible=allowedIds?all.filter(s=>allowedIds.includes(s.id)):all;
+      const pair=state.trendPair[type];
+      return{series:pair==='all'?visible:visible.filter(s=>s.id===pair),all,metric:state.trendMetric};
+    }
+    function historyBounds(series,metric){
+      const points=series.flatMap(s=>s.points.map(p=>({time:p.time,value:metric==='delta'?p.trade-s.baseline:p.trade})));
+      if(!points.length)return null;
+      const times=points.map(p=>p.time),values=points.map(p=>p.value);
+      const rawMin=Math.min(...values),rawMax=Math.max(...values);
+      const spread=Math.max(rawMax-rawMin,metric==='delta'?2:6),pad=spread*.14;
+      let ymin=Math.floor((rawMin-pad)/5)*5,ymax=Math.ceil((rawMax+pad)/5)*5;
+      if(metric==='delta'){ymin=Math.min(ymin,0);ymax=Math.max(ymax,0);}
+      if(ymax-ymin<5){ymin-=2.5;ymax+=2.5;}
+      let xmin=Math.min(...times),xmax=Math.max(...times);
+      const xpad=Math.max((xmax-xmin)*.025,4*60*60*1000);
+      xmin-=xpad;xmax+=xpad;
+      return{xmin,xmax,ymin,ymax,points};
+    }
+    function renderTrend(){
+      const type=state.active,selectedIds=selected().map(r=>r.id),data=historyView(type,selectedIds),{series,metric}=data;
+      const pairInput=$('trendPair'),selectedValue=state.trendPair[type],days=state.trendDays;
+      $('trendHeading').textContent=`Trade Efficiency — Last ${days} Days`;
+      $('trendDays').value=String(days);
+      $('trendScreenshotOption').textContent=`${days}-day trend`;
+      // The search box also limits the selectable trend pairings, without changing their stored history.
+      const candidates=rows(type).filter(r=>selectedIds.includes(r.id));
+      pairInput.innerHTML=`<option value="all">All ${candidates.length} pairings</option>`+candidates.map(r=>`<option value="${r.id}">${esc(pairName(r.id))}</option>`).join('');
+      if(selectedValue!=='all'&&!selectedIds.includes(selectedValue)){state.trendPair[type]='all';}
+      pairInput.value=state.trendPair[type];$('trendMetric').value=metric;
+      $('trendBack').hidden=state.trendPair[type]==='all';
+      const active=historyView(type,selectedIds).series.filter(s=>s.points.length);
+      const allPoints=active.flatMap(s=>s.points),bounds=historyBounds(active,metric);
+      const status=$('trendSummary'),svgRoot=$('trendGraphic'),legend=$('trendLegend'),foot=$('trendFoot');
+      if(!bounds){
+        status.textContent=state.sync[type]==='loading'?`Loading ${days}-day history from GitHub…`:`No verified site-generated trade history in the last ${days} days.`;
+        svgRoot.innerHTML='<div class="empty">No recorded 7-day Open Field trade snapshots are available for this selection.</div>';
+        legend.replaceChildren();
+        foot.textContent=`${days}-day rolling window · Site-generated timestamps only · No synthetic or archived 1-year values.`;
+        return;
+      }
+      const oldest=Math.min(...allPoints.map(p=>p.time)),newest=Math.max(...allPoints.map(p=>p.time));
+      const distinct=new Set(allPoints.map(p=>p.time)).size;
+      const coverage=Math.round(((newest-oldest)/(24*60*60*1000))*10)/10;
+      const changes=active.filter(s=>s.delta!==null).sort((a,b)=>b.delta-a.delta);
+      if(active.length===1){
+        const s=active[0],first=s.points[0],last=s.points[s.points.length-1];
+        const delta=s.delta;
+        status.innerHTML=`<span><strong>${esc(s.name)}</strong></span><span>First: <strong>${trade(first.trade)}</strong></span><span>Latest: <strong>${trade(last.trade)}</strong></span><span>Net change: <strong class="${deltaCls(delta)}">${deltaText(delta)}${delta===null?'':' pp'}</strong></span><span>${s.points.length} observed snapshots</span>`;
+      }else{
+        const positive=changes.find(s=>s.delta>0),negative=[...changes].reverse().find(s=>s.delta<0);
+        status.innerHTML=`<span><strong>${active.length} pairings</strong> · ${distinct} site generations</span><span>Available coverage: <strong>${coverage.toFixed(1)} days</strong> of the last ${days}</span>`+(positive?`<span>Largest gain: <strong class="pos">${esc(positive.name)} ${deltaText(positive.delta)} pp</strong></span>`:'')+(negative?`<span>Largest loss: <strong class="neg">${esc(negative.name)} ${deltaText(negative.delta)} pp</strong></span>`:'');
+      }
+      const W=1050,H=390,left=82,right=34,top=25,bottom=67,pw=W-left-right,ph=H-top-bottom;
+      const sx=x=>left+(x-bounds.xmin)/(bounds.xmax-bounds.xmin)*pw;
+      const sy=y=>top+(bounds.ymax-y)/(bounds.ymax-bounds.ymin)*ph;
+      let svg=`<svg class="trend-plot" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(cfg[type].name)} ${metric==='trade'?'trade efficiency percentage':'trade change in percentage points'} over recorded observations within the last ${days} days">`;
+      for(let i=0;i<=5;i++){
+        const yValue=bounds.ymin+(bounds.ymax-bounds.ymin)*i/5,py=sy(yValue);
+        svg+=`<line x1="${left}" x2="${W-right}" y1="${py.toFixed(2)}" y2="${py.toFixed(2)}" stroke="#43516a" stroke-width="1" opacity=".68"/>`;
+        svg+=`<text x="${left-12}" y="${(py+4).toFixed(2)}" text-anchor="end" fill="#a6b8cd" font-size="12">${(Math.abs(yValue)<.005?0:yValue).toFixed(Math.abs(bounds.ymax-bounds.ymin)<15?1:0)}${metric==='trade'?'%':''}</text>`;
+      }
+      const ref=metric==='delta'?0:100;
+      if(ref>=bounds.ymin&&ref<=bounds.ymax){const py=sy(ref);svg+=`<line x1="${left}" x2="${W-right}" y1="${py.toFixed(2)}" y2="${py.toFixed(2)}" stroke="#d7e1ed" stroke-width="1.5" stroke-dasharray="7 6" opacity=".9"/>`;
+        svg+=`<text x="${W-right-5}" y="${(py-7).toFixed(2)}" text-anchor="end" fill="#dee8f5" font-size="11">${metric==='trade'?'100% break-even':'0 pp baseline'}</text>`;}
+      for(let i=0;i<=5;i++){
+        const tm=bounds.xmin+(bounds.xmax-bounds.xmin)*i/5,px=sx(tm);
+        svg+=`<line x1="${px.toFixed(2)}" x2="${px.toFixed(2)}" y1="${top}" y2="${top+ph}" stroke="#344258" stroke-dasharray="3 6"/>`;
+        svg+=`<text x="${px.toFixed(2)}" y="${H-31}" text-anchor="middle" fill="#a6b8cd" font-size="12">${esc(historyDate(tm))}</text>`;
+      }
+      for(const s of active){
+        let path='',lastTime=null;
+        for(const p of s.points){
+          const x=sx(p.time),v=metric==='delta'?p.trade-s.baseline:p.trade,y=sy(v);
+          // Do not falsely connect across gaps in the collected site history.
+          path+=`${lastTime!==null&&p.time-lastTime<=36*60*60*1000?'L':'M'}${x.toFixed(2)},${y.toFixed(2)} `;
+          lastTime=p.time;
+        }
+        svg+=`<path d="${path.trim()}" stroke="${s.color}" stroke-width="${active.length===1?3.1:2.0}" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="${active.length===1?1:.85}"/>`;
+        for(const p of s.points){const v=metric==='delta'?p.trade-s.baseline:p.trade;
+          svg+=`<circle cx="${sx(p.time).toFixed(2)}" cy="${sy(v).toFixed(2)}" r="${active.length===1?4.6:3.1}" fill="${s.color}" stroke="#162337" stroke-width="1.3"><title>${esc(s.name)} · ${historyStamp(p.time)} · ${trade(p.trade)} · Δ ${deltaText(p.trade-s.baseline)} pp · ${num(p.reports)} reports</title></circle>`;}
+      }
+      svg+=`<text x="${left}" y="${H-6}" fill="#8296b2" font-size="11">Site-generated timestamps (UTC) · Actual observations only</text></svg>`;
+      svgRoot.innerHTML=svg;
+      legend.innerHTML=active.map(s=>`<button type="button" class="trend-key" data-trend-id="${s.id}" title="Focus on ${esc(s.name)}"><span class="trend-swatch" style="background:${s.color}"></span>${esc(s.name)}${s.points[s.points.length-1]?.governors<LOW_SAMPLE_GOVERNORS?'<span class="low-sample">Low sample</span>':''}</button>`).join('');
+      foot.textContent=`Rolling ${days}-day filter · Recorded ${historyStamp(oldest)} to ${historyStamp(newest)} (${coverage.toFixed(1)} days of available history). Lines stop when observations are more than 36h apart. ${metric==='delta'?'Change is measured in percentage points relative to the first recorded observation for each pair.':'Trade efficiency = KP gained ÷ KP lost × 100.'} Each point represents a rolling 7-day Open Field sample, not a cumulative ${days}-day report. No earlier or missing observations are invented.`;
+    }
+
+    function renderStatus(){
+      const type=state.active,q=state.data[type],sync=state.sync[type],s=$('monitorStatus');
+      const loaded=Object.keys(q.snapshots||{}).length>0;
+      s.className=`status ${sync==='github'?'good':'warn'}`;
+      const message=sync==='github'?'Latest repository JSON loaded · Data source: RoK Battles':sync==='loading'?'Loading statistics directly from GitHub…':loaded?'GitHub unavailable · showing data loaded earlier this session':'GitHub unavailable · no statistics loaded · Retry Sync GitHub';
+      s.querySelector('span:last-child').textContent=message;
+      $('times').textContent=loaded?`Workflow checked: ${simpleDate(q.lastCheckedAtUTC)} · Site generated: ${generation(type)}`:'Workflow checked: — · Site generated: —';
+      $('times').title=state.syncError[type]||'';
+    }
+    function render(){
+      const r=selected(),type=state.active,hasData=rows(type).some(x=>x.s),msg=state.sync[type]==='loading'?'Loading verified 7-day / Open Field data from GitHub…':'No verified GitHub data available. Click Sync GitHub to retry.';
+      for(const t of ['inf','cav','arch']){
+        const tab=$('tab-'+t);
+        tab.setAttribute('aria-selected',t===type?'true':'false');
+        tab.querySelector('.count').textContent=String(cfg[t].ids.length);
+      }
+      $('monitoredPairsTotal').textContent=String(Object.values(cfg).reduce((n,c)=>n+c.ids.length,0));
+      $('reportPanel').setAttribute('aria-labelledby','tab-'+type);
+      for(const id of ['screenshotBtn','exportBtn','discordBtn'])$(id).disabled=!hasData;
+      renderHero();renderStatus();kpis(rows(type));
+      if(hasData){renderChart(r);renderTrend();renderTables(r);findings();}
+      else {
+        $('chartRows').innerHTML=`<div class="empty" role="status">${esc(msg)}</div>`;
+        $('chartAxis').innerHTML='';
+        renderTrend();
+        $('rankingRows').innerHTML=`<tr><td colspan="5" class="empty">${esc(msg)}</td></tr>`;
+        $('metricRows').innerHTML=`<tr><td colspan="6" class="empty">${esc(msg)}</td></tr>`;
+        $('findings').innerHTML=`<p>${esc(msg)}</p>`;
+        $('rankingSub').textContent='Trade = KP gained ÷ KP lost × 100';
+        $('chartSub').textContent='Only validated GitHub data will be displayed';
+        const base=`https://github.com/${repo}/blob/main/`;
+        $('sourceLinks').innerHTML=`<a href="${base+cfg[type].file}" target="_blank" rel="noopener">Snapshot JSON ↗</a><a href="${base+cfg[type].report}" target="_blank" rel="noopener">Monitor report ↗</a>`;
+        $('sourceStatus').textContent='Source / monitor status · Waiting for verified GitHub data';
+      }
+      document.title=`${cfg[type].name} Trade Report | RoK Combat Lab`;
+    }
+    let toastTimer;function toast(text){const n=$('toast');n.textContent=text;n.classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>n.classList.add('hidden'),3200);}
+    // Show a loading state immediately; fetch fresh GitHub JSON for all classes in parallel.
+    // The HTML itself contains no snapshots, metrics or historical comparison data.
+    let syncPromise=null;
+    async function refresh(options={}){
+      if(syncPromise)return syncPromise;
+      const automatic=options.automatic===true;
+      const btn=$('refreshBtn'),originalLabel=btn.innerHTML;
+      if(!automatic){btn.disabled=true;btn.innerHTML='↻ Syncing…';}
+      const types=['inf','cav','arch'];let good=0;
+      if(automatic){for(const type of types){state.sync[type]='loading';}renderStatus();}
+      syncPromise=Promise.all(types.map(async type=>{
+        const path=cfg[type].file;
+        const url=`https://raw.githubusercontent.com/${repo}/main/${path}`;
+        const controller=new AbortController();
+        const timer=setTimeout(()=>controller.abort(),automatic?10000:15000);
+        try{
+          const response=await fetch(url,{
+            cache:'no-store', // Request the repository JSON on every page load; never use embedded statistics.
+            signal:controller.signal
+          });
+          if(!response.ok)throw Error('HTTP '+response.status);
+          const remote=await response.json();
+          state.data[type]=loadStore(type,remote);
+          state.sync[type]='github';state.syncError[type]=null;good++;
+          // Update the active chart only when its class changes; other classes only refresh the overview.
+          if(state.active===type)render();else renderHero();
+        }catch(e){
+          state.syncError[type]=e?.name==='AbortError'?'GitHub request timed out':String(e?.message||e);
+          state.sync[type]=state.sync[type]==='github'?'github':'error';
+          if(state.active===type)render();
+        }finally{clearTimeout(timer);}
+      })).then(()=>{
+        if(!automatic)toast(good===types.length?'All three monitor datasets synchronized from GitHub.':good?`${good}/${types.length} monitor datasets loaded; retry missing classes.`:'GitHub unavailable. No embedded statistics exist; retry the sync.');
+      }).finally(()=>{
+        if(!automatic){btn.disabled=false;btn.innerHTML=originalLabel;}
+        syncPromise=null;
+      });
+      return syncPromise;
+    }
+    function exportCSV(){const r=selected(),title=cfg[state.active].name;const header=['Rank','Commander Pairing','Primary ID','Secondary ID','Trade %','Delta pp','Battle reports','Unique governors','KP gained','KP lost','DPS','SPS','TPS','HPS','Site generated UTC','Monitor checked UTC','Pairing URL'];const records=r.map((x,i)=>{const s=x.s||{},[p,q]=x.id.split('-');return[i+1,pairName(x.id),p,q,s.tradePercent??'',x.delta??'',s.battles??'',s.uniqueGovernors??'',s.killPointsGained??'',s.killPointsLost??'',s.dps??'',s.sps??'',s.tps??'',s.hps??'',s.generatedAtUTC??'',s.checkedAtUTC??'',pairURL(x.id)];});const csv=[header,...records].map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n');const blob=new Blob(['\ufeff',csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`RoK_${title}_7d_OpenField_Trades.csv`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast(`${r.length} ${title.toLowerCase()} pairings exported as CSV.`);}
+    async function discord(){const r=selected(),name=cfg[state.active].name,q=state.data[state.active];const valid=r.filter(x=>x.s),byDps=[...valid].sort((a,b)=>b.s.dps-a.s.dps).slice(0,3);const lines=[`**RoK Combat Lab — ${name} Trade Report**`,`**7 Days / Open Field** · ${valid.length}/${r.length} pairings`,`Site: ${generation(state.active)} · Checked: ${simpleDate(q.lastCheckedAtUTC)}`,'',...r.map((x,i)=>`${i+1}. **${pairName(x.id)}** — ${trade(x.s?.tradePercent)} | ${x.s?num(x.s.battles):'N/A'} reports | Δ ${deltaText(x.delta)==='N/A'?'N/A':deltaText(x.delta)+'pp'}`),'',`**Top DPS / Combat Statistics**`,...byDps.map(x=>`${pairName(x.id)}: DPS ${three(x.s.dps)} · SPS ${three(x.s.sps)} · TPS ${three(x.s.tps)} · KP ${kp(x.s.killPointsGained)}/${kp(x.s.killPointsLost)}`),'',`Source: https://rokbattles.com/combat-lab`,`Made by Vinc69cmAløT`];const text=lines.join('\n');try{if(navigator.clipboard?.writeText)await navigator.clipboard.writeText(text);else throw Error('Clipboard API unavailable');toast(`${name} report copied for Discord.`);}catch(e){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.left='-9999px';document.body.append(ta);ta.select();const copied=document.execCommand('copy');ta.remove();toast(copied?'Discord report copied.':'Clipboard blocked by the browser. Use CSV export instead.');}}
+    document.querySelectorAll('[data-tab]').forEach(btn=>btn.addEventListener('click',()=>{state.active=btn.dataset.tab;state.query='';$('search').value='';render();}));
+    $('search').addEventListener('input',e=>{state.query=e.target.value.trim().toLowerCase();render();});
+    $('trendPair').addEventListener('change',e=>{state.trendPair[state.active]=e.target.value;renderTrend();});
+    $('trendDays').addEventListener('change',e=>{const days=Number(e.target.value);if(!HISTORY_PERIODS.includes(days))return;state.trendDays=days;renderTrend();});
+    $('trendBack').addEventListener('click',()=>{state.trendPair[state.active]='all';state.query='';$('search').value='';render();});
+    $('trendMetric').addEventListener('change',e=>{state.trendMetric=e.target.value;renderTrend();});
+    $('trendLegend').addEventListener('click',e=>{const b=e.target.closest('button[data-trend-id]');if(b){state.trendPair[state.active]=b.dataset.trendId;renderTrend();}});
+    // Dependency-free PNG exporter uses only data retrieved from GitHub in this session.
+    // Screenshot creation requires a successful dataset fetch.
+    function exportScreenshot(mode='report') {
+      const type=state.active, items=selected(), all=rows(type), name=cfg[type].name;
+      if(!all.some(x=>x.s))throw Error('No verified GitHub data loaded. Sync GitHub first.');
+      const WIDTH=1260, SCALE=2, margin=56, contentW=WIDTH-margin*2;
+      const scratch=document.createElement('canvas');
+      scratch.width=WIDTH*SCALE;
+      scratch.height=(mode==='chart'?1250:mode==='trend'?1350:4400)*SCALE;
+      const c=scratch.getContext('2d',{alpha:false});
+      if(!c)throw new Error('Canvas rendering is unavailable in this browser');
+      c.setTransform(SCALE,0,0,SCALE,0,0);
+      const P={background:'#0b111d',panel:'#121d2d',chart:'#172234',stroke:'#344258',strokeSoft:'#263549',white:'#edf2fa',muted:'#a9b7c8',muted2:'#8396ae',green:'#22c55e',red:'#ef4444',gold:'#f1bf6b',track:'#29374b'};
+      const font=(size=15,weight=500)=>`${weight} ${size}px Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif`;
+      function t(str,x,y,size=15,color=P.white,weight=500,align='left') {
+        c.font=font(size,weight);c.textAlign=align;c.textBaseline='middle';c.fillStyle=color;
+        c.fillText(String(str??''),x,y);
+      }
+      function rect(x,y,w,h,r,fill,stroke){
+        c.beginPath();if(typeof c.roundRect==='function')c.roundRect(x,y,w,h,r);else c.rect(x,y,w,h);
+        c.fillStyle=fill;c.fill();if(stroke){c.lineWidth=1;c.strokeStyle=stroke;c.stroke();}
+      }
+      // Visually label pairings with under 250 distinct governors in both screenshot modes.
+      function lowSampleBadge(x,centerY){
+        const w=82,h=21;
+        rect(x,centerY-h/2,w,h,5,'#4b341a','#bb8435');
+        t('Low sample',x+w/2,centerY,11,'#ffcf80',740,'center');
+      }
+      function line(x1,y1,x2,y2,color=P.strokeSoft,width=1){c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.lineWidth=width;c.strokeStyle=color;c.stroke();}
+      function dashed(x,y1,y2){c.save();c.beginPath();c.setLineDash([6,5]);c.lineWidth=2;c.strokeStyle='#d7dfeb';c.moveTo(x,y1);c.lineTo(x,y2);c.stroke();c.restore();}
+      function wrap(str,maxW,size=14,weight=500){
+        c.font=font(size,weight);const words=String(str).split(/\s+/);const out=[];let current='';
+        for(const word of words){const attempt=current?current+' '+word:word;if(current&&c.measureText(attempt).width>maxW){out.push(current);current=word;}else current=attempt;}
+        if(current)out.push(current);return out.length?out:[''];
+      }
+      function paragraph(str,x,y,maxW,size=14,color=P.muted,lineHeight=23,weight=500){
+        for(const part of wrap(str,maxW,size,weight)){t(part,x,y,size,color,weight);y+=lineHeight;}return y;
+      }
+      function sectionTitle(label,y,subtitle){t(label,margin,y,23,P.white,750);if(subtitle)t(subtitle,WIDTH-margin,y,12,P.muted,500,'right');return y+23;}
+      function sectionHead(label,y,subtitle){return sectionTitle(label,y,subtitle)+16;}
+      function drawHeader(){
+        rect(0,0,WIDTH,8,0,P.gold);
+        const g=c.createLinearGradient(0,0,WIDTH,260);g.addColorStop(0,'#203047');g.addColorStop(1,P.background);
+        c.fillStyle=g;c.fillRect(0,8,WIDTH,272);
+        t('ROK  /  COMBAT LAB',margin,61,17,P.gold,800);
+        t(`${name} Trade Report`,margin,117,38,P.white,780);
+        t('7 DAYS  /  OPEN FIELD',margin,153,14,P.gold,760);
+        const count=all.filter(x=>x.s).length;
+        const filtered=state.query?`  ·  ${items.length} matching search`:'';
+        t(`${count}/${cfg[type].ids.length} validated pairings${filtered}  ·  Primary → Secondary`,margin,180,13,P.muted);
+        t(`Monitor checked: ${simpleDate(state.data[type].lastCheckedAtUTC)}`,margin,211,12,P.muted2);
+        t(`Site-generated: ${generation(type)}`,margin,233,12,P.muted2);
+        return 275;
+      }
+      function drawKpis(y){
+        const v=all.filter(x=>x.s),best=v[0],dps=v.length?v.reduce((a,b)=>b.s.dps>a.s.dps?b:a):null,biggest=v.length?v.reduce((a,b)=>b.s.battles>a.s.battles?b:a):null;
+        const stats=[
+          ['VALIDATED PAIRS',`${v.length}/${cfg[type].ids.length}`,'7d / Open Field'],
+          ['BEST TRADE',best?trade(best.s.tradePercent):'N/A',best?pairName(best.id):'Unavailable'],
+          ['HIGHEST DPS',dps?three(dps.s.dps):'N/A',dps?pairName(dps.id):'Unavailable'],
+          ['MOST REPORTS',biggest?num(biggest.s.battles):'N/A',biggest?pairName(biggest.id):'Unavailable']
+        ];
+        const gap=12,w=(contentW-3*gap)/4;
+        stats.forEach(([label,value,sub],i)=>{const x=margin+i*(w+gap);rect(x,y,w,112,12,P.panel,P.stroke);t(label,x+17,y+22,11,P.muted2,760);t(value,x+17,y+57,26,i===1?P.green:i===2?P.gold:P.white,780);let size=12;c.font=font(size,550);while(c.measureText(sub).width>w-30&&size>9){size--;}t(sub,x+17,y+91,size,P.muted,550);});
+        return y+148;
+      }
+      function drawChart(y){
+        y=sectionHead('Trade Efficiency Ranking',y,`${items.length} pairings · highest to lowest`);
+        const x=margin,w=contentW,n=Math.max(items.length,1),rowH=39,panelH=123+n*rowH;
+        rect(x,y,w,panelH,17,P.chart,P.stroke);
+        t('●',x+24,y+32,17,P.green,800);t('Positive (>100%)',x+42,y+32,13,P.green,700);
+        t('●',x+232,y+32,17,P.red,800);t('Negative (<100%)',x+250,y+32,13,P.red,700);
+        if(items.some(item=>isLowSample(item.s))){
+          t('●',x+463,y+32,17,P.gold,800);
+          t('Low sample (<250 governors)',x+481,y+32,13,P.gold,700);
+        }
+        const ranksX=x+25,namesX=x+61,trackX=x+428,trackW=560,rateX=x+w-22;
+        const max=TRADE_AXIS_MAX;
+        if(!items.length)t('No commander pairings match this search.',x+34,y+88,15,P.muted,520);
+        items.forEach((item,i)=>{
+          const cy=y+74+i*rowH;
+          if(i>0)line(x+22,cy-18,x+w-22,cy-18,'#34425881');
+          t(String(i+1).padStart(2,'0'),ranksX,cy,12,P.muted2,680);
+          const nameLabel=pairName(item.id);
+          t(nameLabel,namesX,cy,14,P.white,600);
+          if(isLowSample(item.s)){
+            c.font=font(14,600);
+            // Keep the badge beside the pairing, never on top of the trade bar.
+            const chipX=namesX+c.measureText(nameLabel).width+11;
+            if(chipX+82<trackX-8)lowSampleBadge(chipX,cy);
+            else lowSampleBadge(trackX-90,cy);
+          }
+          rect(trackX,cy-8,trackW,16,4,P.track);
+          if(item.s){
+            const val=Number(item.s.tradePercent),fill=val>100?P.green:val<100?P.red:'#9ca3af';
+            rect(trackX,cy-8,Math.max(0,Math.min(trackW,val/max*trackW)),16,3,fill);
+          }
+          dashed(trackX+trackW*100/max,cy-15,cy+15);
+          const value=item.s?.tradePercent;
+          t(trade(value),rateX,cy,15,item.s?(value>100?P.green:value<100?P.red:'#d7dde6'):P.muted,780,'right');
+        });
+        const axisY=y+76+n*rowH;
+        t('0%',trackX,axisY,11,P.muted2,650);
+        t('100%',trackX+trackW*100/max,axisY,11,P.muted2,650,'center');
+        t(`${max}%`,trackX+trackW,axisY,11,P.muted2,650,'right');
+        t('Dashed line = 100% break-even · Latest verified site snapshot',x+24,y+panelH-20,12,P.muted2);
+        return y+panelH+48;
+      }
+      function drawTradeTrend(y){
+        const model=historyView(type,items.map(r=>r.id)),valid=model.series.filter(s=>s.points.length),metric=model.metric;
+        y=sectionHead(`Trade Efficiency — Last ${state.trendDays} Days`,y,`${model.series.length} pairing(s) · ${metric==='trade'?'Trade %':'Change (Δ pp)'}`);
+        const panelH=valid.length>1?560:448,panelY=y,x=margin,w=contentW;
+        rect(x,panelY,w,panelH,17,P.chart,P.stroke);
+        if(!valid.length){t(`No verified ${state.trendDays}-day GitHub history is available.`,x+25,y+78,17,P.muted);return y+panelH+42;}
+        const bounds=historyBounds(valid,metric),allpts=valid.flatMap(s=>s.points),first=Math.min(...allpts.map(p=>p.time)),last=Math.max(...allpts.map(p=>p.time));
+        const summary=`${historyDate(first)} to ${historyDate(last)} UTC · ${new Set(allpts.map(p=>p.time)).size} site generations · No synthetic days`;
+        t(summary,x+24,y+29,13,P.muted,600);
+        const lx=x+73,rx=x+w-32,ty=y+62,by=ty+275,pw=rx-lx,ph=by-ty;
+        const sx=tm=>lx+(tm-bounds.xmin)/(bounds.xmax-bounds.xmin)*pw;
+        const sy=v=>ty+(bounds.ymax-v)/(bounds.ymax-bounds.ymin)*ph;
+        for(let i=0;i<=5;i++){
+          const v=bounds.ymin+(bounds.ymax-bounds.ymin)*i/5,py=sy(v);
+          line(lx,py,rx,py,'#42516a',.8);
+          t((Math.abs(v)<.005?'0':v.toFixed(bounds.ymax-bounds.ymin<15?1:0))+(metric==='trade'?'%':''),lx-13,py,11,P.muted2,580,'right');
+          const tm=bounds.xmin+(bounds.xmax-bounds.xmin)*i/5,px=sx(tm);
+          c.save();c.setLineDash([3,5]);line(px,ty,px,by,'#40506a',.8);c.restore();
+          t(historyDate(tm),px,by+22,11,P.muted2,600,'center');
+        }
+        const reference=metric==='delta'?0:100;
+        if(reference>=bounds.ymin&&reference<=bounds.ymax){
+          const ry=sy(reference);c.save();c.setLineDash([7,5]);line(lx,ry,rx,ry,'#d0dae9',1.3);c.restore();
+          t(metric==='delta'?'0 pp baseline':'100% break-even',rx-5,ry-12,11,P.white,650,'right');
+        }
+        valid.forEach(series=>{
+          const points=series.points;
+          c.beginPath();let prev=null;
+          points.forEach(pt=>{
+            const px=sx(pt.time),val=metric==='delta'?pt.trade-series.baseline:pt.trade,py=sy(val);
+            if(prev!==null&&pt.time-prev<=36*60*60*1000)c.lineTo(px,py);else c.moveTo(px,py);
+            prev=pt.time;
+          });
+          c.strokeStyle=series.color;c.lineWidth=valid.length===1?3.2:2.1;c.stroke();
+          points.forEach(pt=>{const val=metric==='delta'?pt.trade-series.baseline:pt.trade;
+            c.beginPath();c.arc(sx(pt.time),sy(val),valid.length===1?4:3.1,0,Math.PI*2);c.fillStyle=series.color;c.fill();
+          });
+        });
+        if(valid.length===1){const s=valid[0];t(`${s.name}  ·  First ${trade(s.points[0].trade)}  ·  Latest ${trade(s.points[s.points.length-1].trade)}  ·  Δ ${deltaText(s.delta)} pp`,x+25,by+61,14,s.delta>=0?P.green:P.red,700);
+          if(s.points[s.points.length-1].governors<LOW_SAMPLE_GOVERNORS)lowSampleBadge(x+w-120,by+61);
+        }
+        else valid.forEach((series,i)=>{const col=i%2,row=Math.floor(i/2),xx=x+28+col*548,yy=by+54+row*24;
+          rect(xx,yy-3,19,4,1,series.color);t(series.name,xx+29,yy,12,P.white,540);
+          if(series.points[series.points.length-1].governors<LOW_SAMPLE_GOVERNORS){
+            c.font=font(12,540);const bx=xx+29+c.measureText(series.name).width+12;
+            if(bx+82<x+(col+1)*548-10)lowSampleBadge(bx,yy);
+          }
+        });
+        t(`Rolling ${state.trendDays}-day window · Actual 7d / Open Field site generations only`,x+25,panelY+panelH-20,12,P.muted2,550);
+        return y+panelH+44;
+      }
+
+      function tableTitleCells(y,headers,widths,height=42,leftCols=[0]){
+        const xs=[margin];for(let i=0;i<widths.length-1;i++)xs.push(xs[i]+widths[i]);
+        headers.forEach((s,i)=>{const left=leftCols.includes(i);t(s,left?xs[i]+17:xs[i]+widths[i]-15,y+height/2,12,P.muted,780,left?'left':'right');});
+        return xs;
+      }
+      function drawRanking(y){
+        y=sectionHead('Trade Ranking & Battle Reports',y,'Trade = KP gained / KP lost × 100');
+        const headerH=42,rowH=37,widths=[70,588,155,145,190];
+        const h=headerH+Math.max(1,items.length)*rowH;
+        rect(margin,y,contentW,h,12,'#121d2c',P.stroke);
+        rect(margin,y,contentW,headerH,8,'#1b293b');
+        const xs=tableTitleCells(y,['Rank','Commander Pairing','Trade %','Δ pp','Reports'],widths,headerH,[0,1]);
+        if(items.length===0)t('No matching pairings.',margin+22,y+headerH+rowH/2,14,P.muted);
+        items.forEach((r,i)=>{
+          const cy=y+headerH+i*rowH+rowH/2;
+          if(i>0)line(margin+12,cy-rowH/2,margin+contentW-12,cy-rowH/2);
+          t(String(i+1).padStart(2,'0'),xs[0]+17,cy,13,P.muted,720);
+          const nameLabel=pairName(r.id);
+          t(nameLabel,xs[1]+17,cy,13,P.white,600);
+          if(isLowSample(r.s)){
+            c.font=font(13,600);
+            lowSampleBadge(xs[1]+17+c.measureText(nameLabel).width+12,cy);
+          }
+          t(trade(r.s?.tradePercent),xs[2]+widths[2]-15,cy,13,!r.s?P.muted:r.s.tradePercent>100?P.green:r.s.tradePercent<100?P.red:P.white,750,'right');
+          t(deltaText(r.delta),xs[3]+widths[3]-15,cy,13,deltaCls(r.delta)==='pos'?P.green:deltaCls(r.delta)==='neg'?P.red:P.muted,700,'right');
+          t(r.s?num(r.s.battles):'N/A',xs[4]+widths[4]-15,cy,13,P.white,600,'right');
+        });
+        return y+h+36;
+      }
+      function drawMetrics(y){
+        y=sectionHead('Detailed Combat Statistics',y,'KP = Kill Points · B = billion · M = million');
+        const rowH=37,headerH=42,widths=[446,150,150,134,134,134];
+        const h=headerH+Math.max(1,items.length)*rowH;
+        rect(margin,y,contentW,h,12,'#121d2c',P.stroke);
+        rect(margin,y,contentW,headerH,8,'#1b293b');
+        const xs=tableTitleCells(y,['Commander Pairing','KP Gained','KP Lost','DPS','SPS','TPS'],widths,headerH);
+        if(!items.length)t('No matching pairings.',margin+22,y+headerH+rowH/2,14,P.muted);
+        items.forEach((r,i)=>{
+          const cy=y+headerH+i*rowH+rowH/2,s=r.s;
+          if(i>0)line(margin+12,cy-rowH/2,margin+contentW-12,cy-rowH/2);
+          const arr=[pairName(r.id),s?kp(s.killPointsGained):'N/A',s?kp(s.killPointsLost):'N/A',s?three(s.dps):'N/A',s?three(s.sps):'N/A',s?three(s.tps):'N/A'];
+          arr.forEach((str,j)=>t(str,j===0?xs[j]+17:xs[j]+widths[j]-15,cy,13,j===0?P.white:P.muted,j===0?630:570,j===0?'left':'right'));
+        });
+        return y+h+34;
+      }
+      function drawInsights(y){
+        y=sectionHead('Key Findings',y,'Directional insights & sample quality');
+        const valid=all.filter(x=>x.s),maxW=contentW-42;
+        const insights=[];
+        if(valid.length){
+          const best=valid[0],worst=valid[valid.length-1],dps=valid.reduce((a,b)=>b.s.dps>a.s.dps?b:a),largest=valid.reduce((a,b)=>b.s.battles>a.s.battles?b:a),low=valid.filter(x=>isLowSample(x.s));
+          insights.push(`Best trade: ${pairName(best.id)} (${trade(best.s.tradePercent)}). Lowest trade: ${pairName(worst.id)} (${trade(worst.s.tradePercent)}).`);
+          insights.push(`Highest DPS: ${pairName(dps.id)} (${three(dps.s.dps)}). Largest dataset: ${pairName(largest.id)} (${num(largest.s.battles)} battle reports; ${num(largest.s.uniqueGovernors)} unique governors).`);
+          if(low.length)insights.push(`Low governor sample: ${low.map(x=>`${pairName(x.id)} (${num(x.s.uniqueGovernors)})`).join('; ')}.`);
+        }else insights.push('No validated statistics available for this class.');
+        insights.push('Changes require an earlier DISTINCT verified 7-day/Open Field site snapshot; otherwise Δ pp is N/A.');
+        insights.push(`Commander direction is preserved. ${type==='inf'?'Bai Qi / Yi Do differs from Yi Do / Bai Qi.':type==='cav'?'William Marshal / Ivan IV differs from Ivan IV / William Marshal.':'Hermann / Zhuge Liang differs from Zhuge Liang / Hermann.'}`);
+        let needed=29;
+        insights.forEach(s=>needed+=wrap(s,maxW,13,510).length*23+11);
+        rect(margin,y,contentW,needed,13,P.panel,P.stroke);
+        let yy=y+25;
+        for(const s of insights){yy=paragraph(s,margin+21,yy,maxW,13,P.muted,23,510)+11;}
+        y+=needed+31;
+        line(margin,y,WIDTH-margin,y);
+        y=paragraph('Source: RoK Battles · https://rokbattles.com/combat-lab',margin,y+26,contentW,12,P.muted2,19,530)+6;
+        y=paragraph(`Checked: ${simpleDate(state.data[type].lastCheckedAtUTC)} · Site generated: ${generation(type)} · ${ageStatus(type)}`,margin,y,contentW,12,P.muted2,19,530)+22;
+        return y;
+      }
+      c.fillStyle=P.background;c.fillRect(0,0,WIDTH,mode==='chart'?1250:mode==='trend'?1350:4400);
+      let y=drawHeader();
+      if(mode==='report')y=drawKpis(y);
+      else y+=20;
+      if(mode==='trend')y=drawTradeTrend(y);
+      else y=drawChart(y);
+      if(mode==='report'){y=drawTradeTrend(y);y=drawRanking(y);y=drawMetrics(y);y=drawInsights(y);}
+      else {line(margin,y+4,WIDTH-margin,y+4);y=paragraph('Source: RoK Battles · https://rokbattles.com/combat-lab',margin,y+29,contentW,12,P.muted2,19,550)+4;y=paragraph(`Snapshot: ${generation(type)} · Monitor checked: ${simpleDate(state.data[type].lastCheckedAtUTC)}`,margin,y,contentW,12,P.muted2,19,550)+36;}
+      // Creator credit appears on both screenshot export formats, without changing the data source.
+      line(margin,y+10,WIDTH-margin,y+10,P.strokeSoft);
+      t('Made by Vinc69cmAløT',WIDTH-margin,y+39,14,P.gold,700,'right');
+      y+=65;
+      const croppedH=Math.ceil(y+15);
+      if(croppedH>(mode==='chart'?1250:mode==='trend'?1350:4400))throw Error('The selected report is too tall for the screenshot buffer');
+      const output=document.createElement('canvas');output.width=WIDTH*SCALE;output.height=croppedH*SCALE;
+      const oc=output.getContext('2d',{alpha:false});if(!oc)throw Error('Screenshot canvas could not be initialized');
+      oc.drawImage(scratch,0,0,output.width,output.height,0,0,output.width,output.height);
+      return output;
+    }
+    function saveScreenshot(mode) {
+      const btn=$('screenshotBtn'), old=btn.innerHTML;btn.disabled=true;btn.textContent='Creating PNG…';
+      // Continue after the button is painted, to keep UI responsive during 2× export.
+      requestAnimationFrame(()=>setTimeout(async()=>{
+        try{
+          const canvas=exportScreenshot(mode);
+          const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('PNG encoding failed')),'image/png'));
+          const url=URL.createObjectURL(blob),a=document.createElement('a');
+          const date=new Date().toISOString().slice(0,10);
+          a.href=url;a.download=`RoK_Combat_Lab_${cfg[state.active].name}_${mode==='chart'?'Trade_Chart':mode==='trend'?`Trade_Trend_${state.trendDays}D`:'Full_Report'}_7d_OpenField_${date}.png`;
+          document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);
+          toast(`${cfg[state.active].name} ${mode==='chart'?'trade chart':mode==='trend'?`${state.trendDays}-day trade trend`:'full report'} saved as a high-resolution PNG.`);
+        }catch(e){console.error('PNG export failed:',e);toast(`PNG screenshot failed: ${e.message||e}`);}
+        finally{btn.disabled=false;btn.innerHTML=old;}
+      },20));
+    }
+
+    $('exportBtn').addEventListener('click',exportCSV);$('discordBtn').addEventListener('click',discord);$('refreshBtn').addEventListener('click',refresh);
+    $('screenshotBtn').addEventListener('click',()=>saveScreenshot($('screenshotMode').value));
+    // On each opening show a loading view, then fetch all three classes directly from GitHub.
+    // If the network fails, clearly show an error rather than presenting old hard-coded values.
+    render();
+    void refresh({automatic:true});
+  })();
+  </script>
+</body>
+</html>
