@@ -1,7 +1,7 @@
 # RoK Combat Lab — Archer Trade Report
 
-**Workflow checked UTC:** 2026-11-27T17:16:18Z  
-**API site-generated UTC:** 2026-11-27 16:33 UTC  
+**Workflow checked UTC:** 2026-11-28T01:16:13Z  
+**API site-generated UTC:** 2026-11-28 00:34 UTC  
 **Successful monitor checks:** 10/10  
 **Source verification:** API checks: 10/10; distinct site snapshots: 10/10; revised at same timestamp: 0/10; unchanged: 0/10; fresh site timestamps (<=8h): 10/10; stale site timestamps: 0/10  
 **Fresh site snapshots (age <= 8h):** 10/10  
@@ -18,18 +18,18 @@
 
 | Rank | Commander Pairing | Trade % | Δ pp | Reports | Site-generated UTC | Source status |
 |---:|---|---:|---:|---:|---|---|
-| 1 | [Qin Shi Huang / Yi Seong-Gye](https://rokbattles.com/combat-lab?primary=509&secondary=6) | 149.61% | -0.11 | 2,759,769 | 2026-11-27 16:33 UTC | Distinct site-generated snapshot; within 8h |
-| 2 | [Qin Shi Huang / Zhuge Liang](https://rokbattles.com/combat-lab?primary=509&secondary=179) | 123.86% | +0.09 | 3,227,604 | 2026-11-27 16:33 UTC | Distinct site-generated snapshot; within 8h |
-| 3 | [Hermann / Alp Arslan](https://rokbattles.com/combat-lab?primary=187&secondary=611) | 65.37% | +0.07 | 386,569 | 2026-11-27 16:33 UTC | Distinct site-generated snapshot; within 8h |
-| 4 | [Hermann / Zhuge Liang](https://rokbattles.com/combat-lab?primary=187&secondary=179) | 60.54% | -0.09 | 189,309 | 2026-11-27 16:33 UTC | Distinct site-generated snapshot; within 8h |
-| 5 | [Alp Arslan / Hermann](https://rokbattles.com/combat-lab?primary=611&secondary=187) | 60.16% | -0.00 | 398,601 | 2026-11-27 16:33 UTC | Distinct site-generated snapshot; within 8h |
-| 6 | [Alp Arslan / Zhuge Liang](https://rokbattles.com/combat-lab?primary=611&secondary=179) | 58.09% | +0.13 | 193,431 | 2026-11-27 16:33 UTC | Distinct site-generated snapshot; within 8h |
-| 7 | [Zhuge Liang / Hermann](https://rokbattles.com/combat-lab?primary=179&secondary=187) | 53.52% | +0.13 | 128,789 | 2026-11-27 16:33 UTC | Distinct site-generated snapshot; within 8h |
-| 8 | [Zhuge Liang / Philip II](https://rokbattles.com/combat-lab?primary=179&secondary=459) | 53.16% | +0.26 | 118,567 | 2026-11-27 16:33 UTC | Distinct site-generated snapshot; within 8h |
-| 9 | [Alp Arslan / Yi Seong-Gye](https://rokbattles.com/combat-lab?primary=611&secondary=6) | 53.12% | -0.02 | 46,324 | 2026-11-27 16:33 UTC | Distinct site-generated snapshot; within 8h |
-| 10 | [Hermann / Ashurbanipal](https://rokbattles.com/combat-lab?primary=187&secondary=186) | 52.58% | -0.04 | 42,296 | 2026-11-27 16:33 UTC | Distinct site-generated snapshot; within 8h |
+| 1 | [Qin Shi Huang / Yi Seong-Gye](https://rokbattles.com/combat-lab?primary=509&secondary=6) | 150.47% | +0.86 | 2,097,314 | 2026-11-28 00:34 UTC | Distinct site-generated snapshot; within 8h |
+| 2 | [Qin Shi Huang / Zhuge Liang](https://rokbattles.com/combat-lab?primary=509&secondary=179) | 121.85% | -2.01 | 2,098,942 | 2026-11-28 00:34 UTC | Distinct site-generated snapshot; within 8h |
+| 3 | [Hermann / Alp Arslan](https://rokbattles.com/combat-lab?primary=187&secondary=611) | 64.14% | -1.24 | 301,352 | 2026-11-28 00:34 UTC | Distinct site-generated snapshot; within 8h |
+| 4 | [Hermann / Zhuge Liang](https://rokbattles.com/combat-lab?primary=187&secondary=179) | 60.78% | +0.23 | 143,649 | 2026-11-28 00:34 UTC | Distinct site-generated snapshot; within 8h |
+| 5 | [Alp Arslan / Zhuge Liang](https://rokbattles.com/combat-lab?primary=611&secondary=179) | 60.05% | +1.96 | 150,496 | 2026-11-28 00:34 UTC | Distinct site-generated snapshot; within 8h |
+| 6 | [Alp Arslan / Hermann](https://rokbattles.com/combat-lab?primary=611&secondary=187) | 59.67% | -0.50 | 283,090 | 2026-11-28 00:34 UTC | Distinct site-generated snapshot; within 8h |
+| 7 | [Zhuge Liang / Philip II](https://rokbattles.com/combat-lab?primary=179&secondary=459) | 54.06% | +0.90 | 92,584 | 2026-11-28 00:34 UTC | Distinct site-generated snapshot; within 8h |
+| 8 | [Alp Arslan / Yi Seong-Gye](https://rokbattles.com/combat-lab?primary=611&secondary=6) | 52.11% | -1.02 | 33,863 | 2026-11-28 00:34 UTC | Distinct site-generated snapshot; within 8h |
+| 9 | [Zhuge Liang / Hermann](https://rokbattles.com/combat-lab?primary=179&secondary=187) | 50.93% | -2.59 | 75,591 | 2026-11-28 00:34 UTC | Distinct site-generated snapshot; within 8h |
+| 10 | [Hermann / Ashurbanipal](https://rokbattles.com/combat-lab?primary=187&secondary=186) | 47.81% | -4.76 | 24,882 | 2026-11-28 00:34 UTC | Distinct site-generated snapshot; within 8h |
 
-Site-generated: 2026-11-27 16:33 UTC · Retrieved: 10/10 · Fresh site snapshots: 10/10 · Stale site snapshots: 0/10 · Retained after errors: 0 · Unavailable: 0.
+Site-generated: 2026-11-28 00:34 UTC · Retrieved: 10/10 · Fresh site snapshots: 10/10 · Stale site snapshots: 0/10 · Retained after errors: 0 · Unavailable: 0.
 
 ## Detailed Combat Statistics
 
@@ -37,21 +37,21 @@ KP Gained and KP Lost are in millions (M). DPS, SPS and TPS are per-second rates
 
 | Commander Pairing | KP Gained | KP Lost | DPS | SPS | TPS |
 |---|---:|---:|---:|---:|---:|
-| Qin Shi Huang / Yi Seong-Gye | 42,089.456M | 28,132.716M | 390.819 | 57.715 | 38.195 |
-| Qin Shi Huang / Zhuge Liang | 47,139.528M | 38,058.632M | 386.151 | 54.321 | 43.576 |
-| Hermann / Alp Arslan | 3,664.543M | 5,605.656M | 268.746 | 41.857 | 63.450 |
-| Hermann / Zhuge Liang | 1,534.225M | 2,534.130M | 241.835 | 36.291 | 59.748 |
-| Alp Arslan / Hermann | 3,616.815M | 6,011.936M | 265.641 | 41.169 | 68.283 |
-| Alp Arslan / Zhuge Liang | 1,777.725M | 3,060.161M | 285.109 | 42.522 | 72.370 |
-| Zhuge Liang / Hermann | 1,152.147M | 2,152.736M | 271.094 | 41.098 | 77.164 |
-| Zhuge Liang / Philip II | 858.630M | 1,615.131M | 231.637 | 34.405 | 63.595 |
-| Alp Arslan / Yi Seong-Gye | 439.535M | 827.411M | 334.693 | 50.918 | 96.766 |
-| Hermann / Ashurbanipal | 323.467M | 615.216M | 220.194 | 34.673 | 64.657 |
+| Qin Shi Huang / Yi Seong-Gye | 31,087.016M | 20,660.554M | 379.804 | 55.798 | 36.721 |
+| Qin Shi Huang / Zhuge Liang | 30,613.490M | 25,123.125M | 382.521 | 53.850 | 43.903 |
+| Hermann / Alp Arslan | 2,793.485M | 4,355.521M | 261.677 | 40.757 | 62.895 |
+| Hermann / Zhuge Liang | 1,136.260M | 1,869.611M | 233.370 | 34.882 | 57.341 |
+| Alp Arslan / Zhuge Liang | 1,420.862M | 2,365.957M | 290.954 | 43.305 | 71.320 |
+| Alp Arslan / Hermann | 2,558.960M | 4,288.851M | 263.513 | 40.790 | 68.245 |
+| Zhuge Liang / Philip II | 654.665M | 1,211.011M | 226.259 | 33.305 | 60.914 |
+| Alp Arslan / Yi Seong-Gye | 327.785M | 629.072M | 342.850 | 51.777 | 102.132 |
+| Zhuge Liang / Hermann | 661.985M | 1,299.891M | 259.698 | 39.079 | 76.111 |
+| Hermann / Ashurbanipal | 181.723M | 380.055M | 219.537 | 33.858 | 70.055 |
 
 ## Key Findings
 
-**Best trade:** Qin Shi Huang / Yi Seong-Gye at 149.61%. **Worst trade:** Hermann / Ashurbanipal at 52.58%.
-**Largest dataset:** Qin Shi Huang / Zhuge Liang (3,227,604 reports). **Smallest dataset:** Hermann / Ashurbanipal (42,296 reports; interpret cautiously).
-**Distinct-snapshot changes:** Qin Shi Huang / Yi Seong-Gye -0.11 pp; Qin Shi Huang / Zhuge Liang +0.09 pp; Hermann / Alp Arslan +0.07 pp; Hermann / Zhuge Liang -0.09 pp; Alp Arslan / Hermann -0.00 pp; Alp Arslan / Zhuge Liang +0.13 pp; Zhuge Liang / Hermann +0.13 pp; Zhuge Liang / Philip II +0.26 pp; Alp Arslan / Yi Seong-Gye -0.02 pp; Hermann / Ashurbanipal -0.04 pp.
+**Best trade:** Qin Shi Huang / Yi Seong-Gye at 150.47%. **Worst trade:** Hermann / Ashurbanipal at 47.81%.
+**Largest dataset:** Qin Shi Huang / Zhuge Liang (2,098,942 reports). **Smallest dataset:** Hermann / Ashurbanipal (24,882 reports; interpret cautiously).
+**Distinct-snapshot changes:** Qin Shi Huang / Yi Seong-Gye +0.86 pp; Qin Shi Huang / Zhuge Liang -2.01 pp; Hermann / Alp Arslan -1.24 pp; Hermann / Zhuge Liang +0.23 pp; Alp Arslan / Zhuge Liang +1.96 pp; Alp Arslan / Hermann -0.50 pp; Zhuge Liang / Philip II +0.90 pp; Alp Arslan / Yi Seong-Gye -1.02 pp; Zhuge Liang / Hermann -2.59 pp; Hermann / Ashurbanipal -4.76 pp.
 
-**Source / monitor status:** [trades_archer.json](data/trades_archer.json) · [REPORT_ARCHER.md](REPORT_ARCHER.md) · Workflow checked: 2026-11-27T17:16:18Z · API generated: 2026-11-27 16:33 UTC · Retrievals: 10/10 · Fresh site data: 10/10 · Stale source: 0/10 · Historical data preserved; no 1-year baselines.
+**Source / monitor status:** [trades_archer.json](data/trades_archer.json) · [REPORT_ARCHER.md](REPORT_ARCHER.md) · Workflow checked: 2026-11-28T01:16:13Z · API generated: 2026-11-28 00:34 UTC · Retrievals: 10/10 · Fresh site data: 10/10 · Stale source: 0/10 · Historical data preserved; no 1-year baselines.
